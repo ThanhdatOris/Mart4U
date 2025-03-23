@@ -11,4 +11,6 @@
     <string name="delete">Xóa</string>
     <string name="delete_all">Xóa tất cả</string>
     <string name="add_to_cart">Thêm vào giỏ hàng</string>
+    <string name="app_info">Mart4U - Phiên bản 1.0</string>
+    <string name="clear_all_data">Xóa toàn bộ dữ liệu</string>
 </resources>
