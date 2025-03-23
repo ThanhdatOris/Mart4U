@@ -45,6 +45,11 @@ public class DatabaseHelper {
         return database.cartDao();
     }
 
+    // Phương thức để lấy HistoryDao
+    public HistoryDao getHistoryDao() {
+        return database.historyDao();
+    }
+
     // Phương thức để thêm dữ liệu mẫu cho bảng categories
     private void initializeSampleCategories() {
         if (database.categoryDao().getAllCategories().isEmpty()) {

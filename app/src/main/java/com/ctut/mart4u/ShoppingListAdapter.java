@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.CartItem;
+import com.ctut.mart4u.model.HistoryItem;
 import com.ctut.mart4u.model.ShoppingItem;
 
 import java.text.SimpleDateFormat;
@@ -49,6 +50,14 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         holder.checkBoxBought.setOnCheckedChangeListener((buttonView, isChecked) -> {
             item.setBought(isChecked);
             databaseHelper.getShoppingDao().update(item); // Cập nhật trạng thái vào cơ sở dữ liệu
+
+            // Nếu món đồ được đánh dấu là "đã mua", thêm vào lịch sử
+            if (isChecked) {
+                String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                HistoryItem historyItem = new HistoryItem(item.getName(), item.getQuantity(), currentDate);
+                databaseHelper.getHistoryDao().insert(historyItem);
+                Toast.makeText(holder.itemView.getContext(), item.getName() + " đã được thêm vào lịch sử mua sắm", Toast.LENGTH_SHORT).show();
+            }
         });
 
         // Xử lý sự kiện khi nhấn nút "Thêm vào giỏ hàng"
