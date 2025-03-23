@@ -10,4 +10,5 @@
     <string name="add">Thêm</string>
     <string name="delete">Xóa</string>
     <string name="delete_all">Xóa tất cả</string>
+    <string name="add_to_cart">Thêm vào giỏ hàng</string>
 </resources>

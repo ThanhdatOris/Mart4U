@@ -3,16 +3,22 @@ package com.ctut.mart4u;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.db.DatabaseHelper;
+import com.ctut.mart4u.model.CartItem;
 import com.ctut.mart4u.model.ShoppingItem;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ShoppingViewHolder> {
     private List<ShoppingItem> shoppingList;
@@ -44,6 +50,21 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             item.setBought(isChecked);
             databaseHelper.getShoppingDao().update(item); // Cập nhật trạng thái vào cơ sở dữ liệu
         });
+
+        // Xử lý sự kiện khi nhấn nút "Thêm vào giỏ hàng"
+        holder.btnAddToCart.setOnClickListener(v -> {
+            // Lấy ngày hiện tại
+            String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+            // Tạo CartItem từ ShoppingItem
+            CartItem cartItem = new CartItem(item.getName(), item.getQuantity(), currentDate);
+
+            // Thêm vào bảng cart_items
+            databaseHelper.getCartDao().insert(cartItem);
+
+            // Thông báo cho người dùng
+            Toast.makeText(holder.itemView.getContext(), item.getName() + " đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -62,12 +83,14 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         TextView textViewItemName;
         TextView textViewItemQuantity;
         CheckBox checkBoxBought;
+        Button btnAddToCart;
 
         public ShoppingViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewItemName = itemView.findViewById(R.id.textViewItemName);
             textViewItemQuantity = itemView.findViewById(R.id.textViewItemQuantity);
             checkBoxBought = itemView.findViewById(R.id.checkBoxBought);
+            btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
         }
     }
 }

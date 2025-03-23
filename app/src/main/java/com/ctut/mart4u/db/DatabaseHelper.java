@@ -40,6 +40,11 @@ public class DatabaseHelper {
         return database.categoryDao();
     }
 
+    // Phương thức để lấy CartDao
+    public CartDao getCartDao() {
+        return database.cartDao();
+    }
+
     // Phương thức để thêm dữ liệu mẫu cho bảng categories
     private void initializeSampleCategories() {
         if (database.categoryDao().getAllCategories().isEmpty()) {
