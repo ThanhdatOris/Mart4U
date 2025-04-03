@@ -1,68 +1,39 @@
 package com.ctut.mart4u;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.LinearLayout;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import com.ctut.mart4u.db.DatabaseHelper;
+import com.ctut.mart4u.model.CartItem;
 
-public class MainActivity extends AppCompatActivity {
-    private Button btnShoppingList;
-    private Button btnCategory;
-    private Button btnCart;
-    private Button btnHistory;
-    private Button btnSettings;
+public class MainActivity extends BaseActivity {
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        // Khởi tạo các nút
-        btnShoppingList = findViewById(R.id.btnShoppingList);
-        btnCategory = findViewById(R.id.btnCategory);
-        btnCart = findViewById(R.id.btnCart);
-        btnHistory = findViewById(R.id.btnHistory);
-        btnSettings = findViewById(R.id.btnSettings);
+        // Khởi tạo DatabaseHelper
+        databaseHelper = DatabaseHelper.getInstance(this);
 
-        // Xử lý sự kiện khi nhấn nút Shopping List
-        btnShoppingList.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ShoppingListActivity.class);
-            startActivity(intent);
-        });
+        // Thêm sự kiện cho các sản phẩm
+        LinearLayout product1 = findViewById(R.id.product1);
+        LinearLayout product2 = findViewById(R.id.product2);
+        LinearLayout product3 = findViewById(R.id.product3);
 
-        // Xử lý sự kiện khi nhấn nút Category
-        btnCategory.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
-            startActivity(intent);
-        });
+        product1.setOnClickListener(v -> addToCart("Táo Envy Mỹ Túi 1kg", 1, 179000));
+        product2.setOnClickListener(v -> addToCart("Táo Juliet Pháp 1kg", 1, 109000));
+        product3.setOnClickListener(v -> addToCart("Táo", 1, 8));
+    }
 
-        // Xử lý sự kiện khi nhấn nút Cart
-        btnCart.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, CartActivity.class);
-            startActivity(intent);
-        });
+    // Phương thức để thêm sản phẩm vào giỏ hàng
+    private void addToCart(String name, int quantity, double price) {
+        CartItem cartItem = new CartItem(name, quantity, price);
+        databaseHelper.getCartDao().insert(cartItem);
+    }
 
-        // Xử lý sự kiện khi nhấn nút History
-        btnHistory.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-            startActivity(intent);
-        });
-
-        // Xử lý sự kiện khi nhấn nút Settings
-        btnSettings.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
-        });
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 }

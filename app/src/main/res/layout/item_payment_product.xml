@@ -23,14 +23,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewItemName"
+            android:id="@+id/tvProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tên sản phẩm"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textViewPrice"
+            android:id="@+id/tvProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -40,27 +40,11 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewQuantity"
+            android:id="@+id/tvProductQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Số lượng: 0"
             android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textViewAddedDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Thêm vào: 01/01/2025"
-            android:textSize="14sp" />
     </LinearLayout>
-
-    <!-- Nút xóa -->
-    <Button
-        android:id="@+id/btnDeleteItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete" />
-
 </LinearLayout>

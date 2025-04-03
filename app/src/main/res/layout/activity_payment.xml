@@ -24,11 +24,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thông tin giao hàng"
+                android:text="Thanh Toán"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <!-- Thông tin tài khoản -->
+            <!-- Thông tin giao hàng -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Thông tin giao hàng"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +57,6 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <!-- Địa chỉ giao hàng -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,11 +73,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Chợ An Bình, Lô Vong Cung St., P. An Bình, Q. Ninh Kiều, Căn Thơ, 94000, Vietnam"
+                    android:text="Chợ An Bình, Lô Vong Cung St., P. An Bình, Q. Ninh Kiều, Cần Thơ, 94000, Vietnam"
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <!-- Cửa hàng -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,40 +93,57 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Cửa hàng: Căn Thơ"
+                    android:text="Cửa hàng: Cần Thơ"
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <!-- Tiêu đề danh sách sản phẩm -->
+            <!-- Lịch giao hàng -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Tất cả sản phẩm (1)"
-                android:textSize="20sp"
+                android:text="Giao hàng tiêu chuẩn"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <!-- RecyclerView để hiển thị danh sách món đồ trong giỏ hàng -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Ngày nhận hàng dự kiến: 23/03, 15:00 - 18:00"
+                android:textSize="16sp" />
+
+            <!-- Danh sách sản phẩm -->
+            <TextView
+                android:id="@+id/tvProductTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Sản phẩm"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewCart"
+                android:id="@+id/recyclerViewProducts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:listitem="@layout/item_cart" />
-
-            <!-- Button để xóa toàn bộ giỏ hàng -->
-            <Button
-                android:id="@+id/btnDeleteAllCart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/delete_all" />
+                tools:listitem="@layout/item_payment_product" />
 
             <!-- Tổng giá trị -->
+            <TextView
+                android:id="@+id/tvTotalTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tổng giá trị"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -128,28 +151,76 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Thành tiền:"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="Tổng giá trị:"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tvTotalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="139.000đ"
+                    android:text="0đ"
                     android:textColor="#fa003f"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Nút Thanh toán -->
-            <Button
-                android:id="@+id/btnCheckout"
+            <!-- Phương thức thanh toán -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Phương thức thanh toán"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_payment_cash" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Tiền mặt"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDeliveryFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:text="Phí vận chuyển: 0đ" />
+
+
+            <TextView
+                android:id="@+id/tvFinalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tổng cộng: 0đ"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:padding="8dp"
+                android:gravity="end" />
+
+            <!-- Nút Đặt hàng -->
+            <Button
+                android:id="@+id/btnPlaceOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:backgroundTint="#fa003f"
-                android:text="Thanh toán 139.000đ"
+                android:text="Đặt Hàng"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>

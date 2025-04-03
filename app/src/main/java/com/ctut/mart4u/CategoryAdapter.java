@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category category = categoryList.get(position);
         holder.textViewCategoryName.setText(category.getName());
 
+        // Gán hình ảnh dựa trên tên danh mục
+        String categoryName = category.getName().toLowerCase();
+        if (categoryName.contains("rau củ")) {
+            holder.imageViewCategory.setImageResource(R.drawable.img_category_vegetable);
+        } else if (categoryName.contains("thịt")) {
+            holder.imageViewCategory.setImageResource(R.drawable.img_category_meat);
+        } else if (categoryName.contains("trứng")) {
+            holder.imageViewCategory.setImageResource(R.drawable.img_category_egg);
+        } else {
+            holder.imageViewCategory.setImageResource(R.drawable.img_category_vegetable); // Mặc định
+        }
+
         // Xử lý sự kiện khi nhấn nút xóa
         holder.btnDeleteCategory.setOnClickListener(v -> {
             databaseHelper.getCategoryDao().delete(category); // Xóa danh mục khỏi cơ sở dữ liệu
@@ -60,11 +73,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     // ViewHolder để giữ các thành phần giao diện
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
         TextView textViewCategoryName;
+        ImageView imageViewCategory;
         Button btnDeleteCategory;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewCategoryName = itemView.findViewById(R.id.textViewCategoryName);
+            imageViewCategory = itemView.findViewById(R.id.imageViewCategory);
             btnDeleteCategory = itemView.findViewById(R.id.btnDeleteCategory);
         }
     }

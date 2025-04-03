@@ -63,10 +63,10 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         // Xử lý sự kiện khi nhấn nút "Thêm vào giỏ hàng"
         holder.btnAddToCart.setOnClickListener(v -> {
             // Lấy ngày hiện tại
-            String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            // String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
             // Tạo CartItem từ ShoppingItem
-            CartItem cartItem = new CartItem(item.getName(), item.getQuantity(), currentDate);
+            CartItem cartItem = new CartItem(item.getName(), item.getQuantity(), item.getPrice());
 
             // Thêm vào bảng cart_items
             databaseHelper.getCartDao().insert(cartItem);

@@ -11,6 +11,8 @@ public class ShoppingItem {
     private int quantity;
     private boolean isBought;
 
+    private double price;
+
     // Constructor
     public ShoppingItem(String name, int quantity, boolean isBought) {
         this.name = name;
@@ -50,4 +52,8 @@ public class ShoppingItem {
     public void setBought(boolean bought) {
         isBought = bought;
     }
+
+    public double getPrice() {return price;};
+
+    public void setPrice(double price) { this.price = price;}
 }
