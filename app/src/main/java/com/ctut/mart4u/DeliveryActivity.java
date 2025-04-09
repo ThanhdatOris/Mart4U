@@ -4,10 +4,15 @@ import android.os.Bundle;
 import android.widget.Button;
 
 public class DeliveryActivity extends BaseActivity {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_delivery; // Trả về layout nội dung của CategoryActivity
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         // Khởi tạo các nút
         Button btnClose = findViewById(R.id.btnClose);
@@ -28,8 +33,4 @@ public class DeliveryActivity extends BaseActivity {
         });
     }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_delivery;
-    }
 }

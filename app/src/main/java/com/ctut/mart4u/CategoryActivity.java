@@ -12,7 +12,7 @@ import com.ctut.mart4u.model.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryActivity extends AppCompatActivity {
+public class CategoryActivity extends BaseActivity {
 
     private RecyclerView recyclerViewCategory;
     private CategoryAdapter categoryAdapter;
@@ -22,9 +22,14 @@ public class CategoryActivity extends AppCompatActivity {
     private boolean isSampleData = true; // Chuyển thành false để dùng dữ liệu thật
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_category; // Trả về layout nội dung của CategoryActivity
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category);
+//        setContentView(R.layout.activity_category);
 
         // Khởi tạo RecyclerView
         recyclerViewCategory = findViewById(R.id.recyclerViewCategory); // Correct ID

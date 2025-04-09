@@ -28,6 +28,12 @@
             android:name=".ShoppingListActivity"
             android:exported="false" />
         <activity
+            android:name=".DeliveryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
