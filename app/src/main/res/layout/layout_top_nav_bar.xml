@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#fa003f"
+    android:background="#FA003F"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:gravity="center_vertical"
+    android:padding="8dp"
+    android:minHeight="56dp">
 
     <!-- Logo -->
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_logo_lotte_mart" />
+        android:layout_width="100dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_letter_logo"
+        android:layout_marginEnd="8dp" />
 
     <!-- Tên cửa hàng -->
     <Spinner
@@ -19,34 +23,43 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:entries="@array/store_names" />
+        android:entries="@array/store_names"
+        app:backgroundTint="#FFFFFF"
+        android:spinnerMode="dropdown"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp" />
 
     <!-- Biểu tượng tìm kiếm -->
     <ImageView
-        android:id="@+id/icon_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_search" />
+        android:id="@+id/ic_search"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_search"
+        app:tint="#FFFFFF"
+        android:layout_marginEnd="16dp" />
 
     <!-- Biểu tượng giỏ hàng -->
     <ImageView
-        android:id="@+id/icon_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_cart" />
+        android:id="@+id/ic_quick_buy"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_quick_buy"
+        app:tint="#FFFFFF"
+        android:layout_marginEnd="16dp" />
 
     <!-- Biểu tượng thông báo -->
     <ImageView
-        android:id="@+id/icon_notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_notification" />
+        android:id="@+id/ic_notice"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_notice"
+        app:tint="#FFFFFF" />
 
-    <!-- Cờ Việt Nam -->
-    <ImageView
-        android:id="@+id/icon_flag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_flag_vn" />
-
+<!--    <ImageView-->
+<!--        android:id="@+id/ic_flag"-->
+<!--        android:layout_width="32dp"-->
+<!--        android:layout_height="32dp"-->
+<!--        android:src="@drawable/ic_flag"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        />-->
 </LinearLayout>

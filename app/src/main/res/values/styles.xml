@@ -1,8 +1,7 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Mart4U" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme chính của ứng dụng -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Ẩn thanh trạng thái -->
         <item name="android:windowFullscreen">true</item>
         <!-- Ẩn thanh tiêu đề (action bar) nếu không cần -->
@@ -10,6 +9,4 @@
         <!-- Tùy chỉnh thêm nếu cần -->
         <item name="android:windowBackground">@android:color/white</item>
     </style>
-
-    <style name="Theme.Mart4U" parent="Base.Theme.Mart4U" />
 </resources>

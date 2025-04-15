@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -90,24 +91,30 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void resetTabsAppearance() {
         int defaultColor = getResources().getColor(android.R.color.white);
-        setTabTextColor(R.id.tab_category, defaultColor);
-        setTabTextColor(R.id.tab_delivery, defaultColor);
-        setTabTextColor(R.id.tab_lotte_mart, defaultColor);
-        setTabTextColor(R.id.tab_account, defaultColor);
-        setTabTextColor(R.id.tab_quick_buy, defaultColor);
+        setTabColor(R.id.tab_category, defaultColor);
+        setTabColor(R.id.tab_delivery, defaultColor);
+        setTabColor(R.id.tab_lotte_mart, defaultColor);
+        setTabColor(R.id.tab_account, defaultColor);
+        setTabColor(R.id.tab_quick_buy, defaultColor);
     }
 
     private void highlightTab(int tabId) {
         int highlightColor = getResources().getColor(android.R.color.holo_orange_light);
-        setTabTextColor(tabId, highlightColor);
+        setTabColor(tabId, highlightColor);
     }
 
-    private void setTabTextColor(int tabId, int color) {
+    private void setTabColor(int tabId, int color) {
         LinearLayout tab = findViewById(tabId);
         if (tab != null) {
-            TextView textView = (TextView) ((LinearLayout) tab).getChildAt(1);
+            // Đổi màu TextView (văn bản)
+            TextView textView = (TextView) tab.getChildAt(1);
             if (textView != null) {
                 textView.setTextColor(color);
+            }
+            // Đổi màu ImageView (icon)
+            ImageView imageView = (ImageView) tab.getChildAt(0);
+            if (imageView != null) {
+                imageView.setColorFilter(color);
             }
         }
     }
