@@ -3,6 +3,7 @@ package com.ctut.mart4u.model;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import androidx.room.Index;
 
 @Entity(tableName = "purchase_details",
         foreignKeys = {
@@ -14,7 +15,8 @@ import androidx.room.PrimaryKey;
                         parentColumns = "id",
                         childColumns = "productId",
                         onDelete = ForeignKey.CASCADE)
-        })
+        },
+        indices = {@Index(value = {"purchaseId"}), @Index(value = {"productId"})})
 public class PurchaseDetail {
     @PrimaryKey(autoGenerate = true)
     private int id;

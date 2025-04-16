@@ -2,13 +2,15 @@ package com.ctut.mart4u.model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "products",
         foreignKeys = @ForeignKey(entity = Category.class,
                 parentColumns = "id",
                 childColumns = "categoryId",
-                onDelete = ForeignKey.CASCADE))
+                onDelete = ForeignKey.CASCADE),
+        indices = {@Index(value = {"categoryId"})})
 public class Product {
     @PrimaryKey(autoGenerate = true)
     private int id;

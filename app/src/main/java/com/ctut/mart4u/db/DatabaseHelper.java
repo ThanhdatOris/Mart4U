@@ -2,6 +2,7 @@ package com.ctut.mart4u.db;
 
 import android.content.Context;
 import androidx.room.Room;
+import com.ctut.mart4u.model.Address;
 import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.Product;
 import com.ctut.mart4u.model.User;
@@ -60,6 +61,11 @@ public class DatabaseHelper {
         return database.purchaseDetailDao();
     }
 
+    // Phương thức để lấy AddressDao
+    public AddressDao getAddressDao() {
+        return database.addressDao();
+    }
+
     // Phương thức để thêm dữ liệu mẫu cho các bảng
     private void initializeSampleData() {
         // Thêm dữ liệu mẫu cho bảng users nếu bảng rỗng
@@ -80,6 +86,14 @@ public class DatabaseHelper {
             database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100));
             database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200));
             database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50));
+        }
+
+        // Thêm dữ liệu mẫu cho bảng addresses nếu bảng rỗng
+        if (database.addressDao().getAddressesByUser(1).isEmpty()) {
+            // Thêm địa chỉ cho customer1 (userId = 1)
+            database.addressDao().insert(new Address(1, "123 Đường Láng, Hà Nội, Hà Nội, 100000, Vietnam", true));
+            database.addressDao().insert(new Address(1, "456 Nguyễn Trãi, Hà Nội, Hà Nội, 100000, Vietnam", false));
+            // admin1 (userId = 2) không có địa chỉ
         }
     }
 }

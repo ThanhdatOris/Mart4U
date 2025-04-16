@@ -12,6 +12,8 @@ public class User {
     private String email;
     private String role; // "customer" hoặc "admin"
 
+    // Note: A User can have multiple addresses (0 or more).
+    // Use AddressDao to retrieve the list of addresses for a user.
     public User(String username, String password, String email, String role) {
         this.username = username;
         this.password = password;

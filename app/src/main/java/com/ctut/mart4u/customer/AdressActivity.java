@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.ctut.mart4u.R;
 
-public class PaymentActivity extends AppCompatActivity {
+public class AdressActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
