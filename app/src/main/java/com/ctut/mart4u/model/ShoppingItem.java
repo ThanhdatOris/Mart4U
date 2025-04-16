@@ -1,9 +1,19 @@
 package com.ctut.mart4u.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "shopping_items")
+@Entity(
+        tableName = "shopping_items",
+        foreignKeys = @ForeignKey(
+                entity = Category.class,
+                parentColumns = "id",
+                childColumns = "category_id",
+                onDelete = ForeignKey.CASCADE
+        )
+)
 public class ShoppingItem {
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -13,6 +23,8 @@ public class ShoppingItem {
 
     private double price;
 
+    @ColumnInfo(name = "category_id", index = true)
+    private int CategoryId;
     // Constructor
     public ShoppingItem(String name, int quantity, boolean isBought) {
         this.name = name;
@@ -56,4 +68,12 @@ public class ShoppingItem {
     public double getPrice() {return price;};
 
     public void setPrice(double price) { this.price = price;}
+
+    public int getCategoryId() {
+        return CategoryId;
+    }
+    public void setCategoryId(int CategoryId) {
+        this.CategoryId = CategoryId;
+    }
+
 }

@@ -49,6 +49,21 @@ public class CategoryActivity extends BaseActivity {
         loadCategories();
     }
 
+//    private void loadCategories() {
+//        if (isSampleData) {
+//            // Dữ liệu mẫu để test
+//            categoryList.clear();
+//            categoryList.add(new Category("Thịt"));
+//            categoryList.add(new Category("Rau củ"));
+//            categoryList.add(new Category("Trái cây"));
+//        } else {
+//            // Dữ liệu thực từ database
+//            categoryList.clear();
+//            categoryList.addAll(categoryDao.getAllCategories());
+//        }
+//
+//        categoryAdapter.notifyDataSetChanged();
+//    }
     private void loadCategories() {
         if (isSampleData) {
             // Dữ liệu mẫu để test
@@ -61,7 +76,7 @@ public class CategoryActivity extends BaseActivity {
             categoryList.clear();
             categoryList.addAll(categoryDao.getAllCategories());
         }
-
+        categoryList.addAll(categoryDao.getAllCategories());
         categoryAdapter.notifyDataSetChanged();
     }
 }

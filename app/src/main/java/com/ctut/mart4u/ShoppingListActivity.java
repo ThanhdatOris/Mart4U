@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.adapter.ShoppingListAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
+import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.ShoppingItem;
 
 import java.util.ArrayList;
@@ -33,6 +34,18 @@ public class ShoppingListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // neu co du lieu ve cateogyID
+        // nay lay id cua category tu intent => phuc vu viec get product theo category
+        int categoryId = getIntent().getIntExtra("categoryId", -1);
+        if (categoryId != -1) {
+            // Có categoryId => lấy sản phẩm theo category
+            Toast.makeText(this, "Category ID: " + categoryId, Toast.LENGTH_SHORT).show();
+        } else {
+            // Không có categoryId => lấy toàn bộ sản phẩm
+            Toast.makeText(this, "Khong co category => lay tat ca product", Toast.LENGTH_SHORT).show();
+        }
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_shopping_list);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -103,4 +116,19 @@ public class ShoppingListActivity extends AppCompatActivity {
         shoppingList.addAll(databaseHelper.getShoppingDao().getAllItems());
         adapter.updateList(shoppingList);
     }
+//    private void loadCategories() {
+//        if (isSampleData) {
+//            // Dữ liệu mẫu để test
+//            categoryList.clear();
+//            categoryList.add(new Category("Thịt"));
+//            categoryList.add(new Category("Rau củ"));
+//            categoryList.add(new Category("Trái cây"));
+//        } else {
+//            // Dữ liệu thực từ database
+//            categoryList.clear();
+//            categoryList.addAll(categoryDao.getAllCategories());
+//        }
+//
+//        categoryAdapter.notifyDataSetChanged();
+//    }
 }

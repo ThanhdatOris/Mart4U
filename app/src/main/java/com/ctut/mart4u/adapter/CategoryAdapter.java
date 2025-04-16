@@ -1,5 +1,7 @@
 package com.ctut.mart4u.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.R;
+import com.ctut.mart4u.ShoppingListActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.Category;
 
@@ -51,12 +54,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             holder.imageViewCategory.setImageResource(R.drawable.img_category_vegetable); // Mặc định
         }
 
-        // Xử lý sự kiện khi nhấn nút xóa
-        holder.btnDeleteCategory.setOnClickListener(v -> {
-            databaseHelper.getCategoryDao().delete(category); // Xóa danh mục khỏi cơ sở dữ liệu
-            categoryList.remove(position); // Xóa danh mục khỏi danh sách
-            notifyItemRemoved(position); // Cập nhật RecyclerView
-            notifyItemRangeChanged(position, categoryList.size()); // Cập nhật các vị trí còn lại
+//        // Xử lý sự kiện khi nhấn nút xóa
+//        holder.btnDeleteCategory.setOnClickListener(v -> {
+//            databaseHelper.getCategoryDao().delete(category); // Xóa danh mục khỏi cơ sở dữ liệu
+//            categoryList.remove(position); // Xóa danh mục khỏi danh sách
+//            notifyItemRemoved(position); // Cập nhật RecyclerView
+//            notifyItemRangeChanged(position, categoryList.size()); // Cập nhật các vị trí còn lại
+//        });
+        // xem danh sach san pham cua 1 category
+        holder.btnViewProductCategory.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, ShoppingListActivity.class);
+            intent.putExtra("categoryId", category.getId());
+            context.startActivity(intent);
         });
     }
 
@@ -75,13 +85,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
         TextView textViewCategoryName;
         ImageView imageViewCategory;
-        Button btnDeleteCategory;
+//        Button btnDeleteCategory;
+        Button btnViewProductCategory;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewCategoryName = itemView.findViewById(R.id.textViewCategoryName);
             imageViewCategory = itemView.findViewById(R.id.imageViewCategory);
-            btnDeleteCategory = itemView.findViewById(R.id.btnDeleteCategory);
+//            btnDeleteCategory = itemView.findViewById(R.id.btnDeleteCategory);
+            btnViewProductCategory = itemView.findViewById(R.id.btnViewProductCategory);
         }
     }
 }
