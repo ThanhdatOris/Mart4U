@@ -15,17 +15,19 @@ import androidx.room.PrimaryKey;
                         childColumns = "productId",
                         onDelete = ForeignKey.CASCADE)
         })
-public class CartEntry {
+public class CartDetail {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int userId;
     private int productId;
     private int quantity;
+    private String status;
 
-    public CartEntry(int userId, int productId, int quantity) {
+    public CartDetail(int userId, int productId, int quantity) {
         this.userId = userId;
         this.productId = productId;
         this.quantity = quantity;
+        status = "pending";
     }
 
     // Getters and Setters
