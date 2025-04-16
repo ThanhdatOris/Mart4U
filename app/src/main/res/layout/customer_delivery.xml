@@ -331,35 +331,35 @@
                 </TableRow>
             </TableLayout>
 
-            <!-- Nút Đóng -->
-            <Button
-                android:id="@+id/btnClose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#d3d3d3"
-                android:text="Đóng"
-                android:textColor="#000000" />
+<!--            &lt;!&ndash; Nút Đóng &ndash;&gt;-->
+<!--            <Button-->
+<!--                android:id="@+id/btnClose"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:backgroundTint="#d3d3d3"-->
+<!--                android:text="Đóng"-->
+<!--                android:textColor="#000000" />-->
 
-            <!-- Nút Sẵn sàng đặt hàng -->
-            <Button
-                android:id="@+id/btnReadyToOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="#fa003f"
-                android:text="Sẵn sàng đặt hàng"
-                android:textColor="#ffffff" />
+<!--            &lt;!&ndash; Nút Sẵn sàng đặt hàng &ndash;&gt;-->
+<!--            <Button-->
+<!--                android:id="@+id/btnReadyToOrder"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:backgroundTint="#fa003f"-->
+<!--                android:text="Sẵn sàng đặt hàng"-->
+<!--                android:textColor="#ffffff" />-->
 
-            <!-- Nút Mở -->
-            <Button
-                android:id="@+id/btnOpen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="#00ff00"
-                android:text="Mở"
-                android:textColor="#ffffff" />
+<!--            &lt;!&ndash; Nút Mở &ndash;&gt;-->
+<!--            <Button-->
+<!--                android:id="@+id/btnOpen"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:backgroundTint="#00ff00"-->
+<!--                android:text="Mở"-->
+<!--                android:textColor="#ffffff" />-->
 
         </LinearLayout>
     </ScrollView>

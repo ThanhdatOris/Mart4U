@@ -40,7 +40,7 @@ public class CategoryActivity extends BaseActivity {
 
         // Khởi tạo DatabaseHelper và lấy CategoryDao
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
-        categoryDao = databaseHelper.getCategoryDao();
+//        categoryDao = databaseHelper.getCategoryDao();
 
         // Khởi tạo danh sách và adapter
         categoryList = new ArrayList<>();

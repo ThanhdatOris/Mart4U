@@ -10,7 +10,7 @@ import com.ctut.mart4u.model.Purchase;
 import com.ctut.mart4u.model.PurchaseDetail;
 import com.ctut.mart4u.model.Address;
 
-@Database(entities = {User.class, Category.class, Product.class, CartDetail.class, Purchase.class, PurchaseDetail.class, Address.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Category.class, Product.class, CartDetail.class, Purchase.class, PurchaseDetail.class, Address.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract CategoryDao categoryDao();
