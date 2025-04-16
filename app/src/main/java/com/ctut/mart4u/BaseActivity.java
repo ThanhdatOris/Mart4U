@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ctut.mart4u.admin.CategoryActivity;
+//import com.ctut.mart4u.admin.CategoryActivity;
+import com.ctut.mart4u.customer.CategoryActivity;
 import com.ctut.mart4u.customer.AccountActivity;
 import com.ctut.mart4u.customer.DeliveryActivity;
 
