@@ -10,13 +10,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.ctut.mart4u.R;
 
-public class ShoppingListActivity extends AppCompatActivity {
+public class DeliveryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_shopping_list);
+        setContentView(R.layout.activity_delivery);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
