@@ -1,4 +1,4 @@
-package com.ctut.mart4u;
+package com.ctut.mart4u.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ctut.mart4u.R;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.HistoryItem;
 

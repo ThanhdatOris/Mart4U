@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ctut.mart4u.adapter.ShoppingListAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.ShoppingItem;
 

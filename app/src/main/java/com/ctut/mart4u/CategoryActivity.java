@@ -1,10 +1,11 @@
 package com.ctut.mart4u;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ctut.mart4u.adapter.CategoryAdapter;
 import com.ctut.mart4u.db.CategoryDao;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.Category;

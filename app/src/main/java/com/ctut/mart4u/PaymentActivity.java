@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ctut.mart4u.adapter.CartAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.CartItem;
 
