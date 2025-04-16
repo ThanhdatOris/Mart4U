@@ -2,6 +2,9 @@ package com.ctut.mart4u.db;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
 import com.ctut.mart4u.model.User;
 import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.Product;
@@ -20,6 +23,14 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PurchaseDao purchaseDao();
     public abstract PurchaseDetailDao purchaseDetailDao();
     public abstract AddressDao addressDao();
-
     public abstract DeliveryScheduleDao deliveryScheduleDao();
+
+    // Thêm migration
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            // Ví dụ: Thêm cột mới hoặc bảng mới
+            // database.execSQL("ALTER TABLE delivery_schedule ADD COLUMN new_column TEXT");
+        }
+    };
 }

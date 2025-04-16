@@ -25,30 +25,12 @@ public class DeliveryActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         databaseHelper = DatabaseHelper.getInstance(this);
-
-        initSampleData();
-
 
         // Lấy dữ liệu từ database và hiển thị
         loadDeliverySchedule();
     }
-    private void initSampleData() {
-        DeliveryScheduleDao dao = databaseHelper.getInstance(this)
-                .getDeliveryScheduleDao();
-        // Xóa dữ liệu cũ
-        // dao.getAllSchedules().clear();
-        // Thêm dữ liệu mẫu
-        if (dao.getAllSchedules().isEmpty()) {
-            // Insert sample data only if the database is empty
-            dao.insert(new DeliverySchedule("9:00 - 11:00", "Đóng", "Mở", "Mở"));
-            dao.insert(new DeliverySchedule("11:00 - 13:00", "Đóng", "Mở", "Mở"));
-            dao.insert(new DeliverySchedule("13:00 - 15:00", "Đóng", "Mở", "Mở"));
-            dao.insert(new DeliverySchedule("15:00 - 18:00", "Mở", "Mở", "Mở"));
-            dao.insert(new DeliverySchedule("18:00 - 20:00", "Mở", "Mở", "Mở"));
-        }
-    }
+
     private void loadDeliverySchedule() {
         // Lấy instance của database
         List<DeliverySchedule> schedules = databaseHelper.getInstance(this)

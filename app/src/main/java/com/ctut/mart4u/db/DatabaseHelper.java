@@ -6,20 +6,34 @@ import com.ctut.mart4u.model.Address;
 import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.Product;
 import com.ctut.mart4u.model.User;
+import com.ctut.mart4u.model.DeliverySchedule;;
 
 public class DatabaseHelper {
     private static DatabaseHelper instance;
     private final AppDatabase database;
 
+    //Cách cũ
     // Private constructor để ngăn việc tạo instance trực tiếp
+//    private DatabaseHelper(Context context) {
+//        database = Room.databaseBuilder(context.getApplicationContext(),
+//                        AppDatabase.class, "mart4u_database")
+//                .allowMainThreadQueries() // Chỉ dùng cho mục đích học tập, không khuyến khích trong production
+//                .fallbackToDestructiveMigration() // Xóa và tạo lại cơ sở dữ liệu khi version thay đổi
+//                .build();
+//
+//        // Thêm dữ liệu mẫu nếu cơ sở dữ liệu rỗng
+//        initializeSampleData();
+//    }
+
+    //Cách mới
+    // Tham chiếu đến migrate tại appdatabase
     private DatabaseHelper(Context context) {
         database = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, "mart4u_database")
-                .allowMainThreadQueries() // Chỉ dùng cho mục đích học tập, không khuyến khích trong production
-                .fallbackToDestructiveMigration() // Xóa và tạo lại cơ sở dữ liệu khi version thay đổi
+                .allowMainThreadQueries()
+                .addMigrations(AppDatabase.MIGRATION_1_2)
                 .build();
 
-        // Thêm dữ liệu mẫu nếu cơ sở dữ liệu rỗng
         initializeSampleData();
     }
 
@@ -98,6 +112,15 @@ public class DatabaseHelper {
             database.addressDao().insert(new Address(1, "123 Đường Láng, Hà Nội, Hà Nội, 100000, Vietnam", true));
             database.addressDao().insert(new Address(1, "456 Nguyễn Trãi, Hà Nội, Hà Nội, 100000, Vietnam", false));
             // admin1 (userId = 2) không có địa chỉ
+        }
+
+        // Thêm dữ liệu mẫu cho bảng delivery_schedule nếu bảng rỗng
+        if (database.deliveryScheduleDao().getAllSchedules().isEmpty()) {
+            database.deliveryScheduleDao().insert(new DeliverySchedule("9:00 - 11:00", "Đóng", "Mở", "Mở"));
+            database.deliveryScheduleDao().insert(new DeliverySchedule("11:00 - 13:00", "Đóng", "Mở", "Mở"));
+            database.deliveryScheduleDao().insert(new DeliverySchedule("13:00 - 15:00", "Đóng", "Mở", "Mở"));
+            database.deliveryScheduleDao().insert(new DeliverySchedule("15:00 - 18:00", "Mở", "Mở", "Mở"));
+            database.deliveryScheduleDao().insert(new DeliverySchedule("18:00 - 20:00", "Mở", "Mở", "Mở"));
         }
     }
 }
