@@ -65,6 +65,10 @@ public class DatabaseHelper {
     public AddressDao getAddressDao() {
         return database.addressDao();
     }
+    // Phương thức để lấy DeliveryScheduleDao
+    public DeliveryScheduleDao getDeliveryScheduleDao() {
+        return database.deliveryScheduleDao();
+    }
 
     // Phương thức để thêm dữ liệu mẫu cho các bảng
     private void initializeSampleData() {

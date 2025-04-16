@@ -46,6 +46,9 @@
             android:name=".customer.AccountActivity"
             android:exported="false" />
         <activity
+            android:name=".customer.CategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.CategoryActivity"
             android:exported="false" />
         <activity

@@ -28,6 +28,8 @@ public class CategoryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Khởi tạo EdgeToEdge
         EdgeToEdge.enable(this);
 
         // Thêm ở trong phương thức onCreate()
