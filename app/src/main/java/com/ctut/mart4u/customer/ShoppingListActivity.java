@@ -1,134 +1,118 @@
 package com.ctut.mart4u.customer;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.SearchView;
+import android.widget.Spinner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.room.Room;
+import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.R;
-import com.ctut.mart4u.customer.adapter.ShoppingListAdapter;
-import com.ctut.mart4u.db.DatabaseHelper;
-import com.ctut.mart4u.model.ShoppingItem;
-
+import com.ctut.mart4u.db.AppDatabase;
+import com.ctut.mart4u.db.CategoryDao;
+import com.ctut.mart4u.db.ProductDao;
+import com.ctut.mart4u.model.Category;
+import com.ctut.mart4u.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingListActivity extends AppCompatActivity {
-    private RecyclerView recyclerViewShoppingList;
-    private EditText editTextItemName;
-    private EditText editTextItemQuantity;
-    private Button btnAddItem;
-    private Button btnDeleteAll;
-    private ShoppingListAdapter adapter;
-    private List<ShoppingItem> shoppingList;
-    private DatabaseHelper databaseHelper;
+public class ShoppingListActivity extends BaseActivity {
+    private RecyclerView productRecyclerView;
+    private SearchView searchView;
+    private Spinner categorySpinner;
+    private ProductAdapter productAdapter;
+    private AppDatabase db;
+    private ProductDao productDao;
+    private CategoryDao categoryDao;
+    private List<Product> productList;
+    private List<Category> categoryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // neu co du lieu ve cateogyID
-        // nay lay id cua category tu intent => phuc vu viec get product theo category
-        int categoryId = getIntent().getIntExtra("categoryId", -1);
-        if (categoryId != -1) {
-            // Có categoryId => lấy sản phẩm theo category
-            Toast.makeText(this, "Category ID: " + categoryId, Toast.LENGTH_SHORT).show();
-        } else {
-            // Không có categoryId => lấy toàn bộ sản phẩm
-            Toast.makeText(this, "Khong co category => lay tat ca product", Toast.LENGTH_SHORT).show();
-        }
-
-        EdgeToEdge.enable(this);
         setContentView(R.layout.customer_shopping_list);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        // Khởi tạo các thành phần giao diện
-        recyclerViewShoppingList = findViewById(R.id.recyclerViewShoppingList);
-        editTextItemName = findViewById(R.id.editTextItemName);
-        editTextItemQuantity = findViewById(R.id.editTextItemQuantity);
-        btnAddItem = findViewById(R.id.btnAddItem);
-        btnDeleteAll = findViewById(R.id.btnDeleteAll);
+        // Initialize views
+        productRecyclerView = findViewById(R.id.productRecyclerView);
+        searchView = findViewById(R.id.searchView);
+        categorySpinner = findViewById(R.id.categorySpinner);
 
-        // Khởi tạo DatabaseHelper
-        databaseHelper = DatabaseHelper.getInstance(this);
+        // Initialize database
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "mart4u-db")
+                .allowMainThreadQueries() // For simplicity, in production use AsyncTask or Coroutines
+                .build();
+        productDao = db.productDao();
+        categoryDao = db.categoryDao();
 
-        // Khởi tạo danh sách và adapter
-        shoppingList = new ArrayList<>();
-        adapter = new ShoppingListAdapter(shoppingList, databaseHelper);
-        recyclerViewShoppingList.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewShoppingList.setAdapter(adapter);
+        // Setup RecyclerView
+        productList = new ArrayList<>();
+        productAdapter = new ProductAdapter(productList);
+        productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        productRecyclerView.setAdapter(productAdapter);
 
-        // Load dữ liệu từ cơ sở dữ liệu
-        loadShoppingList();
+        // Load categories into spinner
+        categoryList = categoryDao.getAllCategories();
+        List<String> categoryNames = new ArrayList<>();
+        categoryNames.add("All Categories");
+        for (Category category : categoryList) {
+            categoryNames.add(category.getName());
+        }
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryNames);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(categoryAdapter);
 
-        // Xử lý sự kiện khi nhấn nút Add
-        btnAddItem.setOnClickListener(v -> {
-            String itemName = editTextItemName.getText().toString().trim();
-            String quantityStr = editTextItemQuantity.getText().toString().trim();
+        // Load all products initially
+        loadProducts(null, -1);
 
-            if (itemName.isEmpty() || quantityStr.isEmpty()) {
-                Toast.makeText(this, "Please enter item name and quantity", Toast.LENGTH_SHORT).show();
-                return;
+        // Search functionality
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadProducts(query, getSelectedCategoryId());
+                return true;
             }
 
-            int quantity;
-            try {
-                quantity = Integer.parseInt(quantityStr);
-                if (quantity <= 0) {
-                    Toast.makeText(this, "Quantity must be greater than 0", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            } catch (NumberFormatException e) {
-                Toast.makeText(this, "Invalid quantity", Toast.LENGTH_SHORT).show();
-                return;
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                loadProducts(newText, getSelectedCategoryId());
+                return true;
             }
-
-            // Tạo và thêm món đồ mới
-            ShoppingItem newItem = new ShoppingItem(itemName, quantity, false);
-            databaseHelper.getShoppingDao().insert(newItem);
-            editTextItemName.setText("");
-            editTextItemQuantity.setText("");
-            loadShoppingList(); // Làm mới danh sách
         });
 
-        // Xử lý sự kiện khi nhấn nút Delete All
-        btnDeleteAll.setOnClickListener(v -> {
-            databaseHelper.getShoppingDao().deleteAllItems();
-            loadShoppingList(); // Làm mới danh sách
+        // Category filter
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                loadProducts(searchView.getQuery().toString(), getSelectedCategoryId());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
         });
     }
 
-    // Phương thức để load dữ liệu từ cơ sở dữ liệu và cập nhật RecyclerView
-    private void loadShoppingList() {
-        shoppingList.clear();
-        shoppingList.addAll(databaseHelper.getShoppingDao().getAllItems());
-        adapter.updateList(shoppingList);
+    private void loadProducts(String keyword, int categoryId) {
+        productList.clear();
+        if (keyword != null && !keyword.isEmpty()) {
+            productList.addAll(productDao.searchProducts(keyword));
+        } else if (categoryId != -1) {
+            productList.addAll(productDao.getProductsByCategory(categoryId));
+        } else {
+            productList.addAll(productDao.getAllProducts());
+        }
+        productAdapter.notifyDataSetChanged();
     }
-//    private void loadCategories() {
-//        if (isSampleData) {
-//            // Dữ liệu mẫu để test
-//            categoryList.clear();
-//            categoryList.add(new Category("Thịt"));
-//            categoryList.add(new Category("Rau củ"));
-//            categoryList.add(new Category("Trái cây"));
-//        } else {
-//            // Dữ liệu thực từ database
-//            categoryList.clear();
-//            categoryList.addAll(categoryDao.getAllCategories());
-//        }
-//
-//        categoryAdapter.notifyDataSetChanged();
-//    }
+
+    private int getSelectedCategoryId() {
+        int position = categorySpinner.getSelectedItemPosition();
+        if (position == 0) { // "All Categories"
+            return -1;
+        }
+        return categoryList.get(position - 1).getId();
+    }
 }

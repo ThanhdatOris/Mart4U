@@ -19,7 +19,7 @@ public class DatabaseHelper {
                 .build();
 
         // Thêm dữ liệu mẫu cho bảng categories nếu bảng rỗng
-        initializeSampleCategories();
+//        initializeSampleCategories();
     }
 
     // Phương thức Singleton để lấy instance duy nhất
@@ -30,32 +30,32 @@ public class DatabaseHelper {
         return instance;
     }
 
-    // Phương thức để lấy ShoppingDao
-    public ShoppingDao getShoppingDao() {
-        return database.shoppingDao();
-    }
-
-    // Phương thức để lấy CategoryDao
-    public CategoryDao getCategoryDao() {
-        return database.categoryDao();
-    }
-
-    // Phương thức để lấy CartDao
-    public CartDao getCartDao() {
-        return database.cartDao();
-    }
-
-    // Phương thức để lấy HistoryDao
-    public HistoryDao getHistoryDao() {
-        return database.historyDao();
-    }
+//    // Phương thức để lấy ShoppingDao
+//    public ShoppingDao getShoppingDao() {
+//        return database.shoppingDao();
+//    }
+//
+//    // Phương thức để lấy CategoryDao
+//    public CategoryDao getCategoryDao() {
+//        return database.categoryDao();
+//    }
+//
+//    // Phương thức để lấy CartDao
+//    public CartDao getCartDao() {
+//        return database.cartDao();
+//    }
+//
+//    // Phương thức để lấy HistoryDao
+//    public HistoryDao getHistoryDao() {
+//        return database.historyDao();
+//    }
 
     // Phương thức để thêm dữ liệu mẫu cho bảng categories
-    private void initializeSampleCategories() {
-        if (database.categoryDao().getAllCategories().isEmpty()) {
-            database.categoryDao().insert(new Category("Thực phẩm"));
-            database.categoryDao().insert(new Category("Đồ uống"));
-            database.categoryDao().insert(new Category("Đồ gia dụng"));
-        }
-    }
+//    private void initializeSampleCategories() {
+//        if (database.categoryDao().getAllCategories().isEmpty()) {
+//            database.categoryDao().insert(new Category("Thực phẩm"));
+//            database.categoryDao().insert(new Category("Đồ uống"));
+//            database.categoryDao().insert(new Category("Đồ gia dụng"));
+//        }
+//    }
 }

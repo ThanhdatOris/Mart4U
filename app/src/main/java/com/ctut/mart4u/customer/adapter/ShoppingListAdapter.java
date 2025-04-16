@@ -13,9 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.db.DatabaseHelper;
-import com.ctut.mart4u.model.CartItem;
-import com.ctut.mart4u.model.HistoryItem;
-import com.ctut.mart4u.model.ShoppingItem;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

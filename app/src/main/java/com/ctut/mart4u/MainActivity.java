@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.ctut.mart4u.db.DatabaseHelper;
-import com.ctut.mart4u.model.CartItem;
 
 public class MainActivity extends BaseActivity {
     private DatabaseHelper databaseHelper;

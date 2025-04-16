@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.R;
-import com.ctut.mart4u.customer.ShoppingListActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.Category;
 
