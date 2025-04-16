@@ -1,4 +1,4 @@
-package com.ctut.mart4u.adapter;
+package com.ctut.mart4u.customer.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +36,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     @Override
     public ShoppingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_shopping, parent, false);
+                .inflate(R.layout.customer_item_shopping, parent, false);
         return new ShoppingViewHolder(view);
     }
 

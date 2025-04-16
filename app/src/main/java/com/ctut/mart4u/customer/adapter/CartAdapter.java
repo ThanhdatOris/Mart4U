@@ -1,4 +1,4 @@
-package com.ctut.mart4u.adapter;
+package com.ctut.mart4u.customer.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +35,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        int layoutId = showDeleteButton ? R.layout.item_cart : R.layout.item_payment_product;
+        int layoutId = showDeleteButton ? R.layout.customer_item_cart : R.layout.customer_item_payment_product;
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(layoutId, parent, false);
         return new CartViewHolder(view, showDeleteButton);

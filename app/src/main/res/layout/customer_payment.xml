@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:listitem="@layout/item_payment_product" />
+                tools:listitem="@layout/customer_item_payment_product" />
 
             <!-- Tổng giá trị -->
             <TextView

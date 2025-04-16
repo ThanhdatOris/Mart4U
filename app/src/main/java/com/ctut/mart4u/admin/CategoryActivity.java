@@ -1,11 +1,13 @@
-package com.ctut.mart4u;
+package com.ctut.mart4u.admin;
 
 import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ctut.mart4u.adapter.CategoryAdapter;
+import com.ctut.mart4u.BaseActivity;
+import com.ctut.mart4u.R;
+import com.ctut.mart4u.admin.adapter.CategoryAdapter;
 import com.ctut.mart4u.db.CategoryDao;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.Category;
@@ -24,7 +26,7 @@ public class CategoryActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_category; // Trả về layout nội dung của CategoryActivity
+        return R.layout.admin_category; // Trả về layout nội dung của CategoryActivity
     }
 
     @Override

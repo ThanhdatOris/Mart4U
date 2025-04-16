@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoryActivity">
+    tools:context=".customer.HistoryActivity">
 
     <!-- RecyclerView để hiển thị danh sách món đồ trong lịch sử -->
     <androidx.recyclerview.widget.RecyclerView
@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_history" />
+        tools:listitem="@layout/customer_item_history" />
 
     <!-- Button để xóa toàn bộ lịch sử -->
     <Button

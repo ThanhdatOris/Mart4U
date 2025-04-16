@@ -1,4 +1,4 @@
-package com.ctut.mart4u;
+package com.ctut.mart4u.customer;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ctut.mart4u.adapter.CartAdapter;
+import com.ctut.mart4u.BaseActivity;
+import com.ctut.mart4u.R;
+import com.ctut.mart4u.customer.adapter.CartAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.CartItem;
 
@@ -97,6 +99,6 @@ public class PaymentActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_payment;
+        return R.layout.customer_payment;
     }
 }

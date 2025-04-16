@@ -1,4 +1,4 @@
-package com.ctut.mart4u;
+package com.ctut.mart4u.customer;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.ctut.mart4u.R;
 import com.ctut.mart4u.db.DatabaseHelper;
 
 public class SettingsActivity extends AppCompatActivity {

@@ -1,6 +1,9 @@
-package com.ctut.mart4u;
+package com.ctut.mart4u.customer;
 
 import android.os.Bundle;
+
+import com.ctut.mart4u.BaseActivity;
+import com.ctut.mart4u.R;
 
 public class AccountActivity extends BaseActivity {
 
@@ -12,6 +15,6 @@ public class AccountActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_account;
+        return R.layout.customer_account;
     }
 }

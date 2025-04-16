@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ctut.mart4u.admin.CategoryActivity;
+import com.ctut.mart4u.customer.AccountActivity;
+import com.ctut.mart4u.customer.DeliveryActivity;
+
 public abstract class BaseActivity extends AppCompatActivity {
 
     // Phương thức trừu tượng để các Activity con cung cấp layout

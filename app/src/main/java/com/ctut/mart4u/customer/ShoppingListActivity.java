@@ -1,4 +1,4 @@
-package com.ctut.mart4u;
+package com.ctut.mart4u.customer;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -13,9 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ctut.mart4u.adapter.ShoppingListAdapter;
+import com.ctut.mart4u.R;
+import com.ctut.mart4u.customer.adapter.ShoppingListAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
-import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.ShoppingItem;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         }
 
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_shopping_list);
+        setContentView(R.layout.customer_shopping_list);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

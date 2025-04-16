@@ -1,4 +1,4 @@
-package com.ctut.mart4u;
+package com.ctut.mart4u.customer;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,7 +11,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ctut.mart4u.adapter.HistoryAdapter;
+import com.ctut.mart4u.R;
+import com.ctut.mart4u.customer.adapter.HistoryAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.HistoryItem;
 
@@ -29,7 +30,7 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_history);
+        setContentView(R.layout.customer_history);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShoppingListActivity">
+    tools:context=".customer.ShoppingListActivity">
 
     <!-- RecyclerView để hiển thị danh sách mua sắm -->
     <androidx.recyclerview.widget.RecyclerView
@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_shopping" />
+        tools:listitem="@layout/customer_item_shopping" />
 
     <!-- Layout chứa EditText và Button để thêm món đồ -->
     <LinearLayout

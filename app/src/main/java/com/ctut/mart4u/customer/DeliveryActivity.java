@@ -1,12 +1,15 @@
-package com.ctut.mart4u;
+package com.ctut.mart4u.customer;
 
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.ctut.mart4u.BaseActivity;
+import com.ctut.mart4u.R;
+
 public class DeliveryActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_delivery; // Trả về layout nội dung của CategoryActivity
+        return R.layout.customer_delivery; // Trả về layout nội dung của CategoryActivity
     }
 
     @Override
