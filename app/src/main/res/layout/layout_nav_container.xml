@@ -12,7 +12,8 @@
         android:id="@+id/content_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        />
 
     <!-- Bottom Navigation Bar -->
     <include layout="@layout/layout_bottom_nav_bar" />

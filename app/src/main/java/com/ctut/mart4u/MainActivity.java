@@ -14,7 +14,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
+//        setContentView(getLayoutId());
 
         // Khởi tạo DatabaseHelper
         databaseHelper = DatabaseHelper.getInstance(this);
