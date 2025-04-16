@@ -38,13 +38,16 @@ public class DeliveryActivity extends BaseActivity {
         DeliveryScheduleDao dao = databaseHelper.getInstance(this)
                 .getDeliveryScheduleDao();
         // Xóa dữ liệu cũ
-        dao.getAllSchedules().clear();
+        // dao.getAllSchedules().clear();
         // Thêm dữ liệu mẫu
-        dao.insert(new DeliverySchedule("9:00 - 11:00", "Đóng", "Mở", "Mở"));
-        dao.insert(new DeliverySchedule("11:00 - 13:00", "Đóng", "Mở", "Mở"));
-        dao.insert(new DeliverySchedule("13:00 - 15:00", "Đóng", "Mở", "Mở"));
-        dao.insert(new DeliverySchedule("15:00 - 18:00", "Mở", "Mở", "Mở"));
-        dao.insert(new DeliverySchedule("18:00 - 20:00", "Mở", "Mở", "Mở"));
+        if (dao.getAllSchedules().isEmpty()) {
+            // Insert sample data only if the database is empty
+            dao.insert(new DeliverySchedule("9:00 - 11:00", "Đóng", "Mở", "Mở"));
+            dao.insert(new DeliverySchedule("11:00 - 13:00", "Đóng", "Mở", "Mở"));
+            dao.insert(new DeliverySchedule("13:00 - 15:00", "Đóng", "Mở", "Mở"));
+            dao.insert(new DeliverySchedule("15:00 - 18:00", "Mở", "Mở", "Mở"));
+            dao.insert(new DeliverySchedule("18:00 - 20:00", "Mở", "Mở", "Mở"));
+        }
     }
     private void loadDeliverySchedule() {
         // Lấy instance của database
