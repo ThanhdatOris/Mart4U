@@ -14,7 +14,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract CategoryDao categoryDao();
     public abstract ProductDao productDao();
-    public abstract CartEntryDao cartEntryDao();
+    public abstract CartDetailDao cartDetailDao();
     public abstract PurchaseDao purchaseDao();
     public abstract PurchaseDetailDao purchaseDetailDao();
 }

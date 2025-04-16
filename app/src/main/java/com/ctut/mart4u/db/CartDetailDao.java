@@ -5,13 +5,11 @@ import androidx.room.Insert;
 import androidx.room.Update;
 import androidx.room.Delete;
 import androidx.room.Query;
-
 import com.ctut.mart4u.model.CartDetail;
-
 import java.util.List;
 
 @Dao
-public interface CartEntryDao {
+public interface CartDetailDao {
     @Insert
     void insert(CartDetail cartDetail);
 
@@ -21,9 +19,9 @@ public interface CartEntryDao {
     @Delete
     void delete(CartDetail cartDetail);
 
-    @Query("SELECT * FROM CartDetail WHERE userId = :userId")
-    List<CartDetail> getCartEntriesByUser(int userId);
+    @Query("SELECT * FROM cart_details WHERE userId = :userId")
+    List<CartDetail> getCartDetailsByUser(int userId);
 
-    @Query("DELETE FROM CartDetail WHERE userId = :userId")
+    @Query("DELETE FROM cart_details WHERE userId = :userId")
     void clearCart(int userId);
 }

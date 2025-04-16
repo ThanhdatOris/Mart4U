@@ -4,7 +4,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "cart_entries",
+@Entity(tableName = "cart_details",
         foreignKeys = {
                 @ForeignKey(entity = User.class,
                         parentColumns = "id",
@@ -27,7 +27,7 @@ public class CartDetail {
         this.userId = userId;
         this.productId = productId;
         this.quantity = quantity;
-        status = "pending";
+        this.status = "pending";
     }
 
     // Getters and Setters
@@ -61,5 +61,13 @@ public class CartDetail {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -1,10 +1,10 @@
 package com.ctut.mart4u.db;
 
 import android.content.Context;
-
 import androidx.room.Room;
-
 import com.ctut.mart4u.model.Category;
+import com.ctut.mart4u.model.Product;
+import com.ctut.mart4u.model.User;
 
 public class DatabaseHelper {
     private static DatabaseHelper instance;
@@ -18,8 +18,8 @@ public class DatabaseHelper {
                 .fallbackToDestructiveMigration() // Xóa và tạo lại cơ sở dữ liệu khi version thay đổi
                 .build();
 
-        // Thêm dữ liệu mẫu cho bảng categories nếu bảng rỗng
-//        initializeSampleCategories();
+        // Thêm dữ liệu mẫu nếu cơ sở dữ liệu rỗng
+        initializeSampleData();
     }
 
     // Phương thức Singleton để lấy instance duy nhất
@@ -30,32 +30,56 @@ public class DatabaseHelper {
         return instance;
     }
 
-//    // Phương thức để lấy ShoppingDao
-//    public ShoppingDao getShoppingDao() {
-//        return database.shoppingDao();
-//    }
-//
-//    // Phương thức để lấy CategoryDao
-//    public CategoryDao getCategoryDao() {
-//        return database.categoryDao();
-//    }
-//
-//    // Phương thức để lấy CartDao
-//    public CartDao getCartDao() {
-//        return database.cartDao();
-//    }
-//
-//    // Phương thức để lấy HistoryDao
-//    public HistoryDao getHistoryDao() {
-//        return database.historyDao();
-//    }
+    // Phương thức để lấy UserDao
+    public UserDao getUserDao() {
+        return database.userDao();
+    }
 
-    // Phương thức để thêm dữ liệu mẫu cho bảng categories
-//    private void initializeSampleCategories() {
-//        if (database.categoryDao().getAllCategories().isEmpty()) {
-//            database.categoryDao().insert(new Category("Thực phẩm"));
-//            database.categoryDao().insert(new Category("Đồ uống"));
-//            database.categoryDao().insert(new Category("Đồ gia dụng"));
-//        }
-//    }
+    // Phương thức để lấy CategoryDao
+    public CategoryDao getCategoryDao() {
+        return database.categoryDao();
+    }
+
+    // Phương thức để lấy ProductDao
+    public ProductDao getProductDao() {
+        return database.productDao();
+    }
+
+    // Phương thức để lấy CartDetailDao
+    public CartDetailDao getCartDetailDao() {
+        return database.cartDetailDao();
+    }
+
+    // Phương thức để lấy PurchaseDao
+    public PurchaseDao getPurchaseDao() {
+        return database.purchaseDao();
+    }
+
+    // Phương thức để lấy PurchaseDetailDao
+    public PurchaseDetailDao getPurchaseDetailDao() {
+        return database.purchaseDetailDao();
+    }
+
+    // Phương thức để thêm dữ liệu mẫu cho các bảng
+    private void initializeSampleData() {
+        // Thêm dữ liệu mẫu cho bảng users nếu bảng rỗng
+        if (database.userDao().getAllCustomers().isEmpty()) {
+            database.userDao().insert(new User("customer1", "pass123", "customer1@example.com", "customer"));
+            database.userDao().insert(new User("admin1", "admin123", "admin1@example.com", "admin"));
+        }
+
+        // Thêm dữ liệu mẫu cho bảng categories nếu bảng rỗng
+        if (database.categoryDao().getAllCategories().isEmpty()) {
+            database.categoryDao().insert(new Category("Thực phẩm", "Các loại thực phẩm tươi sống và đóng gói"));
+            database.categoryDao().insert(new Category("Đồ uống", "Nước giải khát và đồ uống khác"));
+            database.categoryDao().insert(new Category("Đồ gia dụng", "Đồ dùng trong gia đình"));
+        }
+
+        // Thêm dữ liệu mẫu cho bảng products nếu bảng rỗng
+        if (database.productDao().getAllProducts().isEmpty()) {
+            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100));
+            database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200));
+            database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50));
+        }
+    }
 }
