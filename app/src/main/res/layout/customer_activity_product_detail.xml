@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_placeholder" />
+            android:src="@drawable/ic_flag" />
 
         <!-- Danh mục sản phẩm -->
         <TextView

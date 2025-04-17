@@ -30,6 +30,7 @@ public class MainActivity extends BaseActivity {
         product1.setOnClickListener(v -> addToCart(1)); // ID của Táo Envy Mỹ Túi 1kg
         product2.setOnClickListener(v -> addToCart(2)); // ID của Táo Juliet Pháp 1kg
         product3.setOnClickListener(v -> addToCart(3)); // ID của Táo
+
     }
 
     // Phương thức để kiểm tra và thêm sản phẩm mẫu
