@@ -100,6 +100,7 @@ public class ProductDetailActivity extends BaseActivity {
                     long result = databaseHelper.getCartDetailDao().insert(cartDetail);
                     if (result != -1) {
                         Toast.makeText(this, "Thêm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
+                        updateCartBadge(); // Tk Khoa cập nhật badge sau khi thêm
                     } else {
                         Toast.makeText(this, "Không thể thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
                     }

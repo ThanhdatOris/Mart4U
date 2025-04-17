@@ -24,4 +24,8 @@ public interface CartDetailDao {
 
     @Query("DELETE FROM cart_details WHERE userId = :userId")
     void clearCart(int userId);
+
+    // Đếm số lượng sản phẩm trong giỏ hàng của user
+    @Query("SELECT COUNT(*) FROM cart_details WHERE userId = :userId")
+    int getCartItemCount(int userId);
 }

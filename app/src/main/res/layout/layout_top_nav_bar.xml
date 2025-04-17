@@ -23,11 +23,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:entries="@array/store_names"
-        app:backgroundTint="#FFFFFF"
-        android:spinnerMode="dropdown"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginEnd="16dp"
+        android:enabled="false"
+        android:visibility="visible"
+        android:background="@android:color/transparent" />
 
     <!-- Biểu tượng tìm kiếm -->
     <ImageView
@@ -38,14 +38,32 @@
         app:tint="#FFFFFF"
         android:layout_marginEnd="16dp" />
 
-    <!-- Biểu tượng giỏ hàng -->
-    <ImageView
-        android:id="@+id/ic_quick_buy"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_quick_buy"
-        app:tint="#FFFFFF"
-        android:layout_marginEnd="16dp" />
+    <!-- Biểu tượng giỏ hàng với badge -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp">
+
+        <ImageView
+            android:id="@+id/ic_quick_buy"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_quick_buy"
+            app:tint="#FFFFFF" />
+
+        <!-- Badge hiển thị số lượng sản phẩm -->
+        <TextView
+            android:id="@+id/cart_badge"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="end|top"
+            android:background="@drawable/badge_background"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <!-- Biểu tượng thông báo -->
     <ImageView
@@ -54,12 +72,4 @@
         android:layout_height="32dp"
         android:src="@drawable/ic_notice"
         app:tint="#FFFFFF" />
-
-<!--    <ImageView-->
-<!--        android:id="@+id/ic_flag"-->
-<!--        android:layout_width="32dp"-->
-<!--        android:layout_height="32dp"-->
-<!--        android:src="@drawable/ic_flag"-->
-<!--        android:layout_marginLeft="10dp"-->
-<!--        />-->
 </LinearLayout>
