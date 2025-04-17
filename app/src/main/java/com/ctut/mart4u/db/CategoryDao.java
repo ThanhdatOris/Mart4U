@@ -33,4 +33,6 @@ public interface CategoryDao {
 
     @Query("SELECT COUNT(*) FROM categories")
     int getCategoryCount();
+
+
 }

@@ -24,6 +24,7 @@ public interface ProductDao {
     @Query("SELECT * FROM products WHERE categoryId = :categoryId")
     List<Product> getProductsByCategory(int categoryId);
 
+
     @Query("SELECT * FROM products WHERE id = :productId")
     Product getProductById(int productId);
     @Query("UPDATE products SET stockQuantity = stockQuantity - :quantity WHERE id = :productId AND stockQuantity >= :quantity")

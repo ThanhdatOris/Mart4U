@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface CartDetailDao {
     @Insert
-    void insert(CartDetail cartDetail);
+    long insert(CartDetail cartDetail);
 
     @Update
     void update(CartDetail cartDetail);

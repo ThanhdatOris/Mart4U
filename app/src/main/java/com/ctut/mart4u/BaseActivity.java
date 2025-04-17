@@ -35,6 +35,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         // Highlight tab hiện tại
         highlightCurrentTab();
+
+
+
+
+
+
     }
 
     private void initNavigationBars() {
