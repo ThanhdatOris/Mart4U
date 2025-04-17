@@ -25,8 +25,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class ProductDetailActivity extends BaseActivity {
+    private DatabaseHelper databaseHelper; // Khai báo biến
 
-    DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
     @Override
     protected int getLayoutId() {
         return R.layout.customer_activity_product_detail;
@@ -35,17 +35,23 @@ public class ProductDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        RecyclerView recyclerProductDetail = findViewById(R.id.recyclerViewProductDetail);
-////
-////
-//        recyclerProductDetail.setLayoutManager(new LinearLayoutManager(this));
+        databaseHelper = DatabaseHelper.getInstance(this); // Khởi tạo trong onCreate
+
         int productId = getIntent().getIntExtra("productId", -1);
         if (productId != -1) {
-//            // Có productId => lấy chi tiết sản phẩm
-//            Toast.makeText(this, "Product ID: " + productId, Toast.LENGTH_SHORT).show();
             Product product = databaseHelper.getProductDao().getProductById(productId);
+            if (product == null) {
+                Toast.makeText(this, "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
             Category category = databaseHelper.getCategoryDao().getCategoryById(product.getCategoryId());
-            // Directly set values to views
+            if (category == null) {
+                Toast.makeText(this, "Không tìm thấy danh mục", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+            // Gán giá trị cho các view
             TextView productName = findViewById(R.id.textViewProductName);
             TextView productPrice = findViewById(R.id.textViewProductPrice);
             TextView productDescription = findViewById(R.id.textViewProductDescription);
@@ -58,7 +64,7 @@ public class ProductDetailActivity extends BaseActivity {
             stockQuantity.setText("Số lượng: " + product.getStockQuantity());
             categoryName.setText(category.getName());
 
-//            ================================chuc nang cong, tru so luong san pham dat hang=========================================
+            // Chức năng tăng/giảm số lượng
             Button btnIncreaseQuantity = findViewById(R.id.buttonIncreaseQuantity);
             Button btnDecreaseQuantity = findViewById(R.id.buttonDecreaseQuantity);
             EditText editTextQuantity = findViewById(R.id.editTextQuantity);
@@ -83,28 +89,13 @@ public class ProductDetailActivity extends BaseActivity {
                 }
             });
 
-            editTextQuantity.setOnClickListener(v -> {
-                int quantity = Integer.parseInt(editTextQuantity.getText().toString());
-                if (quantity < 1) {
-                    editTextQuantity.setText("1");
-                } else if (quantity > product.getStockQuantity()) {
-                    editTextQuantity.setText(String.valueOf(product.getStockQuantity()));
-                }
-            });
-
-            // ====================================them vao gio hang========================
+            // Thêm vào giỏ hàng
             Button buttonAddToCart = findViewById(R.id.buttonAddToCart);
             buttonAddToCart.setOnClickListener(v -> {
-                Toast.makeText(this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                int userId = 1; //======================> lay userId tu dang nhap
+                int userId = 1; // Thay bằng userId từ phiên đăng nhập
                 int productCartId = product.getId();
                 int quantity = Integer.parseInt(editTextQuantity.getText().toString());
-                //luu vao database
-                CartDetail cartDetail = new CartDetail(
-                        userId,
-                        productCartId,
-                        quantity
-                );
+                CartDetail cartDetail = new CartDetail(userId, productCartId, quantity);
                 try {
                     long result = databaseHelper.getCartDetailDao().insert(cartDetail);
                     if (result != -1) {
@@ -117,13 +108,10 @@ public class ProductDetailActivity extends BaseActivity {
                     e.printStackTrace();
                 }
             });
-
-            // Set up RecyclerView with ProductDetailAdapter
-//            Toast.makeText(this, "Product Name: " + product.getName(), Toast.LENGTH_SHORT).show();
-
+        } else {
+            Toast.makeText(this, "Không tìm thấy ID sản phẩm", Toast.LENGTH_SHORT).show();
+            finish();
         }
-
         EdgeToEdge.enable(this);
-
     }
 }

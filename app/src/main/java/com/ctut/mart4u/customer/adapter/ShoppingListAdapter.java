@@ -67,8 +67,8 @@ public class ShoppingListAdapter  extends RecyclerView.Adapter<ShoppingListAdapt
             super(itemView);
             // Ánh xạ các view từ layout customer_item_shopping
             productName = itemView.findViewById(R.id.textViewItemName); // Đảm bảo ID này tồn tại trong customer_item_shopping.xml
-            quantity = itemView.findViewById(R.id.textViewItemQuantity); // Đảm bảo ID này tồn tại trong customer_item_shopping.xml
-            viewProductDetail = itemView.findViewById(R.id.btnViewProductDetail); // Đảm bảo ID này tồn tại trong customer_item_shopping.xml
+//            quantity = itemView.findViewById(R.id.textViewItemQuantity); // Đảm bảo ID này tồn tại trong customer_item_shopping.xml
+//            viewProductDetail = itemView.findViewById(R.id.btnViewProductDetail); // Đảm bảo ID này tồn tại trong customer_item_shopping.xml
         }
     }
 }

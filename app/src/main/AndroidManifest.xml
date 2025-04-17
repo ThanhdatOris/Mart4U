@@ -16,11 +16,6 @@
             android:name=".customer.ProductDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".customer.AdressActivity$ProductDetailActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".customer.CategoryActivity" -->
-        <!-- android:exported="false" /> -->
-        <activity
             android:name=".customer.ShoppingListActivity"
             android:exported="false" />
         <activity
