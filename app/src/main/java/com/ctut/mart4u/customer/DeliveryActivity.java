@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.R;
-import com.ctut.mart4u.db.DeliveryScheduleDao;
 import com.ctut.mart4u.model.DeliverySchedule;
 
 import java.util.List;

@@ -3,10 +3,6 @@ package com.ctut.mart4u.customer;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.R;

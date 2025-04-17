@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.customer.ShoppingListActivity;
@@ -44,7 +45,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 //            Toast.makeText(context, "Bạn đã chọn: " + category.getName(), Toast.LENGTH_SHORT).show();
             // TODO: Sau này mở activity product_list ở đây
              Intent intent = new Intent(context, ShoppingListActivity.class);
-             intent.putExtra("category_id", category.getId());
+             intent.putExtra("categoryId", category.getId());
              context.startActivity(intent);
         });
     }
@@ -54,7 +55,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categoryList.size();
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder {
+    public class CategoryViewHolder extends ViewHolder {
         TextView textViewCategoryName;
         Button btnViewProductCategory;
 
