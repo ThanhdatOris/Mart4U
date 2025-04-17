@@ -2,22 +2,19 @@ package com.ctut.mart4u.customer;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.BaseActivity;
+import com.ctut.mart4u.customer.adapter.AddressAdapter;
 import com.ctut.mart4u.db.AddressDao;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.R;
@@ -118,8 +115,9 @@ public class DeliveryActivity extends BaseActivity {
         Button btnSaveNewAddress = dialog.findViewById(R.id.btnSaveNewAddress);
         Button btnClose = dialog.findViewById(R.id.btnClose);
 
-        // Thiết lập RecyclerView
-        AddressAdapter addressAdapter = new AddressAdapter(databaseHelper.getAddressDao().getAddressesByUser(userId));
+        // Thiết lập RecyclerView với AddressAdapter
+        AddressDao addressDao = databaseHelper.getAddressDao();
+        AddressAdapter addressAdapter = new AddressAdapter(addressDao.getAddressesByUser(userId), addressDao);
         rvAddresses.setLayoutManager(new LinearLayoutManager(this));
         rvAddresses.setAdapter(addressAdapter);
 
@@ -140,8 +138,8 @@ public class DeliveryActivity extends BaseActivity {
             }
 
             Address newAddress = new Address(userId, receiverName, phoneNumber, address, false);
-            databaseHelper.getAddressDao().insert(newAddress);
-            addressAdapter.updateAddresses(databaseHelper.getAddressDao().getAddressesByUser(userId));
+            addressDao.insert(newAddress);
+            addressAdapter.updateAddresses(addressDao.getAddressesByUser(userId));
             layoutNewAddress.setVisibility(View.GONE);
             btnAddNewAddress.setVisibility(View.VISIBLE);
         });
@@ -197,70 +195,6 @@ public class DeliveryActivity extends BaseActivity {
             row.addView(dayAfterTomorrowStatus);
 
             tableLayout.addView(row);
-        }
-    }
-
-    // Adapter cho RecyclerView hiển thị danh sách địa chỉ
-    private class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressViewHolder> {
-        private List<Address> addresses;
-        private AddressDao addressDao;
-
-        public AddressAdapter(List<Address> addresses) {
-            this.addresses = addresses;
-            this.addressDao = databaseHelper.getAddressDao();
-        }
-
-        public void updateAddresses(List<Address> newAddresses) {
-            this.addresses = newAddresses;
-            notifyDataSetChanged();
-        }
-
-        @NonNull
-        @Override
-        public AddressViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_address, parent, false);
-            return new AddressViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull AddressViewHolder holder, int position) {
-            Address address = addresses.get(position);
-            holder.tvReceiverInfo.setText("Tên: " + address.getReceiverName() + " - SĐT: " + address.getPhoneNumber());
-            holder.tvAddress.setText("Địa chỉ: " + address.getAddress());
-            holder.checkboxDefault.setChecked(address.isDefault());
-
-            holder.checkboxDefault.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (isChecked) {
-                    // Đặt địa chỉ này là mặc định, bỏ mặc định của các địa chỉ khác
-                    for (Address addr : addresses) {
-                        if (addr.getId() != address.getId() && addr.isDefault()) {
-                            addr.setDefault(false);
-                            addressDao.update(addr);
-                        }
-                    }
-                    address.setDefault(true);
-                    addressDao.update(address);
-                    notifyDataSetChanged();
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return addresses.size();
-        }
-
-        public class AddressViewHolder extends RecyclerView.ViewHolder {
-            TextView tvReceiverInfo;
-            TextView tvAddress;
-            CheckBox checkboxDefault;
-
-            public AddressViewHolder(@NonNull View itemView) {
-                super(itemView);
-                tvReceiverInfo = itemView.findViewById(R.id.tvReceiverInfo);
-                tvAddress = itemView.findViewById(R.id.tvAddress);
-                checkboxDefault = itemView.findViewById(R.id.checkboxDefault);
-            }
         }
     }
 }
