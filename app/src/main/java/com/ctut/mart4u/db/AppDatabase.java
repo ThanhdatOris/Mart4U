@@ -33,4 +33,12 @@ public abstract class AppDatabase extends RoomDatabase {
             // database.execSQL("ALTER TABLE delivery_schedule ADD COLUMN new_column TEXT");
         }
     };
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE users ADD COLUMN phoneNumber TEXT");
+            database.execSQL("ALTER TABLE addresses ADD COLUMN receiverName TEXT");
+            database.execSQL("ALTER TABLE addresses ADD COLUMN phoneNumber TEXT");
+        }
+    };
 }

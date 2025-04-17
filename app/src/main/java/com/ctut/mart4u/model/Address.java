@@ -15,11 +15,15 @@ public class Address {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int userId;
-    private String address; // Chuỗi địa chỉ duy nhất
-    private boolean isDefault; // Địa chỉ mặc định
+    private String receiverName; // Tên người nhận
+    private String phoneNumber;  // Số điện thoại
+    private String address;      // Chuỗi địa chỉ
+    private boolean isDefault;   // Địa chỉ mặc định
 
-    public Address(int userId, String address, boolean isDefault) {
+    public Address(int userId, String receiverName, String phoneNumber, String address, boolean isDefault) {
         this.userId = userId;
+        this.receiverName = receiverName;
+        this.phoneNumber = phoneNumber;
         this.address = address;
         this.isDefault = isDefault;
     }
@@ -39,6 +43,22 @@ public class Address {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {

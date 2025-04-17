@@ -15,11 +15,12 @@ public class User {
 
     // Note: A User can have multiple addresses (0 or more).
     // Use AddressDao to retrieve the list of addresses for a user.
-    public User(String username, String password, String email, String role) {
+    public User(String username, String password, String email, String role, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.phoneNumber = phoneNumber;
     }
 
     // Getters and Setters

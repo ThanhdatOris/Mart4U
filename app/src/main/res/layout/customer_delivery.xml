@@ -38,10 +38,11 @@
 
                 <TextView
                     android:id="@+id/tvAccountInfo"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:text="Thành Đạt  0345517311"
+                    android:text="Tên: Chưa có thông tin\nSố điện thoại: Chưa có thông tin"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -59,11 +60,19 @@
 
                 <TextView
                     android:id="@+id/tvDeliveryAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Chưa có địa chỉ"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btnUpdateAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Chợ An Bình, Lô Vong Cung St., P. An Bình, Q. Ninh Kiều, Căn Thơ, 94000, Vietnam"
-                    android:textSize="16sp" />
+                    android:text="Cập nhật địa chỉ"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- Cửa hàng -->
@@ -83,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Cửa hàng: Căn Thơ"
+                    android:text="Cửa hàng: Chưa có thông tin"
                     android:textSize="16sp" />
             </LinearLayout>
 

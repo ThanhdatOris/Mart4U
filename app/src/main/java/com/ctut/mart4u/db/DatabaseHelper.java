@@ -31,7 +31,7 @@ public class DatabaseHelper {
         database = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, "mart4u_database")
                 .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_1_2)
+                .addMigrations(AppDatabase.MIGRATION_1_2,  AppDatabase.MIGRATION_2_3) // Thêm các migration
                 .build();
 
         initializeSampleData();
@@ -88,10 +88,14 @@ public class DatabaseHelper {
     private void initializeSampleData() {
         // Thêm dữ liệu mẫu cho bảng users nếu bảng rỗng
         if (database.userDao().getAllCustomers().isEmpty()) {
-            database.userDao().insert(new User("customer1", "pass123", "customer1@example.com", "customer"));
-            database.userDao().insert(new User("admin1", "admin123", "admin1@example.com", "admin"));
+            database.userDao().insert(new User("customer1", "pass123", "customer1@example.com", "0345517311", "customer"));
+            database.userDao().insert(new User("admin1", "admin123", "admin1@example.com", "0345517312", "admin"));
         }
 
+        if (database.addressDao().getAddressesByUser(1).isEmpty()) {
+            database.addressDao().insert(new Address(1, "Thành Đạt", "0345517311", "123 Đường Láng, Hà Nội, Hà Nội, 100000, Vietnam", true));
+            database.addressDao().insert(new Address(1, "Thành Đạt", "0345517311", "456 Nguyễn Trãi, Hà Nội, Hà Nội, 100000, Vietnam", false));
+        }
         // Thêm dữ liệu mẫu cho bảng categories nếu bảng rỗng
         if (database.categoryDao().getAllCategories().isEmpty()) {
             database.categoryDao().insert(new Category("Thực phẩm", "Các loại thực phẩm tươi sống và đóng gói"));
@@ -109,12 +113,12 @@ public class DatabaseHelper {
         }
 
         // Thêm dữ liệu mẫu cho bảng addresses nếu bảng rỗng
-        if (database.addressDao().getAddressesByUser(1).isEmpty()) {
-            // Thêm địa chỉ cho customer1 (userId = 1)
-            database.addressDao().insert(new Address(1, "123 Đường Láng, Hà Nội, Hà Nội, 100000, Vietnam", true));
-            database.addressDao().insert(new Address(1, "456 Nguyễn Trãi, Hà Nội, Hà Nội, 100000, Vietnam", false));
-            // admin1 (userId = 2) không có địa chỉ
-        }
+//        if (database.addressDao().getAddressesByUser(1).isEmpty()) {
+//            // Thêm địa chỉ cho customer1 (userId = 1)
+//            database.addressDao().insert(new Address(1, "123 Đường Láng, Hà Nội, Hà Nội, 100000, Vietnam", , true));
+//            database.addressDao().insert(new Address(1, "456 Nguyễn Trãi, Hà Nội, Hà Nội, 100000, Vietnam", false));
+//            // admin1 (userId = 2) không có địa chỉ
+//        }
 
         // Thêm dữ liệu mẫu cho bảng delivery_schedule nếu bảng rỗng
         if (database.deliveryScheduleDao().getAllSchedules().isEmpty()) {
