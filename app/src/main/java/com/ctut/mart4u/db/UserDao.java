@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Insert
-    void insert(User user);
+    long insert(User user);
 
     @Update
     void update(User user);
@@ -28,4 +28,13 @@ public interface UserDao {
 
     @Query("SELECT * FROM users WHERE id = :userId")
     User getUserById(int userId);
+
+    @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
+    User getUserByUsername(String username);
+
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    User getUserByEmail(String email);
+
+    @Query("SELECT * FROM users WHERE phoneNumber = :phoneNumber LIMIT 1")
+    User getUserByPhoneNumber(String phoneNumber);
 }
