@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="16dp">
+
+    <!-- Tiêu đề trang -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product List"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- EditText tìm kiếm -->
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/search_bg"
+        android:drawableEnd="@drawable/ic_search"
+        android:hint="Search products..."
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- Header Row của bảng (chỉ gồm Name, Image, Price) -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="#F5F5F5"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView">
+
+        <!-- Cột Name (chiếm weight 2) -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Name"
+            android:textColor="#707070"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <!-- Cột Image (chiếm weight 1) -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Image"
+            android:textColor="#707070"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <!-- Cột Price (chiếm weight 1) -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Price"
+            android:textColor="#707070"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- ScrollView bọc TableLayout để hiển thị dữ liệu mẫu sản phẩm -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toTopOf="@id/divider">
+
+        <TableLayout
+            android:id="@+id/sampleDataTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <!-- Dòng sản phẩm mẫu 1 -->
+            <TableRow
+                android:padding="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:stateListAnimator="@animator/table_row_animator">
+                <!-- Tên sản phẩm -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Product A"
+                    android:textColor="@android:color/black"/>
+
+                <!-- Hình ảnh sản phẩm (Placeholder) -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_placeholder"
+                    android:contentDescription="Product A Image"/>
+
+                <!-- Giá sản phẩm -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$10.00"
+                    android:textColor="@android:color/black"/>
+            </TableRow>
+
+            <!-- Dòng sản phẩm mẫu 2 -->
+            <TableRow
+                android:padding="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:stateListAnimator="@animator/table_row_animator">
+                <!-- Tên sản phẩm -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Product B"
+                    android:textColor="@android:color/black"/>
+
+                <!-- Hình ảnh sản phẩm (Placeholder) -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_placeholder"
+                    android:contentDescription="Product B Image"/>
+
+                <!-- Giá sản phẩm -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$20.00"
+                    android:textColor="@android:color/black"/>
+            </TableRow>
+
+            <!-- Dòng sản phẩm mẫu 3 -->
+            <TableRow
+                android:padding="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:stateListAnimator="@animator/table_row_animator">
+                <!-- Tên sản phẩm -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Product C"
+                    android:textColor="@android:color/black"/>
+
+                <!-- Hình ảnh sản phẩm (Placeholder) -->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_placeholder"
+                    android:contentDescription="Product C Image"/>
+
+                <!-- Giá sản phẩm -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$30.00"
+                    android:textColor="@android:color/black"/>
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+
+    <!-- Đường kẻ phân cách -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

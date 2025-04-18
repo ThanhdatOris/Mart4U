@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Nội dung chính -->
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/sidebar" />
+
+    <!-- Sidebar nằm ngang phía dưới -->
+    <LinearLayout
+        android:id="@+id/sidebar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#E6F0FA"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:gravity="center">
+
+        <!-- Product Menu Item -->
+        <LinearLayout
+            android:id="@+id/product_menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_agenda"
+                android:contentDescription="Product Icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Product"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Category Menu Item -->
+        <LinearLayout
+            android:id="@+id/category_menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                android:contentDescription="Category Icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Category"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Order Menu Item -->
+        <LinearLayout
+            android:id="@+id/order_menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_send"
+                android:contentDescription="Order Icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Order"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Customer Menu Item -->
+        <LinearLayout
+            android:id="@+id/customer_menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_myplaces"
+                android:contentDescription="Customer Icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Customer"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
