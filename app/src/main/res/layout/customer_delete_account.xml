@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xóa Tài Khoản"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Thông báo -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chúng tôi rất tiếc khi Quý khách quyết định xóa tài khoản LOTTE Mart Online. Để xóa tài khoản, vui lòng đồng ý với các điều khoản sau:"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Điều khoản -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Tài khoản của Quý khách sẽ bị xóa vĩnh viễn và không thể khôi phục.\n- Tất cả dữ liệu liên quan đến tài khoản sẽ bị xóa.\n- Sau khi xóa, Quý khách sẽ không thể đăng nhập hoặc sử dụng tài khoản này."
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Checkbox đồng ý -->
+    <CheckBox
+        android:id="@+id/cb_agree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tôi đồng ý với Chính sách Quản Lý Tài Khoản của LOTTE Mart Việt Nam."
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Nút xác nhận -->
+    <Button
+        android:id="@+id/btn_confirm_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xác nhận"
+        android:backgroundTint="#FA003F"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp"
+        android:enabled="false" />
+
+    <!-- Nút thoát -->
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thoát"
+        android:backgroundTint="#CCCCCC"
+        android:textColor="#000000"
+        android:layout_marginTop="8dp" />
+</LinearLayout>

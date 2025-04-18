@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 //import com.ctut.mart4u.admin.CategoryActivity;
+import com.ctut.mart4u.customer.CartActivity;
 import com.ctut.mart4u.customer.CategoryActivity;
 import com.ctut.mart4u.customer.AccountActivity;
 import com.ctut.mart4u.customer.DeliveryActivity;
@@ -39,6 +40,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Khởi tạo thanh điều hướng
         initNavigationBars();
 
+
+
+
         // Highlight tab hiện tại
         highlightCurrentTab();
 
@@ -58,12 +62,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         LinearLayout tabQuickBuy = findViewById(R.id.tab_quick_buy);
         cartBadge = findViewById(R.id.cart_badge);
 
+
         if (tabCategory == null || tabDelivery == null || tabLotteMart == null ||
                 tabAccount == null || tabQuickBuy == null || cartBadge == null) {
             android.util.Log.e("BaseActivity", "One or more tabs or badge not found in layout");
             Toast.makeText(this, "Lỗi: Không tìm thấy các tab hoặc badge trong layout", Toast.LENGTH_LONG).show();
             return;
         }
+
 
         // Xử lý sự kiện cho các tab với cải tiến
         tabCategory.setOnClickListener(v -> safeNavigateTo(CategoryActivity.class));
@@ -74,6 +80,22 @@ public abstract class BaseActivity extends AppCompatActivity {
             // Handle the case when QuickBuyActivity is not yet implemented
             Toast.makeText(this, "Tính năng đang phát triển", Toast.LENGTH_SHORT).show();
         });
+
+//        ====================xử lý sự kiện click============
+        cartBadge.setOnClickListener(v -> {
+//            int userId = getCurrentUserId();
+//            if (userId == -1) {
+//                Toast.makeText(this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+
+            Intent intent = new Intent(BaseActivity.this, CartActivity.class);
+            intent.putExtra("user_id", 1); // Thay bằng userId từ phiên đăng nhập
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Đảm bảo không stack lại
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        });
+        //=================================================
     }
 
     private void safeNavigateTo(Class<?> activityClass) {
@@ -157,5 +179,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             cartBadge.setVisibility(View.GONE);
         }
     }
-
+    //===========================kiểm tra người dùng có đăng nhập hay chưa=====
+    // Lấy userId từ SharedPreferences (hoặc session, hoặc cách bạn đang dùng)
+    private int getCurrentUserId() {
+        // Ví dụ dùng SharedPreferences
+        return getSharedPreferences("user_session", MODE_PRIVATE).getInt("user_id", -1);
+    }
+    //========================================================================
 }
