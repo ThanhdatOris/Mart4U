@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="8dp">
 
-    <!-- ImageView để hiển thị hình ảnh danh mục -->
+    <!-- ImageView hiển thị hình ảnh danh mục -->
     <ImageView
         android:id="@+id/imageViewCategory"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/img_category_vegetable"
+        android:src="@drawable/ic_flag"
         android:scaleType="centerCrop" />
 
-    <!-- TextView để hiển thị tên danh mục -->
+    <!-- TextView hiển thị tên danh mục -->
     <TextView
         android:id="@+id/textViewCategoryName"
         android:layout_width="wrap_content"
@@ -23,20 +24,4 @@
         android:textSize="14sp"
         android:textAlignment="center"
         android:layout_marginTop="4dp" />
-
-<!--    &lt;!&ndash; Button để xóa danh mục &ndash;&gt;-->
-<!--    <Button-->
-<!--        android:id="@+id/btnDeleteCategory"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="4dp"-->
-<!--        android:text="@string/delete" />-->
-    <!-- Button để xóa danh mục -->
-    <Button
-        android:id="@+id/btnViewProductCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Xem danh sách sản phẩm" />
-
 </LinearLayout>

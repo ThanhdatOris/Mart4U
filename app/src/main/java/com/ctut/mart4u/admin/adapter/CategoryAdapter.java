@@ -93,7 +93,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             textViewCategoryName = itemView.findViewById(R.id.textViewCategoryName);
             imageViewCategory = itemView.findViewById(R.id.imageViewCategory);
 //            btnDeleteCategory = itemView.findViewById(R.id.btnDeleteCategory);
-            btnViewProductCategory = itemView.findViewById(R.id.btnViewProductCategory);
+//            btnViewProductCategory = itemView.findViewById(R.id.btnViewProductCategory);
         }
     }
 }

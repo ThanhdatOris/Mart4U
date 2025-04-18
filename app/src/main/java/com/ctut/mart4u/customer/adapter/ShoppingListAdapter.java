@@ -1,106 +1,79 @@
 package com.ctut.mart4u.customer.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ctut.mart4u.customer.ProductDetailActivity;
+import com.ctut.mart4u.model.Product;
+
 import com.ctut.mart4u.R;
-import com.ctut.mart4u.db.DatabaseHelper;
-import com.ctut.mart4u.model.CartItem;
-import com.ctut.mart4u.model.HistoryItem;
-import com.ctut.mart4u.model.ShoppingItem;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ShoppingViewHolder> {
-    private List<ShoppingItem> shoppingList;
-    private final DatabaseHelper databaseHelper;
+public class ShoppingListAdapter  extends RecyclerView.Adapter<ShoppingListAdapter.ShoppingListViewHolder> {
+    private Context context;
+    private List<Product> productList;
 
-    // Constructor
-    public ShoppingListAdapter(List<ShoppingItem> shoppingList, DatabaseHelper databaseHelper) {
-        this.shoppingList = shoppingList;
-        this.databaseHelper = databaseHelper;
+    public ShoppingListAdapter(Context context, List<Product> productList) {
+        this.context = context;
+        this.productList = productList;
     }
 
     @NonNull
     @Override
-    public ShoppingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.customer_item_shopping, parent, false);
-        return new ShoppingViewHolder(view);
+    public ShoppingListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflate layout của item (customer_item_shopping)
+        View view = LayoutInflater.from(context).inflate(R.layout.customer_item_shopping, parent, false);
+        return new ShoppingListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShoppingViewHolder holder, int position) {
-        ShoppingItem item = shoppingList.get(position);
-        holder.textViewItemName.setText(item.getName());
-        holder.textViewItemQuantity.setText("Qty: " + item.getQuantity());
-        holder.checkBoxBought.setChecked(item.isBought());
+    public void onBindViewHolder(@NonNull ShoppingListAdapter.ShoppingListViewHolder holder, int position) {
+        // Lấy sản phẩm tại vị trí position
+        Product product = productList.get(position);
+        // Gán tên sản phẩm vào TextView
+        holder.productName.setText(product.getName());
+        // Gán số lượng sản phẩm vào TextView
+        holder.productPrice.setText(String.valueOf(product.getPrice()));
 
-        // Xử lý sự kiện khi CheckBox được thay đổi
-        holder.checkBoxBought.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            item.setBought(isChecked);
-            databaseHelper.getShoppingDao().update(item); // Cập nhật trạng thái vào cơ sở dữ liệu
-
-            // Nếu món đồ được đánh dấu là "đã mua", thêm vào lịch sử
-            if (isChecked) {
-                String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-                HistoryItem historyItem = new HistoryItem(item.getName(), item.getQuantity(), currentDate);
-                databaseHelper.getHistoryDao().insert(historyItem);
-                Toast.makeText(holder.itemView.getContext(), item.getName() + " đã được thêm vào lịch sử mua sắm", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Xử lý sự kiện khi nhấn nút "Thêm vào giỏ hàng"
-        holder.btnAddToCart.setOnClickListener(v -> {
-            // Lấy ngày hiện tại
-            // String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-
-            // Tạo CartItem từ ShoppingItem
-            CartItem cartItem = new CartItem(item.getName(), item.getQuantity(), item.getPrice());
-
-            // Thêm vào bảng cart_items
-            databaseHelper.getCartDao().insert(cartItem);
-
-            // Thông báo cho người dùng
-            Toast.makeText(holder.itemView.getContext(), item.getName() + " đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+        //xử lý sự kiện xem chị tiết sản phẩm => day qua trang chi tiet san pham
+        holder.addToCartIcon.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, ProductDetailActivity.class);
+            intent.putExtra("productId", product.getId());
+            context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return shoppingList.size();
+        // Trả về số lượng sản phẩm trong danh sách
+        return productList != null ? productList.size() : 0;
     }
 
-    // Cập nhật danh sách và làm mới RecyclerView
-    public void updateList(List<ShoppingItem> newList) {
-        this.shoppingList = newList;
-        notifyDataSetChanged();
-    }
+    public class ShoppingListViewHolder extends RecyclerView.ViewHolder {
+        // Khai báo các view trong item layout
+//        TextView productName; // Ví dụ: TextView để hiển thị tên sản phẩm
+//        TextView quantity;
+//        Button viewProductDetail;
 
-    // ViewHolder để giữ các thành phần giao diện
-    public static class ShoppingViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewItemName;
-        TextView textViewItemQuantity;
-        CheckBox checkBoxBought;
-        Button btnAddToCart;
-
-        public ShoppingViewHolder(@NonNull View itemView) {
+        TextView productName;
+        TextView productPrice;
+        ImageView addToCartIcon;
+        public ShoppingListViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewItemName = itemView.findViewById(R.id.textViewItemName);
-            textViewItemQuantity = itemView.findViewById(R.id.textViewItemQuantity);
-            checkBoxBought = itemView.findViewById(R.id.checkBoxBought);
-            btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
+            // Ánh xạ các view từ layout customer_item_shopping
+            productName = itemView.findViewById(R.id.productName);
+            productPrice = itemView.findViewById(R.id.productPrice);
+            addToCartIcon = itemView.findViewById(R.id.addToCartIcon);
         }
     }
 }

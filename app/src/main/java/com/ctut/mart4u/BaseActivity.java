@@ -10,19 +10,27 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ctut.mart4u.admin.CategoryActivity;
+//import com.ctut.mart4u.admin.CategoryActivity;
+import com.ctut.mart4u.customer.CartActivity;
+import com.ctut.mart4u.customer.CategoryActivity;
 import com.ctut.mart4u.customer.AccountActivity;
 import com.ctut.mart4u.customer.DeliveryActivity;
+import com.ctut.mart4u.db.DatabaseHelper;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     // Phương thức trừu tượng để các Activity con cung cấp layout
     protected abstract int getLayoutId();
+    private TextView cartBadge;
+
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_nav_container);
+
+        databaseHelper = DatabaseHelper.getInstance(this);
 
         // Lấy container và thêm layout của activity con vào
         FrameLayout contentContainer = findViewById(R.id.content_container);
@@ -32,8 +40,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Khởi tạo thanh điều hướng
         initNavigationBars();
 
+
+
+
         // Highlight tab hiện tại
         highlightCurrentTab();
+
+        updateCartBadge();
+
+
+
+
     }
 
     private void initNavigationBars() {
@@ -43,6 +60,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         LinearLayout tabLotteMart = findViewById(R.id.tab_lotte_mart);
         LinearLayout tabAccount = findViewById(R.id.tab_account);
         LinearLayout tabQuickBuy = findViewById(R.id.tab_quick_buy);
+        cartBadge = findViewById(R.id.cart_badge);
+
+
+        if (tabCategory == null || tabDelivery == null || tabLotteMart == null ||
+                tabAccount == null || tabQuickBuy == null || cartBadge == null) {
+            android.util.Log.e("BaseActivity", "One or more tabs or badge not found in layout");
+            Toast.makeText(this, "Lỗi: Không tìm thấy các tab hoặc badge trong layout", Toast.LENGTH_LONG).show();
+            return;
+        }
+
 
         // Xử lý sự kiện cho các tab với cải tiến
         tabCategory.setOnClickListener(v -> safeNavigateTo(CategoryActivity.class));
@@ -53,6 +80,22 @@ public abstract class BaseActivity extends AppCompatActivity {
             // Handle the case when QuickBuyActivity is not yet implemented
             Toast.makeText(this, "Tính năng đang phát triển", Toast.LENGTH_SHORT).show();
         });
+
+//        ====================xử lý sự kiện click============
+        cartBadge.setOnClickListener(v -> {
+//            int userId = getCurrentUserId();
+//            if (userId == -1) {
+//                Toast.makeText(this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+
+            Intent intent = new Intent(BaseActivity.this, CartActivity.class);
+            intent.putExtra("user_id", 1); // Thay bằng userId từ phiên đăng nhập
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Đảm bảo không stack lại
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        });
+        //=================================================
     }
 
     private void safeNavigateTo(Class<?> activityClass) {
@@ -122,4 +165,25 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
     }
+
+    // Phương thức cập nhật badge
+    public void updateCartBadge() {
+        if (cartBadge == null) return;
+
+        int userId = 1; // Thay bằng userId từ phiên đăng nhập
+        int itemCount = databaseHelper.getCartDetailDao().getCartItemCount(userId);
+        if (itemCount > 0) {
+            cartBadge.setText(String.valueOf(itemCount));
+            cartBadge.setVisibility(View.VISIBLE);
+        } else {
+            cartBadge.setVisibility(View.GONE);
+        }
+    }
+    //===========================kiểm tra người dùng có đăng nhập hay chưa=====
+    // Lấy userId từ SharedPreferences (hoặc session, hoặc cách bạn đang dùng)
+    private int getCurrentUserId() {
+        // Ví dụ dùng SharedPreferences
+        return getSharedPreferences("user_session", MODE_PRIVATE).getInt("user_id", -1);
+    }
+    //========================================================================
 }

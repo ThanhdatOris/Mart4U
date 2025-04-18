@@ -1,52 +1,79 @@
 package com.ctut.mart4u.customer;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.R;
-import com.ctut.mart4u.db.DatabaseHelper;
 
-public class SettingsActivity extends AppCompatActivity {
-    private TextView textViewAppInfo;
-    private Button btnClearAllData;
-    private DatabaseHelper databaseHelper;
+public class SettingsActivity extends BaseActivity {
+    private static final String TAG = "SettingsActivity";
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.customer_settings; // Trả về đúng layout
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_settings);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        EdgeToEdge.enable(this); // Gọi sau khi layout được thiết lập bởi BaseActivity
+
+        int userId = getIntent().getIntExtra("userId", -1);
+        if (userId == -1) {
+            Log.e(TAG, "Invalid userId");
+            Toast.makeText(this, "Không tìm thấy thông tin người dùng", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        // Khởi tạo các view
+        View llProfile = findViewById(R.id.ll_profile);
+        View llChangePassword = findViewById(R.id.ll_change_password);
+        View llDeleteAccount = findViewById(R.id.ll_delete_account);
+        View llLogout = findViewById(R.id.ll_logout);
+
+        // Kiểm tra null để tránh lỗi
+        if (llProfile == null || llChangePassword == null || llDeleteAccount == null || llLogout == null) {
+            Log.e(TAG, "One or more views not found in layout");
+            Toast.makeText(this, "Lỗi giao diện, vui lòng thử lại", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
+        // Thông tin của tôi
+        llProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingsActivity.this, ProfileEditActivity.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
         });
 
-        // Khởi tạo các thành phần giao diện
-        textViewAppInfo = findViewById(R.id.textViewAppInfo);
-        btnClearAllData = findViewById(R.id.btnClearAllData);
-
-        // Khởi tạo DatabaseHelper
-        databaseHelper = DatabaseHelper.getInstance(this);
-
-        // Xử lý sự kiện khi nhấn nút "Xóa toàn bộ dữ liệu"
-        btnClearAllData.setOnClickListener(v -> {
-            // Xóa tất cả dữ liệu trong các bảng
-            databaseHelper.getShoppingDao().deleteAllItems();
-            databaseHelper.getCategoryDao().deleteAllCategories();
-            databaseHelper.getCartDao().deleteAllCartItems();
-            databaseHelper.getHistoryDao().deleteAllHistoryItems();
-
-            // Thông báo cho người dùng
-            Toast.makeText(this, "Đã xóa toàn bộ dữ liệu", Toast.LENGTH_SHORT).show();
+        // Đổi mật khẩu
+        llChangePassword.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingsActivity.this, ChangePasswordActivity.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
         });
+
+        // Xóa tài khoản
+        llDeleteAccount.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingsActivity.this, DeleteAccountActivity.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
+        });
+
+        // Đăng xuất
+//        llLogout.setOnClickListener(v -> {
+//            // TODO: Xóa thông tin đăng nhập (ví dụ: xóa SharedPreferences, token, v.v.)
+//            Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//            finishAffinity();
+//        });
     }
 }
