@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <!-- Nội dung chính -->
+    android:orientation="vertical"
+    android:background="#F5F5F5">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,142 +16,226 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Tiêu đề -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thông tin giao hàng"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:layout_marginBottom="16dp" />
 
-            <!-- Thông tin tài khoản -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:layout_marginBottom="12dp"
+                android:elevation="4dp"
+                android:radius="8dp">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_myplaces" />
-
-                <TextView
-                    android:id="@+id/tvAccountInfo"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:text="Tên: Chưa có thông tin\nSố điện thoại: Chưa có thông tin"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:padding="12dp">
 
-            <!-- Địa chỉ giao hàng -->
-            <LinearLayout
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_account"
+                        android:layout_gravity="center_vertical"
+                        app:tint="#757575" />
+
+                    <TextView
+                        android:id="@+id/tvAccountInfo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="Tên: Chưa có thông tin\nSố điện thoại: Chưa có thông tin"
+                        android:textSize="16sp"
+                        android:textColor="#424242" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:layout_marginBottom="12dp"
+                android:elevation="4dp"
+                android:radius="8dp">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_myplaces" />
-
-                <TextView
-                    android:id="@+id/tvDeliveryAddress"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:text="Chưa có địa chỉ"
-                    android:textSize="16sp" />
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
-                <Button
-                    android:id="@+id/btnUpdateAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cập nhật địa chỉ"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-            <!-- Cửa hàng -->
-            <LinearLayout
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_flag"
+                            android:layout_gravity="center_vertical"
+                            app:tint="#757575" />
+
+                        <TextView
+                            android:id="@+id/tvDeliveryAddress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:text="Chưa có địa chỉ"
+                            android:textSize="16sp"
+                            android:textColor="#424242" />
+
+                        <Button
+                            android:id="@+id/btnUpdateAddress"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cập nhật"
+                            android:textSize="14sp"
+                            android:textColor="#0288D1"
+                            android:layout_gravity="center_vertical" />
+                    </LinearLayout>
+
+                    <RadioGroup
+                        android:id="@+id/rgDeliveryMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <RadioButton
+                            android:id="@+id/rbCOD"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="COD"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbStorePickup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nhận tại cửa hàng"
+                            android:textSize="14sp" />
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/tvDeliveryFee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Phí giao hàng: 0 VNĐ"
+                        android:textSize="14sp"
+                        android:textColor="#757575" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:layout_marginBottom="12dp"
+                android:elevation="4dp"
+                android:radius="8dp">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_myplaces" />
-
-                <TextView
-                    android:id="@+id/tvStore"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Cửa hàng: Chưa có thông tin"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_flag"
+                        app:tint="#757575"
+                        android:layout_gravity="center_vertical" />
 
-            <!-- Lịch giao hàng -->
+                    <TextView
+                        android:id="@+id/tvStore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="Cửa hàng: Chưa có thông tin"
+                        android:textSize="16sp"
+                        android:textColor="#424242" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
                 android:text="Lịch giao hàng"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#212121" />
 
-            <!-- Bảng lịch giao hàng -->
-            <TableLayout
-                android:id="@+id/table_schedule"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:stretchColumns="*">
+                android:elevation="4dp"
+                android:radius="8dp">
 
-                <!-- Tiêu đề bảng -->
-                <TableRow
+                <TableLayout
+                    android:id="@+id/table_schedule"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#f0f0f0"
-                    android:padding="8dp">
+                    android:stretchColumns="*"
+                    android:background="#FFFFFF">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <TableRow
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Giờ giao hàng"
-                        android:textStyle="bold" />
+                        android:background="#E0E0E0"
+                        android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Hôm nay CN"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Giờ giao hàng"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="24/03 Th 2"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Hôm nay"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="25/03 Th 3"
-                        android:textStyle="bold" />
-                </TableRow>
-            </TableLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Ngày mai"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Ngày kia"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
+                    </TableRow>
+                </TableLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

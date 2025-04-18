@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ public class DeliveryActivity extends BaseActivity {
     private TextView tvAccountInfo;
     private TextView tvDeliveryAddress;
     private TextView tvStore;
+    private RadioGroup rgDeliveryMethod;
+    private TextView tvDeliveryFee;
     private Button btnUpdateAddress;
     private Address currentAddress;
     private User currentUser;
@@ -51,12 +54,29 @@ public class DeliveryActivity extends BaseActivity {
         tvAccountInfo = findViewById(R.id.tvAccountInfo);
         tvDeliveryAddress = findViewById(R.id.tvDeliveryAddress);
         tvStore = findViewById(R.id.tvStore);
+        rgDeliveryMethod = findViewById(R.id.rgDeliveryMethod);
+        tvDeliveryFee = findViewById(R.id.tvDeliveryFee);
         btnUpdateAddress = findViewById(R.id.btnUpdateAddress);
 
         // Tải thông tin khách hàng, địa chỉ và cửa hàng
         loadUserInfo();
         loadAddressInfo();
         loadStoreInfo();
+
+        // Sự kiện thay đổi phương thức giao hàng
+        rgDeliveryMethod.setOnCheckedChangeListener((group, checkedId) -> {
+            if (currentAddress != null) {
+                if (checkedId == R.id.rbCOD) {
+                    currentAddress.setDeliveryMethod("COD");
+                    tvDeliveryFee.setText("Phí giao hàng: 30.000 VNĐ");
+                } else if (checkedId == R.id.rbStorePickup) {
+                    currentAddress.setDeliveryMethod("Store Pickup");
+                    tvDeliveryFee.setText("Phí giao hàng: 0 VNĐ");
+                }
+                // Cập nhật địa chỉ trong database
+                databaseHelper.getAddressDao().update(currentAddress);
+            }
+        });
 
         // Sự kiện nút cập nhật địa chỉ
         btnUpdateAddress.setOnClickListener(v -> showManageAddressesDialog());
@@ -91,13 +111,21 @@ public class DeliveryActivity extends BaseActivity {
 
         if (currentAddress != null) {
             tvDeliveryAddress.setText(currentAddress.getAddress());
+            if ("COD".equals(currentAddress.getDeliveryMethod())) {
+                rgDeliveryMethod.check(R.id.rbCOD);
+                tvDeliveryFee.setText("Phí giao hàng: 30.000 VNĐ");
+            } else {
+                rgDeliveryMethod.check(R.id.rbStorePickup);
+                tvDeliveryFee.setText("Phí giao hàng: 0 VNĐ");
+            }
         } else {
             tvDeliveryAddress.setText("Chưa có địa chỉ");
+            rgDeliveryMethod.clearCheck();
+            tvDeliveryFee.setText("Phí giao hàng: 0 VNĐ");
         }
     }
 
     private void loadStoreInfo() {
-        // Giả lập thông tin cửa hàng (bạn có thể lấy từ cơ sở dữ liệu hoặc API)
         tvStore.setText("Cửa hàng: Căn Thơ");
     }
 
@@ -137,7 +165,7 @@ public class DeliveryActivity extends BaseActivity {
                 return; // Có thể thêm thông báo lỗi
             }
 
-            Address newAddress = new Address(userId, receiverName, phoneNumber, address, false);
+            Address newAddress = new Address(userId, receiverName, phoneNumber, address, false, "COD");
             addressDao.insert(newAddress);
             addressAdapter.updateAddresses(addressDao.getAddressesByUser(userId));
             layoutNewAddress.setVisibility(View.GONE);

@@ -31,7 +31,7 @@ public class DatabaseHelper {
         database = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, "mart4u_database")
                 .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_1_2,  AppDatabase.MIGRATION_2_3) // Thêm các migration
+                .addMigrations(AppDatabase.MIGRATION_1_2,  AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4) // Thêm các migration
                 .build();
 
         initializeSampleData();
@@ -93,8 +93,8 @@ public class DatabaseHelper {
         }
 
         if (database.addressDao().getAddressesByUser(1).isEmpty()) {
-            database.addressDao().insert(new Address(1, "Thành Đạt", "0345517311", "123 Đường Láng, Hà Nội, Hà Nội, 100000, Vietnam", true));
-            database.addressDao().insert(new Address(1, "Thành Đạt", "0345517311", "456 Nguyễn Trãi, Hà Nội, Hà Nội, 100000, Vietnam", false));
+            database.addressDao().insert(new Address(1, "Thành Đạt", "0345517311", "123 Đường Láng, Hà Nội, Hà Nội, 100000, Vietnam", true, "COD"));
+            database.addressDao().insert(new Address(1, "Thành Đạt", "0345517311", "456 Nguyễn Trãi, Hà Nội, Hà Nội, 100000, Vietnam", false, "Store Pickup"));
         }
         // Thêm dữ liệu mẫu cho bảng categories nếu bảng rỗng
         if (database.categoryDao().getAllCategories().isEmpty()) {
