@@ -17,6 +17,8 @@ public class AccountActivity extends BaseActivity {
     private TextView tvUsername, tvEmail;
     private ImageView avatar, icSettings;
 
+    private View llSupport;
+
     @Override
     protected int getLayoutId() {
         return R.layout.customer_account;
@@ -41,6 +43,7 @@ public class AccountActivity extends BaseActivity {
         tvEmail = findViewById(R.id.tv_email);
         avatar = findViewById(R.id.avatar);
         icSettings = findViewById(R.id.ic_settings);
+        llSupport = findViewById(R.id.ll_support);
         View profileContainer = findViewById(R.id.profile_container);
 
         // Hiển thị thông tin
@@ -61,5 +64,13 @@ public class AccountActivity extends BaseActivity {
             intent.putExtra("userId", userId);
             startActivity(intent);
         });
+
+        // Sự kiện nhấn Tổng đài/ email
+        llSupport.setOnClickListener(v -> {
+            Intent intent = new Intent(AccountActivity.this, SupportActivity.class);
+            intent.putExtra("userId", userId); // Truyền userId nếu cần
+            startActivity(intent);
+        });
+
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +32,20 @@ public class SettingsActivity extends BaseActivity {
             finish();
             return;
         }
+
+
+        // Khởi tạo nút Back
+        ImageButton btnBack = findViewById(R.id.btn_setting_back);
+        if (btnBack == null) {
+            Log.e(TAG, "Back button not found in layout");
+            finish();
+            return;
+        }
+
+        // Xử lý sự kiện nhấn nút Back
+        btnBack.setOnClickListener(v -> {
+            finish(); // Quay lại trang trước (AccountActivity)
+        });
 
         // Khởi tạo các view
         View llProfile = findViewById(R.id.ll_profile);

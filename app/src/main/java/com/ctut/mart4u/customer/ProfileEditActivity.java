@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -51,6 +52,19 @@ public class ProfileEditActivity extends BaseActivity {
             finish();
             return;
         }
+
+        // Khởi tạo nút Back
+        ImageButton btnBack = findViewById(R.id.btn_profile_back);
+        if (btnBack == null) {
+            Log.e(TAG, "Back button not found in layout");
+            finish();
+            return;
+        }
+
+        // Xử lý sự kiện nhấn nút Back
+        btnBack.setOnClickListener(v -> {
+            finish(); // Quay lại trang trước (AccountActivity)
+        });
 
         // Khởi tạo view
         avatar = findViewById(R.id.avatar);
@@ -156,7 +170,7 @@ public class ProfileEditActivity extends BaseActivity {
             // currentUser.setGender(gender);
 
             try {
-                databaseHelper.getUserDao().insert(currentUser); // Room sẽ tự động update nếu ID đã tồn tại
+                databaseHelper.getUserDao().update(currentUser); // Room sẽ tự động update nếu ID đã tồn tại
                 Toast.makeText(this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
                 finish();
             } catch (Exception e) {
