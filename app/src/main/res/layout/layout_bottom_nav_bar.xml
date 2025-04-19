@@ -93,11 +93,11 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_quick_buy" />
+            android:src="@drawable/ic_payment_cash" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mua Nhanh"
+            android:text="Lịch sử"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
