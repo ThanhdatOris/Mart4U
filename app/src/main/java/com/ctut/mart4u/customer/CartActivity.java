@@ -1,5 +1,6 @@
 package com.ctut.mart4u.customer;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -83,7 +84,7 @@ public class CartActivity extends BaseActivity {
                 btnDeleteAll.setEnabled(false);
             });
 
-            // xử lý sự kiện thanh toán
+            // ===================================xử lý sự kiện thanh toán
             Button btnCheckout = findViewById(R.id.btnCheckout);
             btnCheckout.setOnClickListener(v -> {
                 // Xử lý thanh toán
@@ -95,7 +96,9 @@ public class CartActivity extends BaseActivity {
                 }
                 Purchase purchase = new Purchase(userId, String.valueOf(System.currentTimeMillis()) , totalAmount, "pending");
                 //=======tao chi tiet don hang: tu cartDetail qua purchaseDetail
-                databaseHelper.getPurchaseDao().insert(purchase);
+                long purchaseId = databaseHelper.getPurchaseDao().insert(purchase);
+                purchase.setId((int) purchaseId); // <-- bây giờ bạn có thể dùng purchase.getId()
+
                 for(CartDetail cartDetail : cartList) {
 //                    Toast.makeText(this, "Chi tiet don hang" + cartDetail.getProductId(), Toast.LENGTH_SHORT).show();
                     Product product = databaseHelper.getProductDao().getProductById(cartDetail.getProductId());
@@ -106,13 +109,16 @@ public class CartActivity extends BaseActivity {
                             cartDetail.getQuantity(),
                             product.getPrice()
                     );
+                    databaseHelper.getPurchaseDetailDao().insert(purchaseDetail);
                     //xoa chi tiet don hang
                     databaseHelper.getCartDetailDao().delete(cartDetail);
                 }
                 cartList.clear();
                 //thong bao thanh toan thanh cong
                 Toast.makeText(this, "Thanh toán thành công" + purchase.getId() + " " + purchase.getStatus() + " " + purchase.getPurchaseDate() + " " + purchase.getUserId(), Toast.LENGTH_SHORT).show();
-
+                // nhay qua giao dien ShoppingListActivity
+                 Intent intent = new Intent(CartActivity.this, HistoryActivity.class);
+                 startActivity(intent);
             });
         }
 

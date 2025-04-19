@@ -1,13 +1,17 @@
 package com.ctut.mart4u.customer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ctut.mart4u.R;
+import com.ctut.mart4u.customer.PurchaseDetailActivity;
 import com.ctut.mart4u.model.Purchase;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +53,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         holder.tvOrderStatus.setText("Trạng thái: " + purchase.getStatus());
         holder.tvOrderTotal.setText("Tổng tiền: " + purchase.getTotalAmount() + " VNĐ");
 
+        //xu ly su kien click xem chi tiet
+        holder.btnViewDetails.setOnClickListener(v -> {
+//            Toast.makeText(context, "Xem chi tiết đơn hàng" + purchase.getTotalAmount(), Toast.LENGTH_SHORT).show();
+            //chuyen sang trang chi tiet don hang
+            Context context = v.getContext();
+            Intent intent = new Intent(context, PurchaseDetailActivity.class);
+            intent.putExtra("purchaseId", purchase.getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -60,11 +73,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         TextView tvOrderDate;
         TextView tvOrderStatus;
         TextView tvOrderTotal;
+        Button btnViewDetails;
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvOrderDate = itemView.findViewById(R.id.tvOrderDate);
             tvOrderStatus = itemView.findViewById(R.id.tvOrderStatus);
             tvOrderTotal = itemView.findViewById(R.id.tvOrderTotal);
+            btnViewDetails = itemView.findViewById(R.id.btnViewDetails);
 
         }
     }

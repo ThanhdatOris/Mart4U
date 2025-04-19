@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,10 +42,10 @@ public class ShoppingListAdapter  extends RecyclerView.Adapter<ShoppingListAdapt
         // Gán tên sản phẩm vào TextView
         holder.productName.setText(product.getName());
         // Gán số lượng sản phẩm vào TextView
-        holder.quantity.setText(String.valueOf(product.getStockQuantity()));
+        holder.productPrice.setText(String.valueOf(product.getPrice()));
 
         //xử lý sự kiện xem chị tiết sản phẩm => day qua trang chi tiet san pham
-        holder.viewProductDetail.setOnClickListener(v -> {
+        holder.addToCartIcon.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, ProductDetailActivity.class);
             intent.putExtra("productId", product.getId());
@@ -60,15 +61,19 @@ public class ShoppingListAdapter  extends RecyclerView.Adapter<ShoppingListAdapt
 
     public class ShoppingListViewHolder extends RecyclerView.ViewHolder {
         // Khai báo các view trong item layout
-        TextView productName; // Ví dụ: TextView để hiển thị tên sản phẩm
-        TextView quantity;
-        Button viewProductDetail;
+//        TextView productName; // Ví dụ: TextView để hiển thị tên sản phẩm
+//        TextView quantity;
+//        Button viewProductDetail;
+
+        TextView productName;
+        TextView productPrice;
+        ImageView addToCartIcon;
         public ShoppingListViewHolder(@NonNull View itemView) {
             super(itemView);
             // Ánh xạ các view từ layout customer_item_shopping
-            productName = itemView.findViewById(R.id.textViewItemName); // Đảm bảo ID này tồn tại trong customer_item_shopping.xml
-//            quantity = itemView.findViewById(R.id.textViewItemQuantity); // Đảm bảo ID này tồn tại trong customer_item_shopping.xml
-//            viewProductDetail = itemView.findViewById(R.id.btnViewProductDetail); // Đảm bảo ID này tồn tại trong customer_item_shopping.xml
+            productName = itemView.findViewById(R.id.productName);
+            productPrice = itemView.findViewById(R.id.productPrice);
+            addToCartIcon = itemView.findViewById(R.id.addToCartIcon);
         }
     }
 }
