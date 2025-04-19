@@ -45,13 +45,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         // Gán hình ảnh dựa trên tên danh mục
         String categoryName = category.getName().toLowerCase();
         if (categoryName.contains("rau củ")) {
-            holder.imageViewCategory.setImageResource(R.drawable.img_category_vegetable);
+            holder.imageViewCategory.setImageResource(R.drawable.ic_category_vegetable);
         } else if (categoryName.contains("thịt")) {
-            holder.imageViewCategory.setImageResource(R.drawable.img_category_meat);
+            holder.imageViewCategory.setImageResource(R.drawable.ic_category_meat);
         } else if (categoryName.contains("trứng")) {
-            holder.imageViewCategory.setImageResource(R.drawable.img_category_egg);
+            holder.imageViewCategory.setImageResource(R.drawable.ic_category_egg);
         } else {
-            holder.imageViewCategory.setImageResource(R.drawable.img_category_vegetable); // Mặc định
+            holder.imageViewCategory.setImageResource(R.drawable.ic_category_vegetable); // Mặc định
         }
 
 //        // Xử lý sự kiện khi nhấn nút xóa
