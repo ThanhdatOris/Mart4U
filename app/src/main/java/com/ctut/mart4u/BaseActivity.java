@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ctut.mart4u.customer.CategoryActivity;
 import com.ctut.mart4u.customer.AccountActivity;
 import com.ctut.mart4u.customer.DeliveryActivity;
+import com.ctut.mart4u.customer.HistoryActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -43,10 +44,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         highlightCurrentTab();
 
         updateCartBadge();
-
-
-
-
     }
 
     private void initNavigationBars() {
@@ -70,10 +67,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         tabDelivery.setOnClickListener(v -> safeNavigateTo(DeliveryActivity.class));
         tabLotteMart.setOnClickListener(v -> safeNavigateTo(MainActivity.class));
         tabAccount.setOnClickListener(v -> safeNavigateTo(AccountActivity.class));
-        tabQuickBuy.setOnClickListener(v -> {
-            // Handle the case when QuickBuyActivity is not yet implemented
-            Toast.makeText(this, "Tính năng đang phát triển", Toast.LENGTH_SHORT).show();
+        tabQuickBuy.setOnClickListener(v -> safeNavigateTo(HistoryActivity.class));
+//        tabQuickBuy.setOnClickListener(v -> {
+//            // Handle the case when QuickBuyActivity is not yet implemented
+//            Toast.makeText(this, "Tính năng đang phát triển", Toast.LENGTH_SHORT).show();
+//        });
+
+//        ====================xử lý sự kiện click============
+        cartBadge.setOnClickListener(v -> {
+//            int userId = getCurrentUserId();
+//            if (userId == -1) {
+//                Toast.makeText(this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+
+            Intent intent = new Intent(BaseActivity.this, CartActivity.class);
+            intent.putExtra("user_id", 1); // Thay bằng userId từ phiên đăng nhập
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Đảm bảo không stack lại
+            startActivity(intent);
+            overridePendingTransition(0, 0);
         });
+        //=================================================
     }
 
     private void safeNavigateTo(Class<?> activityClass) {

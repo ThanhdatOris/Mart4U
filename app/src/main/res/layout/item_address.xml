@@ -21,6 +21,13 @@
         android:text="Địa chỉ: 123 Đường Láng, Hà Nội"
         android:textSize="14sp" />
 
+    <TextView
+        android:id="@+id/tvDeliveryMethod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phương thức giao hàng: COD"
+        android:textSize="14sp" />
+
     <CheckBox
         android:id="@+id/checkboxDefault"
         android:layout_width="wrap_content"

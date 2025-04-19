@@ -19,61 +19,30 @@ public class Address {
     private String phoneNumber;  // Số điện thoại
     private String address;      // Chuỗi địa chỉ
     private boolean isDefault;   // Địa chỉ mặc định
+    private String deliveryMethod; // Phương thức giao hàng: "COD" hoặc "Store Pickup"
 
-    public Address(int userId, String receiverName, String phoneNumber, String address, boolean isDefault) {
+    public Address(int userId, String receiverName, String phoneNumber, String address, boolean isDefault, String deliveryMethod) {
         this.userId = userId;
         this.receiverName = receiverName;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.isDefault = isDefault;
+        this.deliveryMethod = deliveryMethod; // Mặc định là "Nhận tại cửa hàng"
     }
 
     // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getReceiverName() {
-        return receiverName;
-    }
-
-    public void setReceiverName(String receiverName) {
-        this.receiverName = receiverName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public boolean isDefault() {
-        return isDefault;
-    }
-
-    public void setDefault(boolean aDefault) {
-        isDefault = aDefault;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
+    public String getReceiverName() { return receiverName; }
+    public void setReceiverName(String receiverName) { this.receiverName = receiverName; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+    public boolean isDefault() { return isDefault; }
+    public void setDefault(boolean isDefault) { this.isDefault = isDefault; }
+    public String getDeliveryMethod() { return deliveryMethod; }
+    public void setDeliveryMethod(String deliveryMethod) { this.deliveryMethod = deliveryMethod; }
 }

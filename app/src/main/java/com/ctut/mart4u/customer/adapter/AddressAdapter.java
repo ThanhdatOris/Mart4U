@@ -43,11 +43,11 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
         Address address = addresses.get(position);
         holder.tvReceiverInfo.setText("Tên: " + address.getReceiverName() + " - SĐT: " + address.getPhoneNumber());
         holder.tvAddress.setText("Địa chỉ: " + address.getAddress());
+        holder.tvDeliveryMethod.setText("Phương thức giao hàng: " + address.getDeliveryMethod());
         holder.checkboxDefault.setChecked(address.isDefault());
 
         holder.checkboxDefault.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                // Đặt địa chỉ này là mặc định, bỏ mặc định của các địa chỉ khác
                 for (Address addr : addresses) {
                     if (addr.getId() != address.getId() && addr.isDefault()) {
                         addr.setDefault(false);
@@ -70,12 +70,14 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     static class AddressViewHolder extends RecyclerView.ViewHolder {
         TextView tvReceiverInfo;
         TextView tvAddress;
+        TextView tvDeliveryMethod; // Thêm để hiển thị phương thức giao hàng
         CheckBox checkboxDefault;
 
         public AddressViewHolder(@NonNull View itemView) {
             super(itemView);
             tvReceiverInfo = itemView.findViewById(R.id.tvReceiverInfo);
             tvAddress = itemView.findViewById(R.id.tvAddress);
+            tvDeliveryMethod = itemView.findViewById(R.id.tvDeliveryMethod);
             checkboxDefault = itemView.findViewById(R.id.checkboxDefault);
         }
     }
