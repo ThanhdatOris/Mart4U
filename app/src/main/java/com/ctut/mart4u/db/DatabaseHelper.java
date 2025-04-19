@@ -1,7 +1,9 @@
 package com.ctut.mart4u.db;
 
 import android.content.Context;
+
 import androidx.room.Room;
+
 import com.ctut.mart4u.model.Address;
 import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.Product;
@@ -31,7 +33,7 @@ public class DatabaseHelper {
         database = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, "mart4u_database")
                 .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_1_2,  AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4) // Thêm các migration
+                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4) // Thêm các migration
                 .build();
 
         initializeSampleData();
@@ -79,6 +81,7 @@ public class DatabaseHelper {
     public AddressDao getAddressDao() {
         return database.addressDao();
     }
+
     // Phương thức để lấy DeliveryScheduleDao
     public DeliveryScheduleDao getDeliveryScheduleDao() {
         return database.deliveryScheduleDao();
@@ -88,10 +91,10 @@ public class DatabaseHelper {
     private void initializeSampleData() {
         // Thêm dữ liệu mẫu cho bảng users nếu bảng rỗng
         if (database.userDao().getAllCustomers().isEmpty()) {
-            database.userDao().insert(new User("customer1", "pass123", "customer1@example.com", "0345517311", "customer"));
-            database.userDao().insert(new User("sinoo", "123456", "anhkhoa@gmail.com", "0345517311", "customer"));
+            database.userDao().insert(new User("customer1", "pass123", "customer1@example.com", "customer", "0345517311"));
+            database.userDao().insert(new User("sinoo", "123456", "anhkhoa@gmail.com", "customer", "0345517311"));
 
-            database.userDao().insert(new User("admin1", "admin123", "admin1@example.com", "0345517312", "admin"));
+            database.userDao().insert(new User("admin1", "admin123", "admin1@example.com", "admin", "0345517312"));
         }
 
         if (database.addressDao().getAddressesByUser(1).isEmpty()) {
