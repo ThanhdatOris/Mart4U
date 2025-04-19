@@ -41,10 +41,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Khởi tạo thanh điều hướng
         initNavigationBars();
 
+
+
+
         // Highlight tab hiện tại
         highlightCurrentTab();
 
         updateCartBadge();
+
+
+
+
     }
 
     private void initNavigationBars() {
@@ -71,6 +78,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         tabLotteMart.setOnClickListener(v -> safeNavigateTo(MainActivity.class));
         tabAccount.setOnClickListener(v -> safeNavigateTo(AccountActivity.class));
         tabQuickBuy.setOnClickListener(v -> safeNavigateTo(HistoryActivity.class));
+//        tabQuickBuy.setOnClickListener(v -> {
+//            // Handle the case when QuickBuyActivity is not yet implemented
+//            Toast.makeText(this, "Tính năng đang phát triển", Toast.LENGTH_SHORT).show();
+//        });
 
 //        ====================xử lý sự kiện click============
         cartBadge.setOnClickListener(v -> {
