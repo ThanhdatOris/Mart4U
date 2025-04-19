@@ -40,6 +40,9 @@
             android:name=".customer.ShoppingListActivity"
             android:exported="false" />
         <activity
+            android:name=".customer.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".customer.DeliveryActivity"
             android:exported="false" />
         <activity
@@ -56,8 +59,9 @@
             android:exported="false" />
         <activity
             android:name=".admin.ProductActivity"
-            android:exported="false" /> <!-- <activity android:name=".customer.ProductDetailActivity" -->
-        <!-- android:exported="false" /> -->
+            android:exported="false" />
+<!--        <activity android:name=".customer.ProductDetailActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".admin.DashboardActivity"
             android:exported="false" />
