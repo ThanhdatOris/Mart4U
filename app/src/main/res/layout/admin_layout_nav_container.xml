@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Top Navigation Bar -->
+    <include layout="@layout/admin_layout_top_nav_bar" />
+
+    <!-- Content Container - nơi sẽ chứa nội dung của từng Activity -->
+    <FrameLayout
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FA003F"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!-- Tab Category -->
+        <LinearLayout
+            android:id="@+id/tab_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_category" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Danh Mục"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Tab Product -->
+        <LinearLayout
+            android:id="@+id/tab_product"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cart" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sản Phẩm"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Tab Purchase -->
+        <LinearLayout
+            android:id="@+id/tab_purchase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delivery" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đơn Hàng"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Tab User -->
+        <LinearLayout
+            android:id="@+id/tab_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_default_user" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Người Dùng"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Tab Address -->
+        <LinearLayout
+            android:id="@+id/tab_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_support" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Địa Chỉ"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

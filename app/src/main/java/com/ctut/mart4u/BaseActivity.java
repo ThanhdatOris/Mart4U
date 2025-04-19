@@ -41,17 +41,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Khởi tạo thanh điều hướng
         initNavigationBars();
 
-
-
-
         // Highlight tab hiện tại
         highlightCurrentTab();
 
         updateCartBadge();
-
-
-
-
     }
 
     private void initNavigationBars() {
@@ -63,14 +56,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         LinearLayout tabQuickBuy = findViewById(R.id.tab_quick_buy);
         cartBadge = findViewById(R.id.cart_badge);
 
-
         if (tabCategory == null || tabDelivery == null || tabLotteMart == null ||
                 tabAccount == null || tabQuickBuy == null || cartBadge == null) {
             android.util.Log.e("BaseActivity", "One or more tabs or badge not found in layout");
             Toast.makeText(this, "Lỗi: Không tìm thấy các tab hoặc badge trong layout", Toast.LENGTH_LONG).show();
             return;
         }
-
 
         // Xử lý sự kiện cho các tab với cải tiến
         tabCategory.setOnClickListener(v -> safeNavigateTo(CategoryActivity.class));
@@ -181,11 +172,5 @@ public abstract class BaseActivity extends AppCompatActivity {
             cartBadge.setVisibility(View.GONE);
         }
     }
-    //===========================kiểm tra người dùng có đăng nhập hay chưa=====
-    // Lấy userId từ SharedPreferences (hoặc session, hoặc cách bạn đang dùng)
-    private int getCurrentUserId() {
-        // Ví dụ dùng SharedPreferences
-        return getSharedPreferences("user_session", MODE_PRIVATE).getInt("user_id", -1);
-    }
-    //========================================================================
+
 }

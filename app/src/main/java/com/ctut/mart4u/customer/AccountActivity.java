@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
+
 import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.LoginActivity;
 import com.ctut.mart4u.R;
@@ -27,12 +28,13 @@ public class AccountActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.customer_account;
+        return R.layout.customer_account; // Trả về layout nội dung của AccountActivity
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
 
         databaseHelper = DatabaseHelper.getInstance(this);

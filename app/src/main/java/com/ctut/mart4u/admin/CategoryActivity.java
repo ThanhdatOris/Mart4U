@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ctut.mart4u.AdminBaseActivity;
 import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.admin.adapter.CategoryAdapter;
@@ -15,7 +16,7 @@ import com.ctut.mart4u.model.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryActivity extends BaseActivity {
+public class CategoryActivity extends AdminBaseActivity {
 
     private RecyclerView recyclerViewCategory;
     private CategoryAdapter categoryAdapter;

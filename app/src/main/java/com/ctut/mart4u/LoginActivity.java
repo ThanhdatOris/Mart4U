@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ctut.mart4u.admin.DashboardActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.User;
 import com.ctut.mart4u.utils.UserSession;
@@ -40,9 +41,10 @@ public class LoginActivity extends AppCompatActivity {
                 if ("customer".equals(user.getRole())) {
                     startActivity(new Intent(this, MainActivity.class));
                 }
-//                else {
-//                    startActivity(new Intent(this, AdminActivity.class));
-//                }
+               else if ("admin".equals(user.getRole())) {
+                    // Chuyển đến DashboardActivity nếu là admin
+                   startActivity(new Intent(this, DashboardActivity.class));
+               }
                 finish();
                 return;
             }
@@ -77,9 +79,9 @@ public class LoginActivity extends AppCompatActivity {
                 if ("customer".equals(user.getRole())) {
                     startActivity(new Intent(this, MainActivity.class));
                 }
-//                else {
-//                    startActivity(new Intent(this, AdminActivity.class));
-//                }
+                else if ("admin".equals(user.getRole())) {
+                    startActivity(new Intent(this, DashboardActivity.class));
+                }
                 finish();
             } else {
                 Toast.makeText(this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
