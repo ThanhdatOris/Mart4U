@@ -94,7 +94,7 @@ public class DatabaseHelper {
             database.userDao().insert(new User("customer1", "pass123", "customer1@example.com", "customer", "0345517311"));
             database.userDao().insert(new User("sinoo", "123456", "anhkhoa@gmail.com", "customer", "0345517311"));
 
-            database.userDao().insert(new User("admin1", "admin123", "admin1@example.com", "admin", "0345517312"));
+            database.userDao().insert(new User("admin", "123456", "admin1@example.com", "admin", "0345517312"));
         }
 
         if (database.addressDao().getAddressesByUser(1).isEmpty()) {

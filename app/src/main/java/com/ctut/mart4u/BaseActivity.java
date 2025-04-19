@@ -40,17 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Khởi tạo thanh điều hướng
         initNavigationBars();
 
-
-
-
         // Highlight tab hiện tại
         highlightCurrentTab();
 
         updateCartBadge();
-
-
-
-
     }
 
     private void initNavigationBars() {
