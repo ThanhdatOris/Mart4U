@@ -5,232 +5,237 @@
     android:orientation="vertical">
 
     <!-- Top Navigation Bar -->
-    <!--    <include layout="@layout/layout_top_nav_bar" />-->
+    <!-- <include layout="@layout/layout_top_nav_bar" /> -->
 
     <!-- Nội dung chính -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp"
         android:background="#FFFFFF">
 
-        <!-- Layout khi chưa đăng nhập -->
+        <!-- Child duy nhất của ScrollView -->
         <LinearLayout
-            android:id="@+id/layoutNotLoggedIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:visibility="gone">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đăng nhập"
-                android:padding="12dp"
-                android:backgroundTint="#0288D1"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
-
-        <!-- Layout khi đã đăng nhập -->
-        <LinearLayout
-            android:id="@+id/layoutLoggedIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <!-- Tiêu đề -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tài Khoản"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Avatar và thông tin cơ bản -->
+            <!-- Layout khi chưa đăng nhập -->
             <LinearLayout
-                android:id="@+id/profile_container"
+                android:id="@+id/layoutNotLoggedIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:background="@drawable/rounded_background"
-                android:layout_marginBottom="16dp">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone">
 
-                <ImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/ic_default_user"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle_background" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginStart="8dp">
-
-                    <TextView
-                        android:id="@+id/tv_username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nguyễn Trần Anh Khoa"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="abc@gmail.com"
-                        android:textSize="14sp"
-                        android:layout_marginTop="4dp" />
-                </LinearLayout>
-
-                <!-- Icon cài đặt -->
-                <ImageView
-                    android:id="@+id/ic_settings"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_setting"
-                    android:layout_gravity="center_vertical" />
+                    android:text="Đăng nhập"
+                    android:padding="12dp"
+                    android:backgroundTint="#0288D1"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
 
-            <!-- Trạng thái đơn hàng -->
+            <!-- Layout khi đã đăng nhập -->
             <LinearLayout
+                android:id="@+id/layoutLoggedIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/tv_pending_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="18sp"
-                        android:textColor="#FA003F" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Chờ Thanh Toán"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/tv_processing_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Soạn Đơn Hàng"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/tv_shipping_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Đang Giao"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/tv_delivered_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Giao Thành Công"
-                        android:textSize="12sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Trợ giúp -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Trợ Giúp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp" />
-
-            <LinearLayout
-                android:id="@+id/ll_support"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:background="@drawable/rounded_background">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_support"
-                    android:layout_gravity="center_vertical" />
-
+                <!-- Tiêu đề -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tổng đài/ email"
-                    android:textSize="14sp"
-                    android:layout_marginStart="8dp"
-                    android:layout_gravity="center_vertical" />
+                    android:text="Tài Khoản"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Avatar và thông tin cơ bản -->
+                <LinearLayout
+                    android:id="@+id/profile_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:background="@drawable/rounded_background"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/ic_default_user"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/circle_background" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nguyễn Trần Anh Khoa"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="abc@gmail.com"
+                            android:textSize="14sp"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <!-- Icon cài đặt -->
+                    <ImageView
+                        android:id="@+id/ic_settings"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_setting"
+                        android:layout_gravity="center_vertical" />
+                </LinearLayout>
+
+                <!-- Trạng thái đơn hàng -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_pending_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="18sp"
+                            android:textColor="#FA003F" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chờ Thanh Toán"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_processing_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Soạn Đơn Hàng"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_shipping_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Đang Giao"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_delivered_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Giao Thành Công"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Trợ giúp -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trợ Giúp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_support"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:background="@drawable/rounded_background">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_support"
+                        android:layout_gravity="center_vertical" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng đài/ email"
+                        android:textSize="14sp"
+                        android:layout_marginStart="8dp"
+                        android:layout_gravity="center_vertical" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <!-- Bottom Navigation Bar -->
-    <!--    <include layout="@layout/layout_bottom_nav_bar" />-->
-
+    <!-- <include layout="@layout/layout_bottom_nav_bar" /> -->
 </LinearLayout>
