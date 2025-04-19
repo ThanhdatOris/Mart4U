@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mart4U"
         tools:targetApi="31">
-        <activity
+         <activity
             android:name=".customer.PurchaseDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminBaseActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
@@ -43,9 +46,6 @@
             android:name=".customer.ShoppingListActivity"
             android:exported="false" />
         <activity
-            android:name=".customer.SettingsActivity"
-            android:exported="false" />
-        <activity
             android:name=".customer.DeliveryActivity"
             android:exported="false" />
         <activity
@@ -62,9 +62,8 @@
             android:exported="false" />
         <activity
             android:name=".admin.ProductActivity"
-            android:exported="false" />
-<!--        <activity android:name=".customer.ProductDetailActivity"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity android:name=".customer.ProductDetailActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".admin.DashboardActivity"
             android:exported="false" />

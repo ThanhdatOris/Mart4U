@@ -56,6 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         LinearLayout tabQuickBuy = findViewById(R.id.tab_quick_buy);
         cartBadge = findViewById(R.id.cart_badge);
 
+
         if (tabCategory == null || tabDelivery == null || tabLotteMart == null ||
                 tabAccount == null || tabQuickBuy == null || cartBadge == null) {
             android.util.Log.e("BaseActivity", "One or more tabs or badge not found in layout");
@@ -63,16 +64,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             return;
         }
 
+
         // Xử lý sự kiện cho các tab với cải tiến
         tabCategory.setOnClickListener(v -> safeNavigateTo(CategoryActivity.class));
         tabDelivery.setOnClickListener(v -> safeNavigateTo(DeliveryActivity.class));
         tabLotteMart.setOnClickListener(v -> safeNavigateTo(MainActivity.class));
         tabAccount.setOnClickListener(v -> safeNavigateTo(AccountActivity.class));
         tabQuickBuy.setOnClickListener(v -> safeNavigateTo(HistoryActivity.class));
-//        tabQuickBuy.setOnClickListener(v -> {
-//            // Handle the case when QuickBuyActivity is not yet implemented
-//            Toast.makeText(this, "Tính năng đang phát triển", Toast.LENGTH_SHORT).show();
-//        });
 
 //        ====================xử lý sự kiện click============
         cartBadge.setOnClickListener(v -> {
@@ -172,5 +170,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             cartBadge.setVisibility(View.GONE);
         }
     }
-
+    //===========================kiểm tra người dùng có đăng nhập hay chưa=====
+    // Lấy userId từ SharedPreferences (hoặc session, hoặc cách bạn đang dùng)
+    private int getCurrentUserId() {
+        // Ví dụ dùng SharedPreferences
+        return getSharedPreferences("user_session", MODE_PRIVATE).getInt("user_id", -1);
+    }
+    //========================================================================
 }

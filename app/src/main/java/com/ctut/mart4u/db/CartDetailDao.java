@@ -5,9 +5,7 @@ import androidx.room.Insert;
 import androidx.room.Update;
 import androidx.room.Delete;
 import androidx.room.Query;
-
 import com.ctut.mart4u.model.CartDetail;
-
 import java.util.List;
 
 @Dao
@@ -31,6 +29,7 @@ public interface CartDetailDao {
     @Query("SELECT COUNT(*) FROM cart_details WHERE userId = :userId")
     int getCartItemCount(int userId);
 
+    // xoa tat ca gio hang cua 1 nguoi dung
     @Query("DELETE FROM cart_details WHERE userId = :userId")
     void deleteAll(int userId);
 }
