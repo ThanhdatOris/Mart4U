@@ -5,4 +5,19 @@
         <item>Cái Răng</item>
         <item>Bình Thủy</item>
     </string-array>
+
+    <string-array name="nationalities">
+        <item>Việt Nam</item>
+        <item>Khác</item>
+    </string-array>
+    <string-array name="genders">
+        <item>Nam</item>
+        <item>Nữ</item>
+        <item>Khác</item>
+    </string-array>
+<string-array name="delivery_methods">
+        <item>Nhận tại cửa hàng</item>
+        <item>COD</item>
+    </string-array>
+
 </resources>

@@ -93,6 +93,7 @@
 
             <!-- Tiêu đề danh sách sản phẩm -->
             <TextView
+                android:id="@+id/tvProductListTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -149,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="#fa003f"
-                android:text="Thanh toán 139.000đ"
+                android:text="Thanh Toán"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>

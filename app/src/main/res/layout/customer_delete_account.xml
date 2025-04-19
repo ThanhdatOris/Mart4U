@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+    
+        <!-- Custom Back Button -->
+        <ImageButton
+            android:id="@+id/btn_delete_account_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_custom" />
+    
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Delete Account"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    
+    </LinearLayout>
+
+
+    <!-- Thông báo -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Chúng tôi rất tiếc khi Quý khách quyết định xóa tài khoản LOTTE Mart Online. Để xóa tài khoản, vui lòng đồng ý với các điều khoản sau:"
+        android:textSize="14sp" />
+
+    <!-- Điều khoản -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="- Tài khoản của Quý khách sẽ bị xóa vĩnh viễn và không thể khôi phục.\n- Tất cả dữ liệu liên quan đến tài khoản sẽ bị xóa.\n- Sau khi xóa, Quý khách sẽ không thể đăng nhập hoặc sử dụng tài khoản này."
+        android:textSize="14sp" />
+
+    <!-- Checkbox đồng ý -->
+    <CheckBox
+        android:id="@+id/cb_agree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Tôi đồng ý với Chính sách Quản Lý Tài Khoản của LOTTE Mart Việt Nam."
+        android:textSize="14sp" />
+
+    <!-- Nút xác nhận -->
+    <Button
+        android:id="@+id/btn_confirm_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#FA003F"
+        android:enabled="false"
+        android:text="Xác nhận"
+        android:textColor="#FFFFFF" />
+
+    <!-- Nút thoát -->
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#CCCCCC"
+        android:text="Thoát"
+        android:textColor="#000000" />
+</LinearLayout>

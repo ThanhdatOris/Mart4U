@@ -59,6 +59,22 @@
             android:hint="Địa chỉ"
             android:inputType="textPostalAddress" />
 
+        <!-- Thêm Spinner để chọn phương thức giao hàng -->
+        <Spinner
+            android:id="@+id/spinnerDeliveryMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:entries="@array/delivery_methods" />
+
+        <!-- Thêm TextView để hiển thị phí giao hàng -->
+        <TextView
+            android:id="@+id/tvDeliveryFee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phí giao hàng: 0 VNĐ"
+            android:layout_marginTop="8dp" />
+
         <Button
             android:id="@+id/btnSaveNewAddress"
             android:layout_width="wrap_content"

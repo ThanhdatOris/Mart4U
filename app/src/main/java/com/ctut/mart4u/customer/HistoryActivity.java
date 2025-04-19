@@ -1,26 +1,48 @@
 package com.ctut.mart4u.customer;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.R;
+import com.ctut.mart4u.customer.adapter.HistoryAdapter;
+import com.ctut.mart4u.db.DatabaseHelper;
+import com.ctut.mart4u.model.Purchase;
 
-public class HistoryActivity extends AppCompatActivity {
+import java.util.List;
+
+public class HistoryActivity extends BaseActivity {
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.customer_orders_history;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_history);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        //=======================id nguoi dung mac dinh la 1
+        int userId = 1;
+        //Lấy danh sách đơn hàng từ cơ sở dữ liệu
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
+        //Lấy danh sách đơn hàng từ cơ sở dữ liệu
+        List<Purchase> purchaseList = databaseHelper.getPurchaseDao().getPurchasesByUser(userId);
+        Toast.makeText(this, "Số lượng đơn hàng: " + purchaseList.size(), Toast.LENGTH_SHORT).show();
+
+        //Lấy RecyclerView từ layout
+        RecyclerView recyclerViewHistory = findViewById(R.id.rvOrderHistory);
+        recyclerViewHistory.setLayoutManager(new LinearLayoutManager(this));
+
+        //Tạo adapter cho RecyclerView
+        HistoryAdapter adapter = new HistoryAdapter(this, purchaseList);
+        //Gán adapter cho RecyclerView
+        recyclerViewHistory.setAdapter(adapter);
+
+
     }
 }

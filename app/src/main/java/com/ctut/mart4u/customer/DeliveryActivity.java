@@ -1,11 +1,14 @@
 package com.ctut.mart4u.customer;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -14,27 +17,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.BaseActivity;
+import com.ctut.mart4u.LoginActivity;
+import com.ctut.mart4u.R;
 import com.ctut.mart4u.customer.adapter.AddressAdapter;
 import com.ctut.mart4u.db.AddressDao;
 import com.ctut.mart4u.db.DatabaseHelper;
-import com.ctut.mart4u.R;
 import com.ctut.mart4u.db.DeliveryScheduleDao;
-import com.ctut.mart4u.db.UserDao;
 import com.ctut.mart4u.model.Address;
 import com.ctut.mart4u.model.DeliverySchedule;
 import com.ctut.mart4u.model.User;
+import com.ctut.mart4u.utils.UserSession;
 
 import java.util.List;
 
 public class DeliveryActivity extends BaseActivity {
     private DatabaseHelper databaseHelper;
-    private TextView tvAccountInfo;
-    private TextView tvDeliveryAddress;
-    private TextView tvStore;
-    private Button btnUpdateAddress;
+    private LinearLayout layoutNotLoggedIn, layoutLoggedIn;
+    private Button btnLogin, btnUpdateAddress;
+    private TextView tvAccountInfo, tvDeliveryAddress, tvStore, tvDeliveryFee;
+    private RadioGroup rgDeliveryMethod;
     private Address currentAddress;
     private User currentUser;
-    private int userId = 1; // Giả sử userId = 1, thay đổi dựa trên đăng nhập
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected int getLayoutId() {
@@ -46,28 +50,72 @@ public class DeliveryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         databaseHelper = DatabaseHelper.getInstance(this);
+        sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
 
         // Ánh xạ các thành phần giao diện
+        layoutNotLoggedIn = findViewById(R.id.layoutNotLoggedIn);
+        layoutLoggedIn = findViewById(R.id.layoutLoggedIn);
+        btnLogin = findViewById(R.id.btnLogin);
         tvAccountInfo = findViewById(R.id.tvAccountInfo);
         tvDeliveryAddress = findViewById(R.id.tvDeliveryAddress);
         tvStore = findViewById(R.id.tvStore);
+        rgDeliveryMethod = findViewById(R.id.rgDeliveryMethod);
+        tvDeliveryFee = findViewById(R.id.tvDeliveryFee);
         btnUpdateAddress = findViewById(R.id.btnUpdateAddress);
 
-        // Tải thông tin khách hàng, địa chỉ và cửa hàng
-        loadUserInfo();
-        loadAddressInfo();
-        loadStoreInfo();
+        // Cập nhật giao diện dựa trên trạng thái đăng nhập
+        updateUI();
 
-        // Sự kiện nút cập nhật địa chỉ
-        btnUpdateAddress.setOnClickListener(v -> showManageAddressesDialog());
+        // Xử lý sự kiện nút Đăng nhập
+        btnLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(DeliveryActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
 
-        // Tải lịch giao hàng
+        // Tải lịch giao hàng (hiển thị cho cả hai trạng thái)
         loadDeliverySchedule();
+
+        // Nếu đã đăng nhập, thiết lập các sự kiện liên quan đến giao hàng
+        if (UserSession.getInstance().isLoggedIn()) {
+            // Tải thông tin khách hàng, địa chỉ và cửa hàng
+            loadUserInfo();
+            loadAddressInfo();
+            loadStoreInfo();
+
+            // Sự kiện thay đổi phương thức giao hàng
+            rgDeliveryMethod.setOnCheckedChangeListener((group, checkedId) -> {
+                if (currentAddress != null) {
+                    if (checkedId == R.id.rbCOD) {
+                        currentAddress.setDeliveryMethod("COD");
+                        tvDeliveryFee.setText("Phí giao hàng: 30.000 VNĐ");
+                    } else if (checkedId == R.id.rbStorePickup) {
+                        currentAddress.setDeliveryMethod("Store Pickup");
+                        tvDeliveryFee.setText("Phí giao hàng: 0 VNĐ");
+                    }
+                    // Cập nhật địa chỉ trong database
+                    databaseHelper.getAddressDao().update(currentAddress);
+                }
+            });
+
+            // Sự kiện nút cập nhật địa chỉ
+            btnUpdateAddress.setOnClickListener(v -> showManageAddressesDialog());
+        }
+    }
+
+    private void updateUI() {
+        currentUser = UserSession.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            // Đã đăng nhập
+            layoutLoggedIn.setVisibility(View.VISIBLE);
+            layoutNotLoggedIn.setVisibility(View.GONE);
+        } else {
+            // Chưa đăng nhập
+            layoutLoggedIn.setVisibility(View.GONE);
+            layoutNotLoggedIn.setVisibility(View.VISIBLE);
+        }
     }
 
     private void loadUserInfo() {
-        UserDao userDao = databaseHelper.getUserDao();
-        currentUser = userDao.getUserById(userId); // Lấy thông tin user
         if (currentUser != null) {
             tvAccountInfo.setText("Tên: " + currentUser.getUsername() + "\nSố điện thoại: " + currentUser.getPhoneNumber());
         } else {
@@ -77,7 +125,7 @@ public class DeliveryActivity extends BaseActivity {
 
     private void loadAddressInfo() {
         AddressDao addressDao = databaseHelper.getAddressDao();
-        List<Address> addresses = addressDao.getAddressesByUser(userId);
+        List<Address> addresses = addressDao.getAddressesByUser(currentUser.getId());
         for (Address address : addresses) {
             if (address.isDefault()) {
                 currentAddress = address;
@@ -91,13 +139,21 @@ public class DeliveryActivity extends BaseActivity {
 
         if (currentAddress != null) {
             tvDeliveryAddress.setText(currentAddress.getAddress());
+            if ("COD".equals(currentAddress.getDeliveryMethod())) {
+                rgDeliveryMethod.check(R.id.rbCOD);
+                tvDeliveryFee.setText("Phí giao hàng: 30.000 VNĐ");
+            } else {
+                rgDeliveryMethod.check(R.id.rbStorePickup);
+                tvDeliveryFee.setText("Phí giao hàng: 0 VNĐ");
+            }
         } else {
             tvDeliveryAddress.setText("Chưa có địa chỉ");
+            rgDeliveryMethod.clearCheck();
+            tvDeliveryFee.setText("Phí giao hàng: 0 VNĐ");
         }
     }
 
     private void loadStoreInfo() {
-        // Giả lập thông tin cửa hàng (bạn có thể lấy từ cơ sở dữ liệu hoặc API)
         tvStore.setText("Cửa hàng: Căn Thơ");
     }
 
@@ -117,7 +173,7 @@ public class DeliveryActivity extends BaseActivity {
 
         // Thiết lập RecyclerView với AddressAdapter
         AddressDao addressDao = databaseHelper.getAddressDao();
-        AddressAdapter addressAdapter = new AddressAdapter(addressDao.getAddressesByUser(userId), addressDao);
+        AddressAdapter addressAdapter = new AddressAdapter(addressDao.getAddressesByUser(currentUser.getId()), addressDao);
         rvAddresses.setLayoutManager(new LinearLayoutManager(this));
         rvAddresses.setAdapter(addressAdapter);
 
@@ -137,9 +193,9 @@ public class DeliveryActivity extends BaseActivity {
                 return; // Có thể thêm thông báo lỗi
             }
 
-            Address newAddress = new Address(userId, receiverName, phoneNumber, address, false);
+            Address newAddress = new Address(currentUser.getId(), receiverName, phoneNumber, address, false, "COD");
             addressDao.insert(newAddress);
-            addressAdapter.updateAddresses(addressDao.getAddressesByUser(userId));
+            addressAdapter.updateAddresses(addressDao.getAddressesByUser(currentUser.getId()));
             layoutNewAddress.setVisibility(View.GONE);
             btnAddNewAddress.setVisibility(View.VISIBLE);
         });
@@ -195,6 +251,17 @@ public class DeliveryActivity extends BaseActivity {
             row.addView(dayAfterTomorrowStatus);
 
             tableLayout.addView(row);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUI();
+        if (UserSession.getInstance().isLoggedIn()) {
+            loadUserInfo();
+            loadAddressInfo();
+            loadStoreInfo();
         }
     }
 }
