@@ -38,7 +38,6 @@ public class DeliveryActivity extends BaseActivity {
     private RadioGroup rgDeliveryMethod;
     private Address currentAddress;
     private User currentUser;
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected int getLayoutId() {
@@ -50,7 +49,6 @@ public class DeliveryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         databaseHelper = DatabaseHelper.getInstance(this);
-        sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
 
         // Ánh xạ các thành phần giao diện
         layoutNotLoggedIn = findViewById(R.id.layoutNotLoggedIn);

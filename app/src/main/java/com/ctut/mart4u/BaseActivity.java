@@ -44,10 +44,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         highlightCurrentTab();
 
         updateCartBadge();
-
-
-
-
     }
 
     private void initNavigationBars() {
