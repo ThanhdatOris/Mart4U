@@ -42,10 +42,10 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
         highlightCurrentTab();
 
         // Xử lý sự kiện cho nút tìm kiếm và cài đặt trên top nav bar
-        ImageView icSearch = findViewById(R.id.ic_search_admin);
-        ImageView icSettings = findViewById(R.id.ic_settings_admin);
-        icSearch.setOnClickListener(v -> Toast.makeText(this, "Tính năng tìm kiếm đang phát triển", Toast.LENGTH_SHORT).show());
-        icSettings.setOnClickListener(v -> Toast.makeText(this, "Tính năng cài đặt đang phát triển", Toast.LENGTH_SHORT).show());
+//        ImageView icSearch = findViewById(R.id.ic_search_admin);
+//        ImageView icSettings = findViewById(R.id.ic_settings_admin);
+//        icSearch.setOnClickListener(v -> Toast.makeText(this, "Tính năng tìm kiếm đang phát triển", Toast.LENGTH_SHORT).show());
+//        icSettings.setOnClickListener(v -> Toast.makeText(this, "Tính năng cài đặt đang phát triển", Toast.LENGTH_SHORT).show());
     }
 
     private void initNavigationBars() {
