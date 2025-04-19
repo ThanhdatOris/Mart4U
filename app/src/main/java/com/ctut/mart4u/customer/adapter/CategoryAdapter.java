@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,32 +41,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category category = categoryList.get(position);
         holder.textViewCategoryName.setText(category.getName());
 
-        // set click vao nut button
-//        holder.btnViewProductCategory.setOnClickListener(v -> {
-////            Toast.makeText(context, "Bạn đã chọn: " + category.getName(), Toast.LENGTH_SHORT).show();
-//            // TODO: Sau này mở activity product_list ở đây
-//             Intent intent = new Intent(context, ShoppingListActivity.class);
-//             intent.putExtra("categoryId", category.getId());
-//             context.startActivity(intent);
-//        });
-
-        // set click vao chu
-        holder.textViewCategoryName.setOnClickListener(v -> {
-            //            Toast.makeText(context, "Bạn đã chọn: " + category.getName(), Toast.LENGTH_SHORT).show();
+        holder.btnViewProductCategory.setOnClickListener(v -> {
+//            Toast.makeText(context, "Bạn đã chọn: " + category.getName(), Toast.LENGTH_SHORT).show();
             // TODO: Sau này mở activity product_list ở đây
              Intent intent = new Intent(context, ShoppingListActivity.class);
              intent.putExtra("categoryId", category.getId());
              context.startActivity(intent);
         });
-        // set click vao hinh
-        holder.imageViewCategory.setOnClickListener(v -> {
-            //            Toast.makeText(context, "Bạn đã chọn: " + category.getName(), Toast.LENGTH_SHORT).show();
-            // TODO: Sau này mở activity product_list ở đây
-             Intent intent = new Intent(context, ShoppingListActivity.class);
-             intent.putExtra("categoryId", category.getId());
-             context.startActivity(intent);
-        });
-
     }
 
     @Override
@@ -75,15 +55,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categoryList.size();
     }
 
-    public static class CategoryViewHolder extends ViewHolder {
+    public class CategoryViewHolder extends ViewHolder {
         TextView textViewCategoryName;
         Button btnViewProductCategory;
-        ImageView imageViewCategory;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewCategoryName = itemView.findViewById(R.id.textViewCategoryName);
-            imageViewCategory = itemView.findViewById(R.id.imageViewCategory);
 //            btnViewProductCategory = itemView.findViewById(R.id.btnViewProductCategory);
         }
     }

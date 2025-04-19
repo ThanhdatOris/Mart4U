@@ -5,16 +5,4 @@
         <item>Cái Răng</item>
         <item>Bình Thủy</item>
     </string-array>
-
-    <string-array name="nationalities">
-        <item>Việt Nam</item>
-        <item>Khác</item>
-    </string-array>
-    <string-array name="genders">
-        <item>Nam</item>
-        <item>Nữ</item>
-        <item>Khác</item>
-    </string-array>
-
-
 </resources>
