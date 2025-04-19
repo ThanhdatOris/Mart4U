@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,12 @@ public class CartEntryAdapter  extends RecyclerView.Adapter<CartEntryAdapter.Car
         holder.textViewItemName.setText(productName);
         holder.textViewPrice.setText(productPrice);
         holder.textViewQuantity.setText("Số lượng: " + cartDetail.getQuantity());
+        // =========================Lấy ảnh sản phẩm từ cơ sở dữ liệu
+//        int productImage = databaseHelper.getProductDao().getProductById(cartDetail.getProductId()).getImage();
+//        holder.imageViewProduct.setImageResource(productImage);
+
+
+
 //        holder.textViewAddedDate.setText("Ngày thêm: " + cartDetail.getAddedDate());
 
         // ===========================su kien xoa 1 san pham===========================
@@ -69,6 +76,7 @@ public class CartEntryAdapter  extends RecyclerView.Adapter<CartEntryAdapter.Car
         TextView textViewQuantity;
         TextView textViewAddedDate;
         Button btnDeleteItem;
+        ImageView imageViewProduct;
         public CartEntryViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewItemName = itemView.findViewById(R.id.textViewItemName);
@@ -76,6 +84,7 @@ public class CartEntryAdapter  extends RecyclerView.Adapter<CartEntryAdapter.Car
             textViewQuantity = itemView.findViewById(R.id.textViewQuantity);
             textViewAddedDate = itemView.findViewById(R.id.textViewAddedDate);
             btnDeleteItem = itemView.findViewById(R.id.btnDeleteItem);
+            imageViewProduct = itemView.findViewById(R.id.imageViewProduct);
 
         }
     }

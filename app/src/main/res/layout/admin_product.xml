@@ -25,7 +25,7 @@
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/search_bg"
+        android:background="@drawable/ic_flag"
         android:drawableEnd="@drawable/ic_search"
         android:hint="Search products..."
         android:padding="8dp"
@@ -107,7 +107,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_placeholder"
+                    android:src="@drawable/ic_flag"
                     android:contentDescription="Product A Image"/>
 
                 <!-- Giá sản phẩm -->
@@ -138,7 +138,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_placeholder"
+                    android:src="@drawable/ic_flag"
                     android:contentDescription="Product B Image"/>
 
                 <!-- Giá sản phẩm -->
@@ -169,7 +169,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_placeholder"
+                    android:src="@drawable/ic_flag"
                     android:contentDescription="Product C Image"/>
 
                 <!-- Giá sản phẩm -->

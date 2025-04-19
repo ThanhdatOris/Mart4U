@@ -1,8 +1,10 @@
 package com.ctut.mart4u.customer;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,8 @@ import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.User;
 
 public class ChangePasswordActivity extends BaseActivity {
+    private static final String TAG = "ChangePasswordActivity";
+
     private DatabaseHelper databaseHelper;
     private User currentUser;
     private EditText etCurrentPassword, etNewPassword, etConfirmPassword;
@@ -35,6 +39,19 @@ public class ChangePasswordActivity extends BaseActivity {
             finish();
             return;
         }
+
+        // Khởi tạo nút Back
+        ImageButton btnBack = findViewById(R.id.btn_change_password_back);
+        if (btnBack == null) {
+            Log.e(TAG, "Back button not found in layout");
+            finish();
+            return;
+        }
+
+        // Xử lý sự kiện nhấn nút Back
+        btnBack.setOnClickListener(v -> {
+            finish(); // Quay lại trang trước (AccountActivity)
+        });
 
         // Khởi tạo view
         etCurrentPassword = findViewById(R.id.et_current_password);
@@ -70,7 +87,7 @@ public class ChangePasswordActivity extends BaseActivity {
 
             currentUser.setPassword(newPassword);
             try {
-                databaseHelper.getUserDao().insert(currentUser);
+                databaseHelper.getUserDao().update(currentUser);
                 Toast.makeText(this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                 finish();
             } catch (Exception e) {

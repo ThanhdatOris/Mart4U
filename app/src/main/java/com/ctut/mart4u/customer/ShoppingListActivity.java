@@ -40,6 +40,9 @@ public class ShoppingListActivity extends BaseActivity {
 
         } else {
             // Không có categoryId => lấy toàn bộ sản phẩm
+            List<Product> productList = databaseHelper.getProductDao().getAllProducts();
+            ShoppingListAdapter adapter = new ShoppingListAdapter(this, productList);
+            recyclerViewShoppingList.setAdapter(adapter);
             Toast.makeText(this, "Khong co category => lay tat ca product", Toast.LENGTH_SHORT).show();
         }
 

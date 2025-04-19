@@ -15,6 +15,9 @@
         <item>Nữ</item>
         <item>Khác</item>
     </string-array>
-
+<string-array name="delivery_methods">
+        <item>Nhận tại cửa hàng</item>
+        <item>COD</item>
+    </string-array>
 
 </resources>
