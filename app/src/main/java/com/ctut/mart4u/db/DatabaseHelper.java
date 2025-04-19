@@ -89,6 +89,8 @@ public class DatabaseHelper {
         // Thêm dữ liệu mẫu cho bảng users nếu bảng rỗng
         if (database.userDao().getAllCustomers().isEmpty()) {
             database.userDao().insert(new User("customer1", "pass123", "customer1@example.com", "0345517311", "customer"));
+            database.userDao().insert(new User("sinoo", "123456", "anhkhoa@gmail.com", "0345517311", "customer"));
+
             database.userDao().insert(new User("admin1", "admin123", "admin1@example.com", "0345517312", "admin"));
         }
 
@@ -111,14 +113,6 @@ public class DatabaseHelper {
             database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200));
             database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50));
         }
-
-        // Thêm dữ liệu mẫu cho bảng addresses nếu bảng rỗng
-//        if (database.addressDao().getAddressesByUser(1).isEmpty()) {
-//            // Thêm địa chỉ cho customer1 (userId = 1)
-//            database.addressDao().insert(new Address(1, "123 Đường Láng, Hà Nội, Hà Nội, 100000, Vietnam", , true));
-//            database.addressDao().insert(new Address(1, "456 Nguyễn Trãi, Hà Nội, Hà Nội, 100000, Vietnam", false));
-//            // admin1 (userId = 2) không có địa chỉ
-//        }
 
         // Thêm dữ liệu mẫu cho bảng delivery_schedule nếu bảng rỗng
         if (database.deliveryScheduleDao().getAllSchedules().isEmpty()) {
