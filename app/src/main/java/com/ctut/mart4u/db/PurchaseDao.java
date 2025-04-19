@@ -11,9 +11,14 @@ public interface PurchaseDao {
     @Insert
     void insert(Purchase purchase);
 
+
     @Query("SELECT * FROM purchases WHERE userId = :userId")
     List<Purchase> getPurchasesByUser(int userId);
 
     @Query("SELECT * FROM purchases WHERE id = :purchaseId")
     Purchase getPurchaseById(int purchaseId);
+
+    //get all purchases
+    @Query("SELECT * FROM purchases")
+    List<Purchase> getAllPurchases();
 }

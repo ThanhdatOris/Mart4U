@@ -42,6 +42,7 @@ public class CartEntryAdapter  extends RecyclerView.Adapter<CartEntryAdapter.Car
         holder.textViewItemName.setText(productName);
         holder.textViewPrice.setText(productPrice);
         holder.textViewQuantity.setText("Số lượng: " + cartDetail.getQuantity());
+
 //        holder.textViewAddedDate.setText("Ngày thêm: " + cartDetail.getAddedDate());
 
         // ===========================su kien xoa 1 san pham===========================
