@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.User;
+import com.ctut.mart4u.utils.UserSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -30,6 +31,23 @@ public class LoginActivity extends AppCompatActivity {
         databaseHelper = DatabaseHelper.getInstance(this);
         sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
 
+        // Kiểm tra trạng thái đăng nhập
+        if (sharedPreferences.getInt("userId", -1) != -1) {
+            User user = databaseHelper.getUserDao().getUserByUsername(
+                    sharedPreferences.getString("username", ""));
+            if (user != null) {
+                UserSession.getInstance().setCurrentUser(user);
+                if ("customer".equals(user.getRole())) {
+                    startActivity(new Intent(this, MainActivity.class));
+                }
+//                else {
+//                    startActivity(new Intent(this, AdminActivity.class));
+//                }
+                finish();
+                return;
+            }
+        }
+
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -38,26 +56,29 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> {
             String username = etUsername.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
-            String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            User user = databaseHelper.getUserDao().login(username, hashPassword);
+            User user = databaseHelper.getUserDao().login(username, password);
             if (user != null) {
+                // Lưu vào SharedPreferences
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("userId", user.getId());
                 editor.putString("username", user.getUsername());
                 editor.putString("role", user.getRole());
                 editor.apply();
 
+                // Lưu vào UserSession
+                UserSession.getInstance().setCurrentUser(user);
+
                 if ("customer".equals(user.getRole())) {
                     startActivity(new Intent(this, MainActivity.class));
                 }
 //                else {
-//                    startActivity(new Intent(this, CustomerActivity.class));
+//                    startActivity(new Intent(this, AdminActivity.class));
 //                }
                 finish();
             } else {

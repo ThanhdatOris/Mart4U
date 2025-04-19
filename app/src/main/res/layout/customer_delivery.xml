@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F5F5F5">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -25,147 +26,177 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:textColor="#212121"
                 android:layout_marginBottom="16dp" />
 
-            <androidx.cardview.widget.CardView
+            <!-- Layout khi chưa đăng nhập -->
+            <LinearLayout
+                android:id="@+id/layoutNotLoggedIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:elevation="4dp"
-                android:radius="8dp">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
+                    android:text="Đăng nhập"
+                    android:padding="12dp"
+                    android:backgroundTint="#0288D1"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_account"
-                        android:layout_gravity="center_vertical"
-                        app:tint="#757575" />
-
-                    <TextView
-                        android:id="@+id/tvAccountInfo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="12dp"
-                        android:text="Tên: Chưa có thông tin\nSố điện thoại: Chưa có thông tin"
-                        android:textSize="16sp"
-                        android:textColor="#424242" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
+            <!-- Layout khi đã đăng nhập -->
+            <LinearLayout
+                android:id="@+id/layoutLoggedIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:elevation="4dp"
-                android:radius="8dp">
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:layout_marginBottom="12dp"
+                    android:elevation="4dp"
+                    android:radius="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_account"
+                            android:layout_gravity="center_vertical"
+                            app:tint="#757575" />
+
+                        <TextView
+                            android:id="@+id/tvAccountInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:text="Tên: Chưa có thông tin\nSố điện thoại: Chưa có thông tin"
+                            android:textSize="16sp"
+                            android:textColor="#424242" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:elevation="4dp"
+                    android:radius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_flag"
+                                android:layout_gravity="center_vertical"
+                                app:tint="#757575" />
+
+                            <TextView
+                                android:id="@+id/tvDeliveryAddress"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="12dp"
+                                android:text="Chưa có địa chỉ"
+                                android:textSize="16sp"
+                                android:textColor="#424242" />
+
+                            <Button
+                                android:id="@+id/btnUpdateAddress"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cập nhật"
+                                android:textSize="14sp"
+                                android:textColor="#0288D1"
+                                android:layout_gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rgDeliveryMethod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="8dp">
+
+                            <RadioButton
+                                android:id="@+id/rbCOD"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="COD"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:id="@+id/rbStorePickup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nhận tại cửa hàng"
+                                android:textSize="14sp" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:id="@+id/tvDeliveryFee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Phí giao hàng: 0 VNĐ"
+                            android:textSize="14sp"
+                            android:textColor="#757575" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:elevation="4dp"
+                    android:radius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_flag"
-                            android:layout_gravity="center_vertical"
-                            app:tint="#757575" />
+                            app:tint="#757575"
+                            android:layout_gravity="center_vertical" />
 
                         <TextView
-                            android:id="@+id/tvDeliveryAddress"
-                            android:layout_width="0dp"
+                            android:id="@+id/tvStore"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginStart="12dp"
-                            android:text="Chưa có địa chỉ"
+                            android:text="Cửa hàng: Chưa có thông tin"
                             android:textSize="16sp"
                             android:textColor="#424242" />
-
-                        <Button
-                            android:id="@+id/btnUpdateAddress"
-                            style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cập nhật"
-                            android:textSize="14sp"
-                            android:textColor="#0288D1"
-                            android:layout_gravity="center_vertical" />
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
-                    <RadioGroup
-                        android:id="@+id/rgDeliveryMethod"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="8dp">
-
-                        <RadioButton
-                            android:id="@+id/rbCOD"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="COD"
-                            android:textSize="14sp" />
-
-                        <RadioButton
-                            android:id="@+id/rbStorePickup"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Nhận tại cửa hàng"
-                            android:textSize="14sp" />
-                    </RadioGroup>
-
-                    <TextView
-                        android:id="@+id/tvDeliveryFee"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Phí giao hàng: 0 VNĐ"
-                        android:textSize="14sp"
-                        android:textColor="#757575" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:elevation="4dp"
-                android:radius="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_flag"
-                        app:tint="#757575"
-                        android:layout_gravity="center_vertical" />
-
-                    <TextView
-                        android:id="@+id/tvStore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:text="Cửa hàng: Chưa có thông tin"
-                        android:textSize="16sp"
-                        android:textColor="#424242" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
+            <!-- Phần lịch giao hàng - hiển thị cho cả hai trạng thái -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
