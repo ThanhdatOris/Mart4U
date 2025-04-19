@@ -9,7 +9,7 @@ import java.util.List;
 @Dao
 public interface PurchaseDao {
     @Insert
-    void insert(Purchase purchase);
+    long insert(Purchase purchase);
 
 
     @Query("SELECT * FROM purchases WHERE userId = :userId")
