@@ -1,27 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="8dp">
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="4dp"
+    card_view:cardBackgroundColor="@android:color/white">
 
-    <!-- ImageView hiển thị hình ảnh danh mục -->
-    <ImageView
-        android:id="@+id/imageViewCategory"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_flag"
-        android:scaleType="centerCrop" />
-
-    <!-- TextView hiển thị tên danh mục -->
-    <TextView
-        android:id="@+id/textViewCategoryName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Category Name"
-        android:textSize="14sp"
-        android:textAlignment="center"
-        android:layout_marginTop="4dp" />
-</LinearLayout>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <!-- ImageView hiển thị hình ảnh danh mục -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewCategory"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent" />
+
+        <!-- TextView hiển thị tên danh mục -->
+        <TextView
+            android:id="@+id/textViewCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category Name"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:layout_marginTop="8dp" />
+
+        <!-- TextView hiển thị mô tả danh mục -->
+        <TextView
+            android:id="@+id/textViewCategoryDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category Description"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:textAlignment="center"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

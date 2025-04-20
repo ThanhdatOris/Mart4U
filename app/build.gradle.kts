@@ -15,6 +15,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -46,4 +48,7 @@ dependencies {
 
     // Thêm jBCrypt đúng cú pháp Kotlin DSL
     implementation("org.mindrot:jbcrypt:0.4")
+
+    // CardView
+    implementation("androidx.cardview:cardview:1.0.0")
 }
