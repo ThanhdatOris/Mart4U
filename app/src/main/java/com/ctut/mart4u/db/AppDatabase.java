@@ -47,4 +47,11 @@ public abstract class AppDatabase extends RoomDatabase {
             database.execSQL("ALTER TABLE addresses ADD COLUMN deliveryMethod TEXT");
         }
     };
+
+    static final Migration MIGRATION_4_5 = new Migration(4, 5) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE products ADD COLUMN imagePath TEXT");
+        }
+    };
 }
