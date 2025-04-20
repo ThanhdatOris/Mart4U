@@ -33,7 +33,7 @@ public class DatabaseHelper {
         database = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, "mart4u_database")
                 .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4) // Thêm các migration
+                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_4_5) // Thêm các migration
                 .build();
 
         initializeSampleData();
@@ -111,10 +111,10 @@ public class DatabaseHelper {
 
         // Thêm dữ liệu mẫu cho bảng products nếu bảng rỗng
         if (database.productDao().getAllProducts().isEmpty()) {
-            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100));
-            database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100));
-            database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200));
-            database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50));
+            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, null));
+            database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, null));
+            database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200, null));
+            database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50, null));
         }
 
         // Thêm dữ liệu mẫu cho bảng delivery_schedule nếu bảng rỗng
