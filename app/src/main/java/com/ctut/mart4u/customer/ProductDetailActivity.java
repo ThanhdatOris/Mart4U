@@ -1,6 +1,9 @@
 package com.ctut.mart4u.customer;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,9 @@ import com.ctut.mart4u.model.Product;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class ProductDetailActivity extends BaseActivity {
     private DatabaseHelper databaseHelper; // Khai báo biến
 
@@ -38,7 +44,9 @@ public class ProductDetailActivity extends BaseActivity {
         databaseHelper = DatabaseHelper.getInstance(this); // Khởi tạo trong onCreate
 
         int productId = getIntent().getIntExtra("productId", -1);
+
         if (productId != -1) {
+
             Product product = databaseHelper.getProductDao().getProductById(productId);
             if (product == null) {
                 Toast.makeText(this, "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
@@ -57,12 +65,22 @@ public class ProductDetailActivity extends BaseActivity {
             TextView productDescription = findViewById(R.id.textViewProductDescription);
             TextView stockQuantity = findViewById(R.id.textViewStockQuantity);
             TextView categoryName = findViewById(R.id.textViewCategory);
+            ImageView productImage = findViewById(R.id.imageViewProductDetail);
 
             productName.setText(product.getName());
             productPrice.setText(product.getPrice() + "đ");
             productDescription.setText(product.getDescription());
             stockQuantity.setText("Số lượng: " + product.getStockQuantity());
             categoryName.setText(category.getName());
+            // Hiển thị ảnh sản phẩm
+            InputStream is = null;
+            try {
+                is = getAssets().open(product.getImagePath());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            productImage.setImageBitmap(bitmap);
 
             // Chức năng tăng/giảm số lượng
             Button btnIncreaseQuantity = findViewById(R.id.buttonIncreaseQuantity);
