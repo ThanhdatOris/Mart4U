@@ -1,69 +1,69 @@
 package com.ctut.mart4u;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.ctut.mart4u.customer.adapter.ProductAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.CartDetail;
 import com.ctut.mart4u.model.Product;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends BaseActivity {
     private DatabaseHelper databaseHelper;
     private int userId = 1; // Giả định userId là 1, có thể lấy từ đăng nhập sau này
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(getLayoutId());
-
-        // Khởi tạo DatabaseHelper
-        databaseHelper = DatabaseHelper.getInstance(this);
-
-        // Kiểm tra và thêm sản phẩm mẫu nếu chưa có
-        initializeProducts();
-
-        // Thêm sự kiện cho các sản phẩm
-        LinearLayout product1 = findViewById(R.id.product1);
-        LinearLayout product2 = findViewById(R.id.product2);
-        LinearLayout product3 = findViewById(R.id.product3);
-
-        product1.setOnClickListener(v -> addToCart(1)); // ID của Táo Envy Mỹ Túi 1kg
-        product2.setOnClickListener(v -> addToCart(2)); // ID của Táo Juliet Pháp 1kg
-        product3.setOnClickListener(v -> addToCart(3)); // ID của Táo
-
-    }
-
-    // Phương thức để kiểm tra và thêm sản phẩm mẫu
-    private void initializeProducts() {
-        // Kiểm tra xem sản phẩm đã tồn tại chưa, nếu chưa thì thêm
-        if (databaseHelper.getProductDao().getProductById(1) == null) {
-            databaseHelper.getProductDao().insert(new Product("Táo Envy Mỹ Túi 1kg", "Táo nhập khẩu từ Mỹ", 179000, 1, 50));
-        }
-        if (databaseHelper.getProductDao().getProductById(2) == null) {
-            databaseHelper.getProductDao().insert(new Product("Táo Juliet Pháp 1kg", "Táo nhập khẩu từ Pháp", 109000, 1, 50));
-        }
-        if (databaseHelper.getProductDao().getProductById(3) == null) {
-            databaseHelper.getProductDao().insert(new Product("Táo", "Táo không rõ nguồn gốc", 8000, 1, 100));
-        }
-    }
-
-    // Phương thức để thêm sản phẩm vào giỏ hàng
-    private void addToCart(int productId) {
-        // Kiểm tra sản phẩm có tồn tại không
-        Product product = databaseHelper.getProductDao().getProductById(productId);
-        if (product == null) {
-            Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Tạo CartDetail và thêm vào giỏ hàng
-        CartDetail cartDetail = new CartDetail(userId, productId, 1); // Số lượng mặc định là 1
-        databaseHelper.getCartDetailDao().insert(cartDetail);
-        Toast.makeText(this, product.getName() + " added to cart", Toast.LENGTH_SHORT).show();
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Change the color of menu icons
+        ImageView accountIcon = findViewById(R.id.ic_account);
+        ImageView locationIcon = findViewById(R.id.ic_location);
+        ImageView quickBuyIcon = findViewById(R.id.ic_cart);
+        ImageView orderIcon = findViewById(R.id.ic_order);
+
+        // Set color filter (e.g., red color)
+        int color = Color.parseColor("#FFFFFF"); // Replace with your desired color
+        accountIcon.setColorFilter(color);
+        locationIcon.setColorFilter(color);
+        quickBuyIcon.setColorFilter(color);
+        orderIcon.setColorFilter(color);
+        // Initialize the database helper
+        databaseHelper = DatabaseHelper.getInstance(this);
+
+        // Fetch products from the database
+        RecyclerView rvProducts = findViewById(R.id.rvProducts);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvProducts.setLayoutManager(layoutManager);
+
+        // Fetch products from the database and set the adapter
+        ProductAdapter adapter = new ProductAdapter(this, databaseHelper.getProductDao().getAllProducts());
+        rvProducts.setAdapter(adapter);
+
+        ImageView bannerImage = findViewById(R.id.bannerImage);
+        try {
+            InputStream inputStream = getAssets().open("images/banner.png"); // Đường dẫn tới ảnh trong thư mục assets
+            Drawable drawable = Drawable.createFromStream(inputStream, null);
+            bannerImage.setImageDrawable(drawable);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
