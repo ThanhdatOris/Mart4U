@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView tvSignup;
     private SharedPreferences sharedPreferences;
+
+    private ImageView logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +52,13 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
         }
-
+        logo = findViewById(R.id.logo);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvSignup = findViewById(R.id.tvSignup);
+
+        logo.setColorFilter(getResources().getColor(R.color.red), android.graphics.PorterDuff.Mode.SRC_IN);
 
         btnLogin.setOnClickListener(v -> {
             String username = etUsername.getText().toString().trim();
