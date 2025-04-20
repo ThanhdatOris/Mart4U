@@ -9,6 +9,7 @@ import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.Product;
 import com.ctut.mart4u.model.User;
 import com.ctut.mart4u.model.DeliverySchedule;;import org.mindrot.jbcrypt.BCrypt;
+import com.ctut.mart4u.R;
 
 public class DatabaseHelper {
     private static DatabaseHelper instance;
@@ -33,7 +34,7 @@ public class DatabaseHelper {
         database = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, "mart4u_database")
                 .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4) // Thêm các migration
+                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_5_6)
                 .build();
 
         initializeSampleData();
@@ -120,10 +121,10 @@ public class DatabaseHelper {
         }
         // Thêm dữ liệu mẫu cho bảng categories nếu bảng rỗng
         if (database.categoryDao().getAllCategories().isEmpty()) {
-            database.categoryDao().insert(new Category("Thực phẩm", "Các loại thực phẩm tươi sống và đóng gói"));
-            database.categoryDao().insert(new Category("Đồ uống", "Nước giải khát và đồ uống khác"));
-            database.categoryDao().insert(new Category("Đồ gia dụng", "Đồ dùng trong gia đình"));
-            database.categoryDao().insert(new Category("Đồ gia dụng123213", "Đồ dùng trong gia đình"));
+            database.categoryDao().insert(new Category("Trái cây", "Trái cây tươi sống nhập khẩu Nhật, Mỹ, Hàn", R.drawable.ic_category_fruit));
+            database.categoryDao().insert(new Category("Rau củ", "Rau củ các loại", R.drawable.ic_category_vegetable));
+            database.categoryDao().insert(new Category("Trứng", "Trứng công nghiệp", R.drawable.ic_category_egg));
+            database.categoryDao().insert(new Category("Thịt", "Các loại thịt tươi sống và đóng gói", R.drawable.ic_category_meat));
         }
 
         // Thêm dữ liệu mẫu cho bảng products nếu bảng rỗng
