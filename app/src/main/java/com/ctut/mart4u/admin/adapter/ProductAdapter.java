@@ -1,6 +1,7 @@
 package com.ctut.mart4u.admin.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.R;
+import com.ctut.mart4u.admin.ProductEditActivity;
 import com.ctut.mart4u.model.Product;
 
 import java.io.IOException;
@@ -53,6 +55,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Bitmap bitmap = BitmapFactory.decodeStream(is);
         holder.productImage.setImageBitmap(bitmap);
 
+        // sự kiện click vào edit
+        holder.btnEditProduct.setOnClickListener(v -> {
+
+            // mo productEidtActivity
+            Intent intent = new Intent(context, ProductEditActivity.class);
+            intent.putExtra("productId", product.getId());
+
+            context.startActivity(intent);
+        });
 
 
     }
