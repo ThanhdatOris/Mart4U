@@ -8,7 +8,9 @@ import com.ctut.mart4u.model.Address;
 import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.Product;
 import com.ctut.mart4u.model.User;
-import com.ctut.mart4u.model.DeliverySchedule;;
+import com.ctut.mart4u.model.DeliverySchedule;
+import org.mindrot.jbcrypt.BCrypt;
+import com.ctut.mart4u.R;
 
 public class DatabaseHelper {
     private static DatabaseHelper instance;
@@ -33,7 +35,7 @@ public class DatabaseHelper {
         database = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, "mart4u_database")
                 .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4) // Thêm các migration
+                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_4_5, AppDatabase.MIGRATION_5_6)
                 .build();
 
         initializeSampleData();
@@ -90,11 +92,28 @@ public class DatabaseHelper {
     // Phương thức để thêm dữ liệu mẫu cho các bảng
     private void initializeSampleData() {
         // Thêm dữ liệu mẫu cho bảng users nếu bảng rỗng
-        if (database.userDao().getAllCustomers().isEmpty()) {
-            database.userDao().insert(new User("customer1", "pass123", "customer1@example.com", "customer", "0345517311"));
-            database.userDao().insert(new User("sinoo", "123456", "anhkhoa@gmail.com", "customer", "0345517311"));
-
-            database.userDao().insert(new User("admin", "123456", "admin1@example.com", "admin", "0345517312"));
+        if (database.userDao().getAllUsers().isEmpty()) { // Sửa từ getAllCustomers() thành getAllUsers()
+            database.userDao().insert(new User(
+                    "customer",
+                    BCrypt.hashpw("123456", BCrypt.gensalt()),
+                    "customer@gmail.com",
+                    "customer",
+                    "0816396742"
+            ));
+            database.userDao().insert(new User(
+                    "sinoo",
+                    BCrypt.hashpw("123456", BCrypt.gensalt()),
+                    "anhkhoa@gmail.com",
+                    "customer",
+                    "0345517311"
+            ));
+            database.userDao().insert(new User(
+                    "admin",
+                    BCrypt.hashpw("123456", BCrypt.gensalt()),
+                    "admin1@example.com",
+                    "admin",
+                    "0345517311"
+            ));
         }
 
         if (database.addressDao().getAddressesByUser(1).isEmpty()) {
@@ -103,18 +122,18 @@ public class DatabaseHelper {
         }
         // Thêm dữ liệu mẫu cho bảng categories nếu bảng rỗng
         if (database.categoryDao().getAllCategories().isEmpty()) {
-            database.categoryDao().insert(new Category("Thực phẩm", "Các loại thực phẩm tươi sống và đóng gói"));
-            database.categoryDao().insert(new Category("Đồ uống", "Nước giải khát và đồ uống khác"));
-            database.categoryDao().insert(new Category("Đồ gia dụng", "Đồ dùng trong gia đình"));
-            database.categoryDao().insert(new Category("Đồ gia dụng123213", "Đồ dùng trong gia đình"));
+            database.categoryDao().insert(new Category("Trái cây", "Trái cây tươi sống nhập khẩu Nhật, Mỹ, Hàn", R.drawable.ic_category_fruit));
+            database.categoryDao().insert(new Category("Rau củ", "Rau củ các loại", R.drawable.ic_category_vegetable));
+            database.categoryDao().insert(new Category("Trứng", "Trứng công nghiệp", R.drawable.ic_category_egg));
+            database.categoryDao().insert(new Category("Thịt", "Các loại thịt tươi sống và đóng gói", R.drawable.ic_category_meat));
         }
 
         // Thêm dữ liệu mẫu cho bảng products nếu bảng rỗng
         if (database.productDao().getAllProducts().isEmpty()) {
-            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100));
-            database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100));
-            database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200));
-            database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50));
+            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, "images/product_gaongucoc1.jpg", false));
+            database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, "images/product_gaongucoc2.jpg", false));
+            database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200, "images/product_trungsua1.jpg", false));
+            database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50, "images/product_trungsua2.jpg", false));
         }
 
         // Thêm dữ liệu mẫu cho bảng delivery_schedule nếu bảng rỗng

@@ -5,37 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
-    <!-- Nội dung chính -->
-    <ScrollView
+    <!-- Tiêu đề -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Danh Mục"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- RecyclerView hiển thị danh mục -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategory"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Tiêu đề -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Danh Mục"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
-
-            <!-- RecyclerView hiển thị danh mục -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewCategory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/customer_item_category" />
-
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        tools:listitem="@layout/customer_item_category" />
 
 </LinearLayout>

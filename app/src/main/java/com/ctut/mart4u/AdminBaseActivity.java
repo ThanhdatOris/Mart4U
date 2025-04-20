@@ -1,6 +1,7 @@
 package com.ctut.mart4u;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -10,16 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ctut.mart4u.R;
 import com.ctut.mart4u.admin.CategoryActivity;
 import com.ctut.mart4u.admin.CustomerActivity;
 import com.ctut.mart4u.admin.ProductActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
+import com.ctut.mart4u.utils.UserSession;
 
 public abstract class AdminBaseActivity extends AppCompatActivity {
 
     protected abstract int getLayoutId();
     private DatabaseHelper databaseHelper;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
         setContentView(R.layout.admin_layout_nav_container);
 
         databaseHelper = DatabaseHelper.getInstance(this);
-
+        sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
 
 
         // Lấy container và thêm layout của activity con vào
@@ -46,6 +48,36 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
 //        ImageView icSettings = findViewById(R.id.ic_settings_admin);
 //        icSearch.setOnClickListener(v -> Toast.makeText(this, "Tính năng tìm kiếm đang phát triển", Toast.LENGTH_SHORT).show());
 //        icSettings.setOnClickListener(v -> Toast.makeText(this, "Tính năng cài đặt đang phát triển", Toast.LENGTH_SHORT).show());
+        // Gán sự kiện cho nút đăng xuất
+        setEventListenerLogout();
+    }
+
+    private void setEventListenerLogout() {
+        // Xử lý sự kiện nhấn nút Logout
+        LinearLayout llLogoutAdmin = findViewById(R.id.ll_logout_admin);
+        llLogoutAdmin.setOnClickListener(v -> {
+            // // Xóa thông tin đăng nhập trong SharedPreferences
+            // SharedPreferences sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
+            // SharedPreferences.Editor editor = sharedPreferences.edit();
+            // editor.clear(); // Xóa toàn bộ dữ liệu trong SharedPreferences
+            // editor.apply();
+        
+            // // Chuyển đến LoginActivity
+            // Intent intent = new Intent(this, LoginActivity.class);
+            // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            // startActivity(intent);
+            // finish();
+        
+            // Toast.makeText(this, "Đã đăng xuất", Toast.LENGTH_SHORT).show();
+            UserSession.getInstance().clearSession();
+            sharedPreferences.edit().clear().apply();
+            // updateUI();
+
+           Intent intent = new Intent(AdminBaseActivity.this, LoginActivity.class);
+           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+           startActivity(intent);
+           finishAffinity();
+        });
     }
 
     private void initNavigationBars() {
@@ -134,5 +166,27 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
                 imageView.setColorFilter(color);
             }
         }
+    }
+    // Lấy tên user hiện tại dựa trên seesssion đăng nhập
+    protected String getCurrentAdminName() {
+        // Lấy SharedPreferences với tên file "login_prefs"
+        SharedPreferences sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
+
+        // Lấy userId để kiểm tra trạng thái đăng nhập
+        int userId = sharedPreferences.getInt("userId", -1);
+        if (userId == -1) {
+            // Người dùng chưa đăng nhập
+            return null;
+        }
+
+        // Lấy role để kiểm tra xem có phải admin không
+        String role = sharedPreferences.getString("role", "");
+        if (!"admin".equals(role)) {
+            // Người dùng không phải admin
+            return null;
+        }
+
+        // Lấy username (tên admin)
+        return sharedPreferences.getString("username", null);
     }
 }

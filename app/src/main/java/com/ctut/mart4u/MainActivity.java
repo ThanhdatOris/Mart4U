@@ -20,7 +20,6 @@ import java.io.InputStream;
 
 public class MainActivity extends BaseActivity {
     private DatabaseHelper databaseHelper;
-    private int userId = 1; // Giả định userId là 1, có thể lấy từ đăng nhập sau này
 
     @Override
     protected int getLayoutId() {

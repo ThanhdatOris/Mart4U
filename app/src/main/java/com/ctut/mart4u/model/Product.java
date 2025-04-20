@@ -19,13 +19,19 @@ public class Product {
     private double price;
     private int categoryId;
     private int stockQuantity;
+    private String imagePath; // Thêm thuộc tính mới để lưu đường dẫn ảnh
 
-    public Product(String name, String description, double price, int categoryId, int stockQuantity) {
+    // is delete prop
+    private boolean isDeleted;
+
+    public Product(String name, String description, double price, int categoryId, int stockQuantity, String imagePath, boolean isDeleted) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.categoryId = categoryId;
         this.stockQuantity = stockQuantity;
+        this.imagePath = imagePath;
+        this.isDeleted = isDeleted;
     }
 
     // Getters and Setters
@@ -76,4 +82,19 @@ public class Product {
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
 }

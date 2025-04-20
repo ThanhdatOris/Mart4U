@@ -37,4 +37,8 @@ public interface UserDao {
 
     @Query("SELECT * FROM users WHERE phoneNumber = :phoneNumber LIMIT 1")
     User getUserByPhoneNumber(String phoneNumber);
+
+    // getAllUsers
+    @Query("SELECT * FROM users")
+    List<User> getAllUsers();
 }

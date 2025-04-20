@@ -5,19 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.customer.ShoppingListActivity;
 import com.ctut.mart4u.model.Category;
-
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
@@ -40,36 +34,26 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Category category = categoryList.get(position);
+
+        // Hiển thị tên danh mục
         holder.textViewCategoryName.setText(category.getName());
 
-        // set click vao nut button
-//        holder.btnViewProductCategory.setOnClickListener(v -> {
-////            Toast.makeText(context, "Bạn đã chọn: " + category.getName(), Toast.LENGTH_SHORT).show();
-//            // TODO: Sau này mở activity product_list ở đây
-//             Intent intent = new Intent(context, ShoppingListActivity.class);
-//             intent.putExtra("categoryId", category.getId());
-//             context.startActivity(intent);
-//        });
+        // Hiển thị mô tả danh mục
+        holder.textViewCategoryDescription.setText(category.getDescription());
 
-        // set click vao chu
-        holder.textViewCategoryName.setOnClickListener(v -> {
-            //            Toast.makeText(context, "Bạn đã chọn: " + category.getName(), Toast.LENGTH_SHORT).show();
-            // TODO: Sau này mở activity product_list ở đây
-             Intent intent = new Intent(context, ShoppingListActivity.class);
-             intent.putExtra("categoryId", category.getId());
-             context.startActivity(intent);
+        // Hiển thị hình ảnh từ imageResourceId
+        if (category.getImageResourceId() != 0) {
+            holder.imageViewCategory.setImageResource(category.getImageResourceId());
+        } else {
+            holder.imageViewCategory.setImageResource(R.drawable.ic_launcher_foreground); // Hình ảnh mặc định
+        }
+
+        // Gán sự kiện click cho toàn bộ item
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ShoppingListActivity.class);
+            intent.putExtra("categoryId", category.getId());
+            context.startActivity(intent);
         });
-        // set click vao hinh
-        holder.imageViewCategory.setOnClickListener(v -> {
-            //            Toast.makeText(context, "Bạn đã chọn: " + category.getName(), Toast.LENGTH_SHORT).show();
-            // TODO: Sau này mở activity product_list ở đây
-             Intent intent = new Intent(context, ShoppingListActivity.class);
-             intent.putExtra("categoryId", category.getId());
-             context.startActivity(intent);
-        });
-
-
-
     }
 
     @Override
@@ -77,16 +61,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categoryList.size();
     }
 
-    public static class CategoryViewHolder extends ViewHolder {
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder {
         TextView textViewCategoryName;
-        Button btnViewProductCategory;
+        TextView textViewCategoryDescription;
         ImageView imageViewCategory;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewCategoryName = itemView.findViewById(R.id.textViewCategoryName);
+            textViewCategoryDescription = itemView.findViewById(R.id.textViewCategoryDescription);
             imageViewCategory = itemView.findViewById(R.id.imageViewCategory);
-//            btnViewProductCategory = itemView.findViewById(R.id.btnViewProductCategory);
         }
     }
 }

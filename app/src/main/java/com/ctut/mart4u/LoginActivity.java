@@ -1,6 +1,5 @@
 package com.ctut.mart4u;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView tvSignup;
     private SharedPreferences sharedPreferences;
-
     private ImageView logo;
 
     @Override
@@ -43,15 +41,14 @@ public class LoginActivity extends AppCompatActivity {
                 UserSession.getInstance().setCurrentUser(user);
                 if ("customer".equals(user.getRole())) {
                     startActivity(new Intent(this, MainActivity.class));
+                } else if ("admin".equals(user.getRole())) {
+                    startActivity(new Intent(this, DashboardActivity.class));
                 }
-               else if ("admin".equals(user.getRole())) {
-                    // Chuyển đến DashboardActivity nếu là admin
-                   startActivity(new Intent(this, DashboardActivity.class));
-               }
                 finish();
                 return;
             }
         }
+
         logo = findViewById(R.id.logo);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
@@ -69,9 +66,10 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            User user = databaseHelper.getUserDao().login(username, password);
-            if (user != null) {
-                // Lưu vào SharedPreferences
+            // Lấy user từ database dựa trên username
+            User user = databaseHelper.getUserDao().getUserByUsername(username);
+            if (user != null && BCrypt.checkpw(password, user.getPassword())) {
+                // Mật khẩu khớp, tiến hành đăng nhập
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("userId", user.getId());
                 editor.putString("username", user.getUsername());
@@ -83,8 +81,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if ("customer".equals(user.getRole())) {
                     startActivity(new Intent(this, MainActivity.class));
-                }
-                else if ("admin".equals(user.getRole())) {
+                } else if ("admin".equals(user.getRole())) {
                     startActivity(new Intent(this, DashboardActivity.class));
                 }
                 finish();

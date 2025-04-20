@@ -9,10 +9,12 @@ public class Category {
     private int id;
     private String name;
     private String description;
+    private int imageResourceId; // Này lưu kiểu này cũng dễ hơn
 
-    public Category(String name, String description) {
+    public Category(String name, String description, int imageResourceId) {
         this.name = name;
         this.description = description;
+        this.imageResourceId = imageResourceId;
     }
 
     // Getters and Setters
@@ -38,5 +40,13 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getImageResourceId() {
+        return imageResourceId;
+    }
+
+    public void setImageResourceId(int imageResourceId) {
+        this.imageResourceId = imageResourceId;
     }
 }

@@ -1,11 +1,9 @@
 package com.ctut.mart4u.customer;
 
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.customer.adapter.CategoryAdapter;
@@ -28,20 +26,18 @@ public class CategoryActivity extends BaseActivity {
         // Khởi tạo EdgeToEdge
         EdgeToEdge.enable(this);
 
-        // Thêm ở trong phương thức onCreate()
+        // Khởi tạo RecyclerView
         RecyclerView recyclerViewCategory = findViewById(R.id.recyclerViewCategory);
-        recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this));
 
-//        recyclerViewCategory.setLayoutManager(new GridLayoutManager(this, 3));
-// Lấy dữ liệu từ cơ sở dữ liệu
+        // Sử dụng GridLayoutManager (dạng lưới với 3 cột)
+        recyclerViewCategory.setLayoutManager(new GridLayoutManager(this, 2));
+
+        // Lấy dữ liệu từ cơ sở dữ liệu
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
         List<Category> sampleCategoryList = databaseHelper.getCategoryDao().getAllCategories();
 
-// Set adapter
+        // Set adapter
         CategoryAdapter adapter = new CategoryAdapter(this, sampleCategoryList);
         recyclerViewCategory.setAdapter(adapter);
-
     }
-
-
 }
