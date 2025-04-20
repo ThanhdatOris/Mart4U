@@ -22,13 +22,28 @@
             android:gravity="center"
             android:visibility="gone">
 
+            <ImageView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/ic_warning"
+                android:contentDescription="@string/app_name"
+                android:layout_marginBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bạn chưa đăng nhập"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đăng nhập"
                 android:padding="12dp"
-                android:backgroundTint="#0288D1"
+                android:backgroundTint="@color/red"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 

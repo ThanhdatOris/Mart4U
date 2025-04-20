@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText etUsername, etPassword, etEmail, etPhoneNumber;
     private Button btnSignup;
     private TextView tvLogin;
+    private ImageView logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,9 @@ public class SignupActivity extends AppCompatActivity {
         btnSignup = findViewById(R.id.btnSignup);
         tvLogin = findViewById(R.id.tvLogin);
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
+        logo = findViewById(R.id.logo);
+
+        logo.setColorFilter(getResources().getColor(R.color.red), android.graphics.PorterDuff.Mode.SRC_IN);
 
         btnSignup.setOnClickListener(v -> {
             String username = etUsername.getText().toString().trim();
