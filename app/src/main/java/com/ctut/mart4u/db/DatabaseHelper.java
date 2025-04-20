@@ -8,7 +8,7 @@ import com.ctut.mart4u.model.Address;
 import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.Product;
 import com.ctut.mart4u.model.User;
-import com.ctut.mart4u.model.DeliverySchedule;;
+import com.ctut.mart4u.model.DeliverySchedule;;import org.mindrot.jbcrypt.BCrypt;
 
 public class DatabaseHelper {
     private static DatabaseHelper instance;
@@ -90,11 +90,28 @@ public class DatabaseHelper {
     // Phương thức để thêm dữ liệu mẫu cho các bảng
     private void initializeSampleData() {
         // Thêm dữ liệu mẫu cho bảng users nếu bảng rỗng
-        if (database.userDao().getAllCustomers().isEmpty()) {
-            database.userDao().insert(new User("customer1", "pass123", "customer1@example.com", "customer", "0345517311"));
-            database.userDao().insert(new User("sinoo", "123456", "anhkhoa@gmail.com", "customer", "0345517311"));
-
-            database.userDao().insert(new User("admin", "123456", "admin1@example.com", "admin", "0345517312"));
+        if (database.userDao().getAllUsers().isEmpty()) { // Sửa từ getAllCustomers() thành getAllUsers()
+            database.userDao().insert(new User(
+                    "customer",
+                    BCrypt.hashpw("123456", BCrypt.gensalt()),
+                    "customer@gmail.com",
+                    "customer",
+                    "0816396742"
+            ));
+            database.userDao().insert(new User(
+                    "sinoo",
+                    BCrypt.hashpw("123456", BCrypt.gensalt()),
+                    "anhkhoa@gmail.com",
+                    "customer",
+                    "0345517311"
+            ));
+            database.userDao().insert(new User(
+                    "admin",
+                    BCrypt.hashpw("123456", BCrypt.gensalt()),
+                    "admin1@example.com",
+                    "admin",
+                    "0345517311"
+            ));
         }
 
         if (database.addressDao().getAddressesByUser(1).isEmpty()) {
