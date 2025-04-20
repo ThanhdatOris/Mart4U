@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Trạng thái khi nhấn -->
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#D00034" /> <!-- Màu nền khi nhấn (một tông đỏ tối hơn) -->
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <!-- Trạng thái mặc định -->
+    <item>
+        <shape>
+            <solid android:color="@android:color/transparent" /> <!-- Màu nền mặc định là trong suốt -->
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</selector>

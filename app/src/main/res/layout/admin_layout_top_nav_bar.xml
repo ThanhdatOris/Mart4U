@@ -27,20 +27,36 @@
         android:textSize="18sp"
         android:layout_marginStart="8dp" />
 
-    <!-- Biểu tượng tìm kiếm -->
-<!--    <ImageView-->
-<!--        android:id="@+id/ic_search_admin"-->
-<!--        android:layout_width="32dp"-->
-<!--        android:layout_height="32dp"-->
-<!--        android:src="@drawable/ic_search"-->
-<!--        app:tint="#FFFFFF"-->
-<!--        android:layout_marginEnd="16dp" />-->
+    <!-- Nút đăng xuất -->
+    <LinearLayout
+        android:id="@+id/ll_logout_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@drawable/logout_button_background"
+        android:gravity="center_vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginStart="8dp">
 
-    <!-- Biểu tượng cài đặt -->
-<!--    <ImageView-->
-<!--        android:id="@+id/ic_settings_admin"-->
-<!--        android:layout_width="32dp"-->
-<!--        android:layout_height="32dp"-->
-<!--        android:src="@drawable/ic_setting"-->
-<!--        app:tint="#FFFFFF" />-->
+        <!-- Icon đăng xuất -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_logout"
+            app:tint="#FFFFFF"
+            android:layout_gravity="center_vertical" />
+
+        <!-- Văn bản "Đăng Xuất" -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đăng Xuất"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="4dp"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
 </LinearLayout>
