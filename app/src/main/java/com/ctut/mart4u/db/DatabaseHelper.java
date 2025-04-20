@@ -106,15 +106,14 @@ public class DatabaseHelper {
             database.categoryDao().insert(new Category("Thực phẩm", "Các loại thực phẩm tươi sống và đóng gói"));
             database.categoryDao().insert(new Category("Đồ uống", "Nước giải khát và đồ uống khác"));
             database.categoryDao().insert(new Category("Đồ gia dụng", "Đồ dùng trong gia đình"));
-            database.categoryDao().insert(new Category("Đồ gia dụng123213", "Đồ dùng trong gia đình"));
         }
 
         // Thêm dữ liệu mẫu cho bảng products nếu bảng rỗng
         if (database.productDao().getAllProducts().isEmpty()) {
-            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, null));
-            database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, null));
-            database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200, null));
-            database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50, null));
+            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, "images/product_gaongucoc1.jpg"));
+            database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, "images/product_gaongucoc2.jpg"));
+            database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200, "images/product_trungsua1.jpg"));
+            database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50, "images/product_trungsua2.jpg"));
         }
 
         // Thêm dữ liệu mẫu cho bảng delivery_schedule nếu bảng rỗng
