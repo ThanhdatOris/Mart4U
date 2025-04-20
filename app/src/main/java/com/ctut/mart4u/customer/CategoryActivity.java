@@ -30,7 +30,7 @@ public class CategoryActivity extends BaseActivity {
         RecyclerView recyclerViewCategory = findViewById(R.id.recyclerViewCategory);
 
         // Sử dụng GridLayoutManager (dạng lưới với 3 cột)
-        recyclerViewCategory.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerViewCategory.setLayoutManager(new GridLayoutManager(this, 2));
 
         // Lấy dữ liệu từ cơ sở dữ liệu
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);

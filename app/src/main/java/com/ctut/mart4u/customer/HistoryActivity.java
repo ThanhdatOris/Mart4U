@@ -27,7 +27,7 @@ public class HistoryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         //=======================id nguoi dung mac dinh la 1
-        int userId = 1;
+        int userId = getCurrentUserId();
         //Lấy danh sách đơn hàng từ cơ sở dữ liệu
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
         //Lấy danh sách đơn hàng từ cơ sở dữ liệu
@@ -45,4 +45,8 @@ public class HistoryActivity extends BaseActivity {
 
 
     }
+    // lấy người dùng đăng nhập\
+    // protected int getCurrentUserId() {
+    //     return getSharedPreferences("login_prefs", MODE_PRIVATE).getInt("userId", -1);
+    // }
 }
