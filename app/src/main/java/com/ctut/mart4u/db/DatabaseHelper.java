@@ -35,8 +35,7 @@ public class DatabaseHelper {
         database = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, "mart4u_database")
                 .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_4_5) // Thêm các migration
-                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_5_6)
+                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_4_5, AppDatabase.MIGRATION_5_6)
                 .build();
 
         initializeSampleData();
