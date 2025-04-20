@@ -11,7 +11,7 @@
         android:id="@+id/imageViewProduct"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/img_product_redbull"
+        android:src="@drawable/ic_quick_buy"
         android:scaleType="centerCrop" />
 
     <!-- Thông tin sản phẩm -->
