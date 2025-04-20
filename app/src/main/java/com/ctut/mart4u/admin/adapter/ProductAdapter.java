@@ -8,15 +8,19 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.R;
+import com.ctut.mart4u.admin.ProductActivity;
 import com.ctut.mart4u.admin.ProductEditActivity;
+import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.Product;
 
 import java.io.IOException;
@@ -61,9 +65,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             // mo productEidtActivity
             Intent intent = new Intent(context, ProductEditActivity.class);
             intent.putExtra("productId", product.getId());
-
             context.startActivity(intent);
         });
+
+        //su kien xoa
+        holder.btnDeleteProduct.setOnClickListener(v ->{
+            DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+            product.setDeleted(true);
+            databaseHelper.getProductDao().update(product);
+            productList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, productList.size());
+            Toast.makeText(context, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+        });
+
+//
 
 
     }
@@ -79,6 +95,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         TextView productPrice;
         ImageButton btnEditProduct;
         ImageButton btnDeleteProduct;
+//        ImageView searchIcon;
+//        EditText searchEditText;
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             productImage = itemView.findViewById(R.id.productImage);
@@ -86,6 +104,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productPrice = itemView.findViewById(R.id.productPrice);
             btnEditProduct = itemView.findViewById(R.id.btnEditProduct);
             btnDeleteProduct = itemView.findViewById(R.id.btnDeleteProduct);
+
+//            searchIcon = itemView.findViewById(R.id.searchIcon);
+//            searchEditText = itemView.findViewById(R.id.searchEditText);
 
         }
     }

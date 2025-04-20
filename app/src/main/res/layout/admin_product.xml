@@ -60,6 +60,7 @@
         <!-- EditText tìm kiếm -->
         <EditText
             android:id="@+id/searchEditText"
+            android:inputType="text|textMultiLine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
