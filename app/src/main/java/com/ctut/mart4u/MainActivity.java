@@ -19,6 +19,7 @@ import com.ctut.mart4u.customer.AccountActivity;
 import com.ctut.mart4u.customer.AdressActivity;
 import com.ctut.mart4u.customer.CartActivity;
 import com.ctut.mart4u.customer.CategoryActivity;
+import com.ctut.mart4u.customer.DeliveryActivity;
 import com.ctut.mart4u.customer.HistoryActivity;
 import com.ctut.mart4u.customer.adapter.ProductAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
@@ -53,7 +54,7 @@ public class MainActivity extends BaseActivity {
 
         // Điều hướng đến trang chọn địa chỉ
         locationIcon.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AdressActivity.class);
+            Intent intent = new Intent(MainActivity.this, DeliveryActivity.class);
             startActivity(intent);
         });
 
