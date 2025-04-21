@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F5F7FA">
+
+    <!-- Tiêu đề trang -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chỉnh sửa danh mục"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#1A1A1A"
+        android:letterSpacing="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/categoryInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView">
+
+        <!-- Nhập tên danh mục -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:hintTextColor="#6B7280"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#D1D5DB"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCategoryName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tên danh mục"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:textColor="#1A1A1A"
+                android:background="@null"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Nhập mô tả danh mục -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:hintTextColor="#6B7280"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#D1D5DB"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCategoryDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mô tả danh mục"
+                android:textSize="16sp"
+                android:maxLines="4"
+                android:padding="12dp"
+                android:textColor="#1A1A1A"
+                android:background="@null"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Chọn hình ảnh danh mục -->
+        <Button
+            android:id="@+id/btnSelectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Chọn hình ảnh"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:paddingHorizontal="24dp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#3B82F6"
+            android:elevation="4dp"
+            android:layout_marginTop="12dp"
+            app:cornerRadius="12dp"/>
+    </LinearLayout>
+
+    <!-- Nhóm nút thao tác -->
+    <LinearLayout
+        android:id="@+id/actionButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Nút Lưu danh mục -->
+        <Button
+            android:id="@+id/btnSaveCategory"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Lưu"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#10B981"
+            android:textColor="#FFFFFF"
+            android:elevation="4dp"
+            app:cornerRadius="12dp"/>
+
+        <!-- Nút Xóa danh mục -->
+        <Button
+            android:id="@+id/btnDeleteCategory"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Xóa"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#F87171"
+            android:textColor="#FFFFFF"
+            android:elevation="4dp"
+            app:cornerRadius="12dp"/>
+
+        <!-- Nút Hủy -->
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Hủy"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#EF4444"
+            android:textColor="#FFFFFF"
+            android:elevation="4dp"
+            app:cornerRadius="12dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

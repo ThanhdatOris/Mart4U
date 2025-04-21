@@ -29,4 +29,8 @@ public interface ProductDao {
     Product getProductById(int productId);
     @Query("UPDATE products SET stockQuantity = stockQuantity - :quantity WHERE id = :productId AND stockQuantity >= :quantity")
     int reduceProductQuantity(int productId, int quantity);
+
+    // Phương thức kiểm tra xem có sản phẩm nào liên kết với categoryId không
+    @Query("SELECT COUNT(*) FROM products WHERE categoryId = :categoryId")
+    int countProductsByCategoryId(int categoryId);
 }

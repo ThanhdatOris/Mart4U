@@ -1,85 +1,98 @@
 package com.ctut.mart4u.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.AdminBaseActivity;
-import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.admin.adapter.CategoryAdapter;
-import com.ctut.mart4u.db.CategoryDao;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.Category;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryActivity extends AdminBaseActivity {
 
-    private RecyclerView recyclerViewCategory;
-    private CategoryAdapter categoryAdapter;
-    private List<Category> categoryList;
-    private CategoryDao categoryDao;
-
-    private boolean isSampleData = true; // Chuyển thành false để dùng dữ liệu thật
-
     @Override
     protected int getLayoutId() {
-        return R.layout.admin_category; // Trả về layout nội dung của CategoryActivity
+        return R.layout.admin_category;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_category);
+        EdgeToEdge.enable(this);
 
-        // Khởi tạo RecyclerView
-        recyclerViewCategory = findViewById(R.id.recyclerViewCategory); // Correct ID
+        RecyclerView recyclerViewCategory = findViewById(R.id.categoryRecyclerView);
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this));
 
-        // Khởi tạo DatabaseHelper và lấy CategoryDao
+        // Lấy thông tin danh mục từ database
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
-//        categoryDao = databaseHelper.getCategoryDao();
+        List<Category> categoryList = databaseHelper.getCategoryDao().getAllCategories();
 
-        // Khởi tạo danh sách và adapter
-        categoryList = new ArrayList<>();
-        categoryAdapter = new CategoryAdapter(categoryList, databaseHelper);
-        recyclerViewCategory.setAdapter(categoryAdapter);
+        Toast.makeText(this, "Số lượng danh mục: " + categoryList.size(), Toast.LENGTH_SHORT).show();
 
-        // Load categories (sample or real)
-        // loadCategories();
+        // Khởi tạo adapter ban đầu
+        CategoryAdapter adapter = new CategoryAdapter(this, categoryList);
+        recyclerViewCategory.setAdapter(adapter);
+
+        // Xử lý sự kiện thêm danh mục
+        Button btnAddCategory = findViewById(R.id.btnAddCategory);
+        btnAddCategory.setOnClickListener(v -> {
+            startActivity(new Intent(this, CategoryEditActivity.class));
+        });
+
+        // Xử lý tìm kiếm
+        EditText searchEditText = findViewById(R.id.searchEditText);
+        ImageView searchIcon = findViewById(R.id.searchIcon);
+
+        // Tìm kiếm khi nhấn Enter
+        searchEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch(searchEditText, databaseHelper, recyclerViewCategory, categoryList);
+                return true;
+            }
+            return false;
+        });
+
+        // Tìm kiếm khi nhấn icon
+        searchIcon.setOnClickListener(v -> performSearch(searchEditText, databaseHelper, recyclerViewCategory, categoryList));
     }
 
-//    private void loadCategories() {
-//        if (isSampleData) {
-//            // Dữ liệu mẫu để test
-//            categoryList.clear();
-//            categoryList.add(new Category("Thịt"));
-//            categoryList.add(new Category("Rau củ"));
-//            categoryList.add(new Category("Trái cây"));
-//        } else {
-//            // Dữ liệu thực từ database
-//            categoryList.clear();
-//            categoryList.addAll(categoryDao.getAllCategories());
-//        }
-//
-//        categoryAdapter.notifyDataSetChanged();
-//    }
-//    private void loadCategories() {
-//        if (isSampleData) {
-//            // Dữ liệu mẫu để test
-//            categoryList.clear();
-//            categoryList.add(new Category("Thịt"));
-//            categoryList.add(new Category("Rau củ"));
-//            categoryList.add(new Category("Trái cây"));
-//        } else {
-//            // Dữ liệu thực từ database
-//            categoryList.clear();
-//            categoryList.addAll(categoryDao.getAllCategories());
-//        }
-//        categoryList.addAll(categoryDao.getAllCategories());
-//        categoryAdapter.notifyDataSetChanged();
-//    }
+    private void performSearch(EditText searchEditText, DatabaseHelper databaseHelper, RecyclerView recyclerView, List<Category> categoryList) {
+        String query = searchEditText.getText().toString().trim();
+        if (query.isEmpty()) {
+            CategoryAdapter adapter = new CategoryAdapter(this, categoryList);
+            recyclerView.setAdapter(adapter);
+            Toast.makeText(this, "Vui lòng nhập tên danh mục", Toast.LENGTH_SHORT).show();
+        } else {
+            List<Category> searchResults = databaseHelper.getCategoryDao().searchCategories(query);
+            if (searchResults.isEmpty()) {
+                searchResults = databaseHelper.getCategoryDao().getAllCategories();
+                Toast.makeText(this, "Không tìm thấy danh mục", Toast.LENGTH_SHORT).show();
+            }
+            CategoryAdapter adapter = new CategoryAdapter(this, searchResults);
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Cập nhật danh sách khi quay lại
+        RecyclerView recyclerViewCategory = findViewById(R.id.categoryRecyclerView);
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
+        List<Category> updatedCategoryList = databaseHelper.getCategoryDao().getAllCategories();
+        CategoryAdapter adapter = new CategoryAdapter(this, updatedCategoryList);
+        recyclerViewCategory.setAdapter(adapter);
+    }
 }

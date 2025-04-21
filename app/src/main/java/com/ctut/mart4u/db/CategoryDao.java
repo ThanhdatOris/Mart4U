@@ -34,5 +34,8 @@ public interface CategoryDao {
     @Query("SELECT COUNT(*) FROM categories")
     int getCategoryCount();
 
+    // searchCategories(query);
+    @Query("SELECT * FROM categories WHERE name LIKE '%' || :query || '%'")
+    List<Category> searchCategories(String query);
 
 }

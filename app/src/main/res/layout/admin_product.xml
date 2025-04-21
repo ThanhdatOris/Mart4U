@@ -60,7 +60,7 @@
         <!-- EditText tìm kiếm -->
         <EditText
             android:id="@+id/searchEditText"
-            android:inputType="text|textMultiLine"
+            android:inputType="text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -69,6 +69,7 @@
             android:background="@null"
             android:padding="10dp"
             android:textColor="#1A1A1A"
+            android:imeOptions="actionDone"
             android:textColorHint="#6B7280" />
 
         <!-- Icon tìm kiếm -->
