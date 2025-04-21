@@ -82,7 +82,7 @@
             android:textColor="@android:color/white" />
     </LinearLayout>
 
-    <!-- Tab Mua Nhanh -->
+    <!-- Tab Lịch Sử -->
     <LinearLayout
         android:id="@+id/tab_quick_buy"
         android:layout_width="0dp"

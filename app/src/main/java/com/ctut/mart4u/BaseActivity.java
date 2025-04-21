@@ -125,6 +125,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             highlightTab(R.id.tab_lotte_mart);
         } else if (this.getClass().equals(AccountActivity.class)) {
             highlightTab(R.id.tab_account);
+        } else if (this.getClass().equals(HistoryActivity.class)) {
+            highlightTab(R.id.tab_quick_buy);
         }
     }
 
