@@ -43,6 +43,8 @@
             android:id="@+id/etSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             android:layout_weight="1"
             android:hint="Tìm kiếm sản phẩm"
             android:background="@null"
