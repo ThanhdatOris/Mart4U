@@ -4,7 +4,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
+import com.ctut.mart4u.R;
 import com.ctut.mart4u.model.User;
 import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.Product;
@@ -58,6 +58,38 @@ public abstract class AppDatabase extends RoomDatabase {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE categories ADD COLUMN imageResourceId INTEGER NOT NULL DEFAULT 0");
+        }
+    };
+    static final Migration MIGRATION_6_7 = new Migration(6, 7) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            // 1. Tạo bảng tạm thời với cột imagePath mới
+            database.execSQL(
+                    "CREATE TABLE categories_temp (" +
+                            "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                            "name TEXT NOT NULL, " +
+                            "description TEXT NOT NULL, " +
+                            "imagePath TEXT)"
+            );
+
+            // 2. Chuyển dữ liệu từ bảng cũ sang bảng tạm, ánh xạ imageResourceId thành Uri
+            database.execSQL(
+                    "INSERT INTO categories_temp (id, name, description, imagePath) " +
+                            "SELECT id, name, description, " +
+                            "CASE " +
+                            "WHEN imageResourceId = " + R.drawable.ic_category_fruit + " THEN 'android.resource://com.ctut.mart4u/" + R.drawable.ic_category_fruit + "' " +
+                            "WHEN imageResourceId = " + R.drawable.ic_category_vegetable + " THEN 'android.resource://com.ctut.mart4u/" + R.drawable.ic_category_vegetable + "' " +
+                            "WHEN imageResourceId = " + R.drawable.ic_category_egg + " THEN 'android.resource://com.ctut.mart4u/" + R.drawable.ic_category_egg + "' " +
+                            "WHEN imageResourceId = " + R.drawable.ic_category_meat + " THEN 'android.resource://com.ctut.mart4u/" + R.drawable.ic_category_meat + "' " +
+                            "ELSE NULL END " +
+                            "FROM categories"
+            );
+
+            // 3. Xóa bảng cũ
+            database.execSQL("DROP TABLE categories");
+
+            // 4. Đổi tên bảng tạm thành bảng chính
+            database.execSQL("ALTER TABLE categories_temp RENAME TO categories");
         }
     };
 };

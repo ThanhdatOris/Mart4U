@@ -1,6 +1,7 @@
 package com.ctut.mart4u.db;
 
 import android.content.Context;
+import android.net.Uri;
 
 import androidx.room.Room;
 
@@ -35,7 +36,7 @@ public class DatabaseHelper {
         database = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, "mart4u_database")
                 .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_4_5, AppDatabase.MIGRATION_5_6)
+                .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4, AppDatabase.MIGRATION_4_5, AppDatabase.MIGRATION_5_6, AppDatabase.MIGRATION_6_7)
                 .build();
 
         initializeSampleData();
@@ -122,10 +123,26 @@ public class DatabaseHelper {
         }
         // Thêm dữ liệu mẫu cho bảng categories nếu bảng rỗng
         if (database.categoryDao().getAllCategories().isEmpty()) {
-            database.categoryDao().insert(new Category("Trái cây", "Trái cây tươi sống nhập khẩu Nhật, Mỹ, Hàn", R.drawable.ic_category_fruit));
-            database.categoryDao().insert(new Category("Rau củ", "Rau củ các loại", R.drawable.ic_category_vegetable));
-            database.categoryDao().insert(new Category("Trứng", "Trứng công nghiệp", R.drawable.ic_category_egg));
-            database.categoryDao().insert(new Category("Thịt", "Các loại thịt tươi sống và đóng gói", R.drawable.ic_category_meat));
+            database.categoryDao().insert(new Category(
+                    "Trái cây",
+                    "Trái cây tươi sống nhập khẩu Nhật, Mỹ, Hàn",
+                    Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_fruit).toString()
+            ));
+            database.categoryDao().insert(new Category(
+                    "Rau củ",
+                    "Rau củ các loại",
+                    Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_vegetable).toString()
+            ));
+            database.categoryDao().insert(new Category(
+                    "Trứng",
+                    "Trứng công nghiệp",
+                    Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_egg).toString()
+            ));
+            database.categoryDao().insert(new Category(
+                    "Thịt",
+                    "Các loại thịt tươi sống và đóng gói",
+                    Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_meat).toString()
+            ));
         }
 
         // Thêm dữ liệu mẫu cho bảng products nếu bảng rỗng

@@ -2,6 +2,7 @@ package com.ctut.mart4u.admin.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,9 +43,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category category = categoryList.get(position);
         holder.categoryName.setText(category.getName());
 
-        // Hiển thị hình ảnh nếu có
-        if (category.getImageResourceId() != 0) {
-            holder.categoryImage.setImageResource(category.getImageResourceId());
+        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
+        if (category.getImagePath() != null && !category.getImagePath().isEmpty()) {
+            Uri imageUri = Uri.parse(category.getImagePath());
+            holder.categoryImage.setImageURI(imageUri);
         } else {
             holder.categoryImage.setImageResource(R.drawable.ic_flag);
         }
@@ -59,14 +61,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         // Sự kiện xóa
         holder.btnDeleteCategory.setOnClickListener(v -> {
             DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
-            // Kiểm tra xem danh mục có sản phẩm liên kết không
             int productCount = databaseHelper.getProductDao().countProductsByCategoryId(category.getId());
             if (productCount > 0) {
                 Toast.makeText(context, "Không thể xóa danh mục vì có " + productCount + " sản phẩm liên kết.", Toast.LENGTH_LONG).show();
                 return;
             }
 
-            // Nếu không có sản phẩm liên kết, tiến hành xóa
             databaseHelper.getCategoryDao().delete(category);
             categoryList.remove(position);
             notifyItemRemoved(position);
