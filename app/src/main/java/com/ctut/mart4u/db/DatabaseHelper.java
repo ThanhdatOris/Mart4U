@@ -8,6 +8,8 @@ import androidx.room.Room;
 import com.ctut.mart4u.model.Address;
 import com.ctut.mart4u.model.Category;
 import com.ctut.mart4u.model.Product;
+import com.ctut.mart4u.model.Purchase;
+import com.ctut.mart4u.model.PurchaseDetail;
 import com.ctut.mart4u.model.User;
 import com.ctut.mart4u.model.DeliverySchedule;
 import org.mindrot.jbcrypt.BCrypt;
@@ -177,36 +179,36 @@ public class DatabaseHelper {
 //            database.cartDetailDao().insert(new CartDetail(5, 9, 3)); // User 5, Product 9 (Nước cam), 3 units
 //        }
 //        // Thêm dữ liệu mẫu cho bảng purchases nếu bảng rỗng
-//        if (database.purchaseDao().getAllPurchases().isEmpty()) {
-//            database.purchaseDao().insert(new Purchase(1, "2025-04-20", 85000, "completed"));  // User 1
-//            database.purchaseDao().insert(new Purchase(1, "2025-04-21", 30000, "pending"));    // User 1
-//            database.purchaseDao().insert(new Purchase(2, "2025-04-20", 90000, "completed"));  // User 2
-//            database.purchaseDao().insert(new Purchase(3, "2025-04-22", 150000, "completed")); // User 3
-//            database.purchaseDao().insert(new Purchase(4, "2025-04-22", 195000, "pending"));   // User 4
-//            database.purchaseDao().insert(new Purchase(5, "2025-04-23", 305000, "completed")); // User 5
-//        }
+        if (database.purchaseDao().getAllPurchases().isEmpty()) {
+            database.purchaseDao().insert(new Purchase(1, "2025-04-20", 85000, "completed"));  // User 1
+            database.purchaseDao().insert(new Purchase(1, "2025-04-21", 30000, "pending"));    // User 1
+            database.purchaseDao().insert(new Purchase(2, "2025-04-20", 90000, "completed"));  // User 2
+            database.purchaseDao().insert(new Purchase(3, "2025-04-22", 150000, "completed")); // User 3
+            database.purchaseDao().insert(new Purchase(4, "2025-04-22", 195000, "pending"));   // User 4
+            database.purchaseDao().insert(new Purchase(5, "2025-04-23", 305000, "completed")); // User 5
+        }
 //        // Thêm dữ liệu mẫu cho bảng purchase_details nếu bảng rỗng
-//        if (database.purchaseDetailDao().getPurchaseDetailsByPurchase(1).isEmpty() &&
-//                database.purchaseDetailDao().getPurchaseDetailsByPurchase(2).isEmpty() &&
-//                database.purchaseDetailDao().getPurchaseDetailsByPurchase(3).isEmpty() &&
-//                database.purchaseDetailDao().getPurchaseDetailsByPurchase(4).isEmpty() &&
-//                database.purchaseDetailDao().getPurchaseDetailsByPurchase(5).isEmpty() ) {
-//            // Purchase 1 (User 1)
-//            database.purchaseDetailDao().insert(new PurchaseDetail(1, 1, 2, 30000)); // Product 1 (Gạo ST25), 2 units
-//            database.purchaseDetailDao().insert(new PurchaseDetail(1, 3, 1, 25000)); // Product 3 (Sữa Vinamilk), 1 unit
-//            // Purchase 2 (User 1)
-//            database.purchaseDetailDao().insert(new PurchaseDetail(2, 1, 1, 30000)); // Product 1 (Gạo ST25), 1 unit
-//            // Purchase 3 (User 2)
-//            database.purchaseDetailDao().insert(new PurchaseDetail(3, 2, 3, 30000)); // Product 2 (Gạo ABC), 3 units
-//            // Purchase 4 (User 3)
-//            database.purchaseDetailDao().insert(new PurchaseDetail(4, 4, 1, 150000)); // Product 4 (Nồi inox), 1 unit
-//            // Purchase 5 (User 4)
-//            database.purchaseDetailDao().insert(new PurchaseDetail(5, 5, 2, 60000)); // Product 5 (Táo Mỹ), 2 units
-//            database.purchaseDetailDao().insert(new PurchaseDetail(5, 7, 5, 3000));  // Product 7 (Trứng gà), 5 units
-//            // Purchase 6 (User 5)
-//            database.purchaseDetailDao().insert(new PurchaseDetail(6, 8, 1, 200000)); // Product 8 (Thịt bò), 1 unit
-//            database.purchaseDetailDao().insert(new PurchaseDetail(6, 9, 3, 35000));  // Product 9 (Nước cam), 3 units
-//            database.purchaseDetailDao().insert(new PurchaseDetail(6, 10, 1, 120000)); // Product 10 (Chảo chống dính), 1 unit
-//        }
+        if (database.purchaseDetailDao().getPurchaseDetailsByPurchase(1).isEmpty() &&
+                database.purchaseDetailDao().getPurchaseDetailsByPurchase(2).isEmpty() &&
+                database.purchaseDetailDao().getPurchaseDetailsByPurchase(3).isEmpty() &&
+                database.purchaseDetailDao().getPurchaseDetailsByPurchase(4).isEmpty() &&
+                database.purchaseDetailDao().getPurchaseDetailsByPurchase(5).isEmpty() ) {
+            // Purchase 1 (User 1)
+            database.purchaseDetailDao().insert(new PurchaseDetail(1, 1, 2, 30000)); // Product 1 (Gạo ST25), 2 units
+            database.purchaseDetailDao().insert(new PurchaseDetail(1, 3, 1, 25000)); // Product 3 (Sữa Vinamilk), 1 unit
+            // Purchase 2 (User 1)
+            database.purchaseDetailDao().insert(new PurchaseDetail(2, 1, 1, 30000)); // Product 1 (Gạo ST25), 1 unit
+            // Purchase 3 (User 2)
+            database.purchaseDetailDao().insert(new PurchaseDetail(3, 2, 3, 30000)); // Product 2 (Gạo ABC), 3 units
+            // Purchase 4 (User 3)
+            database.purchaseDetailDao().insert(new PurchaseDetail(4, 4, 1, 150000)); // Product 4 (Nồi inox), 1 unit
+            // Purchase 5 (User 4)
+            database.purchaseDetailDao().insert(new PurchaseDetail(5, 5, 2, 60000)); // Product 5 (Táo Mỹ), 2 units
+            database.purchaseDetailDao().insert(new PurchaseDetail(5, 7, 5, 3000));  // Product 7 (Trứng gà), 5 units
+            // Purchase 6 (User 5)
+            database.purchaseDetailDao().insert(new PurchaseDetail(6, 8, 1, 200000)); // Product 8 (Thịt bò), 1 unit
+            database.purchaseDetailDao().insert(new PurchaseDetail(6, 9, 3, 35000));  // Product 9 (Nước cam), 3 units
+            database.purchaseDetailDao().insert(new PurchaseDetail(6, 10, 1, 120000)); // Product 10 (Chảo chống dính), 1 unit
+        }
     }
 }

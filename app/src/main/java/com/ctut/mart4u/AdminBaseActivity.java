@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ctut.mart4u.admin.CategoryActivity;
 import com.ctut.mart4u.admin.CustomerActivity;
+import com.ctut.mart4u.admin.OrderActivity;
 import com.ctut.mart4u.admin.ProductActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.utils.UserSession;
@@ -98,7 +99,7 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
         // Xử lý sự kiện cho các tab
         tabCategory.setOnClickListener(v -> safeNavigateTo(CategoryActivity.class));
         tabProduct.setOnClickListener(v -> safeNavigateTo(ProductActivity.class));
-//        tabPurchase.setOnClickListener(v -> safeNavigateTo(PurchaseActivity.class));
+        tabPurchase.setOnClickListener(v -> safeNavigateTo(OrderActivity.class));
         tabUser.setOnClickListener(v -> safeNavigateTo(CustomerActivity.class));
 //        tabAddress.setOnClickListener(v -> safeNavigateTo(AddressActivity.class));
     }

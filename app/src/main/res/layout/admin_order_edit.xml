@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Tiêu đề -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chi tiết đơn hàng"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A1A"
+            android:letterSpacing="0.02"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Thông tin đơn hàng -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/orderInfoCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- User ID -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#D1D5DB"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUserId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="User ID"
+                        android:inputType="number"
+                        android:textSize="16sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Ngày mua -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#D1D5DB"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPurchaseDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ngày mua (yyyy-MM-dd)"
+                        android:inputType="text"
+                        android:textSize="16sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Tổng tiền -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#D1D5DB"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTotalAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Tổng tiền"
+                        android:inputType="numberDecimal"
+                        android:textSize="16sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Trạng thái -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#D1D5DB"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Trạng thái (pending/completed/cancelled)"
+                        android:inputType="text"
+                        android:textSize="16sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Tiêu đề chi tiết đơn hàng -->
+        <TextView
+            android:id="@+id/tvPurchaseDetailsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Chi tiết đơn hàng"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A1A"
+            app:layout_constraintTop_toBottomOf="@id/orderInfoCard"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Container cho chi tiết đơn hàng -->
+        <LinearLayout
+            android:id="@+id/purchaseDetailsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tvPurchaseDetailsTitle"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Nút xác nhận đơn hàng -->
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:text="Xác nhận đơn hàng"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:elevation="4dp"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/purchaseDetailsContainer"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Nút hủy đơn hàng -->
+        <Button
+            android:id="@+id/btnCancelOrder"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:text="Hủy đơn hàng"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#EF4444"
+            android:textColor="#FFFFFF"
+            android:elevation="4dp"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/btnConfirm"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Nút xóa đơn hàng -->
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:text="Xóa đơn hàng"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#EF4444"
+            android:textColor="#FFFFFF"
+            android:elevation="4dp"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/btnCancelOrder"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Nút Lưu -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:text="Lưu"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#2196F3"
+            android:textColor="#FFFFFF"
+            android:elevation="4dp"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/btnDelete"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Nút Hủy -->
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Hủy"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#B0BEC5"
+            android:textColor="#FFFFFF"
+            android:elevation="4dp"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/btnSave"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

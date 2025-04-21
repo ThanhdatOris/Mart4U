@@ -93,7 +93,12 @@
         <activity
             android:name=".admin.CustomerDetailActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".admin.OrderEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.OrderActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
