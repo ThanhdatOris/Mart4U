@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,172 +7,176 @@
     android:orientation="vertical"
     android:background="#FFFFFF"
     tools:context=".MainActivity">
-
-    <!-- Banner -->
-    <ImageView
-        android:id="@+id/bannerImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@null" />
-
-    <!-- Chào người dùng -->
-
-    <!-- Thanh tìm kiếm -->
-    <TextView
-        android:id="@+id/tvWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Mart4U xin chào!"
-        android:textColor="#ff0045"
-        android:gravity="center"
-        android:textSize="28sp"
-        android:textStyle="bold" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
-        android:background="@drawable/rounded_background"
-        android:padding="8dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:imeOptions="actionDone"
-            android:layout_weight="1"
-            android:hint="Tìm kiếm sản phẩm"
-            android:background="@null"
-            android:padding="8dp"
-            android:textSize="16sp" />
-
+        <!-- Banner -->
         <ImageView
-            android:id="@+id/ivSearch"
+            android:id="@+id/bannerImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@null" />
+
+        <!-- Chào người dùng -->
+        <TextView
+            android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_search"
-            android:layout_gravity="center_vertical"
-            android:contentDescription="Search Icon" />
+            android:layout_margin="16dp"
+            android:text="Mart4U xin chào!"
+            android:textColor="#ff0045"
+            android:gravity="center"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <!-- Menu chức năng -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@drawable/rounded_menu_item">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/ic_account"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_account" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tài khoản"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/ic_location"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_location" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/ic_cart"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_quick_buy" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giỏ hàng"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/ic_order"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_order" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đơn hàng"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Danh sách sản phẩm dạng lưới -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Mua gì hôm nay?"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Thanh tìm kiếm -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_background"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:layout_weight="1"
+                android:hint="Tìm kiếm sản phẩm"
+                android:background="@null"
+                android:padding="8dp"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="Search Icon" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            tools:listitem="@layout/item_product" />
     </LinearLayout>
 
-    <!-- Menu chức năng -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="8dp"
-        android:background="@drawable/rounded_menu_item">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/ic_account"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_account" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tài khoản"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/ic_location"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_location" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Địa chỉ"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/ic_cart"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_quick_buy" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Giỏ hàng"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/ic_order"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_order" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đơn hàng"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Danh sách sản phẩm dạng lưới -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Mua gì hôm nay"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProducts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        tools:listitem="@layout/item_product" />
-
-</LinearLayout>
+</ScrollView>
