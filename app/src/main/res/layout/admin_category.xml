@@ -1,45 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#F5F7FA"
+    android:padding="16dp">
 
-    <!-- Top Navigation Bar -->
-<!--    <include layout="@layout/layout_top_nav_bar" />-->
+    <!-- Tiêu đề và nút Thêm danh mục -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Nội dung chính -->
-    <ScrollView
+        <!-- Tiêu đề -->
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quản lý Danh mục"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A1A"
+            android:letterSpacing="0.02" />
+
+        <!-- Nút Thêm danh mục -->
+        <Button
+            android:id="@+id/btnAddCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:text="Thêm danh mục"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:paddingHorizontal="24dp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#10B981"
+            android:elevation="4dp"
+            app:cornerRadius="12dp" />
+    </LinearLayout>
+
+    <!-- Thanh tìm kiếm -->
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:drawable/editbox_background"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- EditText tìm kiếm -->
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Tìm kiếm danh mục..."
+            android:textSize="16sp"
+            android:background="@null"
+            android:padding="10dp"
+            android:textColor="#1A1A1A"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:textColorHint="#6B7280" />
+
+        <!-- Icon tìm kiếm -->
+        <ImageView
+            android:id="@+id/searchIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            android:contentDescription="Tìm kiếm"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <!-- RecyclerView danh sách danh mục -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Tiêu đề -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Danh Mục"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <!-- RecyclerView để hiển thị danh sách danh mục -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewCategory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                tools:listitem="@layout/customer_item_category" />
-
-        </LinearLayout>
-    </ScrollView>
-
-    <!-- Bottom Navigation Bar -->
-<!--    <include layout="@layout/layout_bottom_nav_bar" />-->
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

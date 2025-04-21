@@ -2,16 +2,20 @@ package com.ctut.mart4u.customer.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.customer.ShoppingListActivity;
 import com.ctut.mart4u.model.Category;
+
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
@@ -41,9 +45,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         // Hiển thị mô tả danh mục
         holder.textViewCategoryDescription.setText(category.getDescription());
 
-        // Hiển thị hình ảnh từ imageResourceId
-        if (category.getImageResourceId() != 0) {
-            holder.imageViewCategory.setImageResource(category.getImageResourceId());
+        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
+        if (category.getImagePath() != null && !category.getImagePath().isEmpty()) {
+            Uri imageUri = Uri.parse(category.getImagePath());
+            holder.imageViewCategory.setImageURI(imageUri);
         } else {
             holder.imageViewCategory.setImageResource(R.drawable.ic_launcher_foreground); // Hình ảnh mặc định
         }
