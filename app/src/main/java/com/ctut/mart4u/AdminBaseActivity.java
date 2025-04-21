@@ -99,7 +99,7 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
         tabCategory.setOnClickListener(v -> safeNavigateTo(CategoryActivity.class));
         tabProduct.setOnClickListener(v -> safeNavigateTo(ProductActivity.class));
 //        tabPurchase.setOnClickListener(v -> safeNavigateTo(PurchaseActivity.class));
-//        tabUser.setOnClickListener(v -> safeNavigateTo(UserActivity.class));
+        tabUser.setOnClickListener(v -> safeNavigateTo(CustomerActivity.class));
 //        tabAddress.setOnClickListener(v -> safeNavigateTo(AddressActivity.class));
     }
 

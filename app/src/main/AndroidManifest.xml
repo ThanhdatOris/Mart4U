@@ -91,6 +91,10 @@
             android:name=".admin.CategoryEditActivity"
             android:exported="false" />
         <activity
+            android:name=".admin.CustomerDetailActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
