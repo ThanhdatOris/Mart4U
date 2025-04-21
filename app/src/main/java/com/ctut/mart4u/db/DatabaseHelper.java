@@ -132,6 +132,8 @@ public class DatabaseHelper {
                     "Các loại thịt tươi sống và đóng gói",
                     Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_meat).toString()
             ));
+            database.categoryDao().insert(new Category("Đồ uống", "Nước giải khát và sữa", Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_drink).toString()));
+            database.categoryDao().insert(new Category("Đồ gia dụng", "Dụng cụ gia đình", Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_household).toString()));
         }
 
         // Thêm dữ liệu mẫu cho bảng products nếu bảng rỗng
