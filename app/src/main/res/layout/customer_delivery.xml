@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:text="Đăng nhập"
                     android:padding="12dp"
-                    android:backgroundTint="#0288D1"
+                    android:backgroundTint="#ff0045"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
 

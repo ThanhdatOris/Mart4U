@@ -10,16 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.model.Product;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private final List<Product> productList;
     private final Context context;
-
+    private final List<Product> originalProductList;
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
+        this.originalProductList = new ArrayList<>(productList);
     }
 
     @NonNull
@@ -44,6 +47,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public int getItemCount() {
         return productList.size();
+    }
+
+    public void filter(String keyword) {
+        List<Product> filteredList = new ArrayList<>();
+        for (Product product : originalProductList) { // Danh sách gốc chưa lọc
+            if (product.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                filteredList.add(product);
+            }
+        }
+        productList.clear();
+        productList.addAll(filteredList);
+        notifyDataSetChanged();
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
