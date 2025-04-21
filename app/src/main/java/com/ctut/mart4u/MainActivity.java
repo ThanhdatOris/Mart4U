@@ -1,5 +1,6 @@
 package com.ctut.mart4u;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -7,13 +8,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ctut.mart4u.customer.CategoryActivity;
 import com.ctut.mart4u.customer.adapter.ProductAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
-import com.ctut.mart4u.model.CartDetail;
-import com.ctut.mart4u.model.Product;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,8 +48,10 @@ public class MainActivity extends BaseActivity {
 
         // Fetch products from the database
         RecyclerView rvProducts = findViewById(R.id.rvProducts);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rvProducts.setLayoutManager(layoutManager);
+
 
         // Fetch products from the database and set the adapter
         ProductAdapter adapter = new ProductAdapter(this, databaseHelper.getProductDao().getAllProducts());
@@ -63,6 +66,10 @@ public class MainActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-
+        // Set OnClickListener to navigate to CustomerActivityCategory
+        bannerImage.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+            startActivity(intent);
+        });
     }
 }
