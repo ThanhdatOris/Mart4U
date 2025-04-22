@@ -48,12 +48,21 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void initNavigationBars() {
         // Khởi tạo Bottom Navigation Bar
+        ImageView  logo = findViewById(R.id.logo);
         LinearLayout tabCategory = findViewById(R.id.tab_category);
         LinearLayout tabDelivery = findViewById(R.id.tab_delivery);
         LinearLayout tabLotteMart = findViewById(R.id.tab_lotte_mart);
         LinearLayout tabAccount = findViewById(R.id.tab_account);
         LinearLayout tabQuickBuy = findViewById(R.id.tab_quick_buy);
         cartBadge = findViewById(R.id.cart_badge);
+
+        // Điều hướng đến trang chính khi bấm vào logo
+        logo.setOnClickListener(v -> {
+            Intent intent = new Intent(BaseActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        });
 
         if (tabCategory == null || tabDelivery == null || tabLotteMart == null ||
                 tabAccount == null || tabQuickBuy == null || cartBadge == null) {
@@ -88,6 +97,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             startActivity(intent);
             overridePendingTransition(0, 0);
         });
+
+
     }
 
     private void safeNavigateTo(Class<?> activityClass) {
