@@ -25,7 +25,8 @@ public class HistoryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        //EdgeToEdge.enable(this);
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.red));
         //=======================id nguoi dung mac dinh la 1
         int userId = getCurrentUserId();
         //Lấy danh sách đơn hàng từ cơ sở dữ liệu
@@ -49,4 +50,5 @@ public class HistoryActivity extends BaseActivity {
     // protected int getCurrentUserId() {
     //     return getSharedPreferences("login_prefs", MODE_PRIVATE).getInt("userId", -1);
     // }
+
 }

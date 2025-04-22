@@ -35,7 +35,8 @@ public class AccountActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        EdgeToEdge.enable(this);
+        //EdgeToEdge.enable(this);
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.red));
 
         databaseHelper = DatabaseHelper.getInstance(this);
         sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);

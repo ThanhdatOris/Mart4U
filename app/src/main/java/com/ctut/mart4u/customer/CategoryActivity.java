@@ -24,7 +24,8 @@ public class CategoryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // Khởi tạo EdgeToEdge
-        EdgeToEdge.enable(this);
+        //EdgeToEdge.enable(this);
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.red));
 
         // Khởi tạo RecyclerView
         RecyclerView recyclerViewCategory = findViewById(R.id.recyclerViewCategory);

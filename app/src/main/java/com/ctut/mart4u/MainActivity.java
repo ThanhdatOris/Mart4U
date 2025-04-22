@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.red));
         // Change the color of menu icons
         ImageView accountIcon = findViewById(R.id.ic_account);
         ImageView locationIcon = findViewById(R.id.ic_location);
