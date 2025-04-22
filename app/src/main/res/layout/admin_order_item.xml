@@ -15,23 +15,33 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- ID đơn hàng -->
+        <!-- Mã đơn hàng -->
         <TextView
             android:id="@+id/tvOrderId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID: 1"
+            android:text="Mã đơn hàng: 1"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#1A1A1A"/>
 
-        <!-- ID người dùng -->
+        <!-- Tên khách hàng -->
         <TextView
-            android:id="@+id/tvUserId"
+            android:id="@+id/tvCustomerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="User ID: 1"
+            android:text="Tên khách hàng: Nguyễn Văn A"
+            android:textSize="16sp"
+            android:textColor="#6B7280"/>
+
+        <!-- Số điện thoại -->
+        <TextView
+            android:id="@+id/tvPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Số điện thoại: 0123456789"
             android:textSize="16sp"
             android:textColor="#6B7280"/>
 
@@ -62,6 +72,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Trạng thái: pending"
+            android:textSize="16sp"
+            android:textColor="#6B7280"/>
+
+        <!-- Địa chỉ khách hàng -->
+        <TextView
+            android:id="@+id/tvCustomerAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Địa chỉ: Chưa có"
             android:textSize="16sp"
             android:textColor="#6B7280"/>
 

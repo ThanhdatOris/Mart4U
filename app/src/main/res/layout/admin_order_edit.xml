@@ -41,85 +41,75 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- User ID -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
+                <!-- Mã đơn hàng -->
+                <TextView
+                    android:id="@+id/tvOrderId"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#D1D5DB"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusBottomEnd="8dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etUserId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="User ID"
-                        android:inputType="number"
-                        android:textSize="16sp"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Mã đơn hàng: 1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1A1A"/>
+
+                <!-- Tên khách hàng -->
+                <TextView
+                    android:id="@+id/tvCustomerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Tên khách hàng: Nguyễn Văn A"
+                    android:textSize="16sp"
+                    android:textColor="#6B7280"/>
+
+                <!-- Số điện thoại -->
+                <TextView
+                    android:id="@+id/tvPhoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Số điện thoại: 0123456789"
+                    android:textSize="16sp"
+                    android:textColor="#6B7280"/>
 
                 <!-- Ngày mua -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvPurchaseDate"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#D1D5DB"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusBottomEnd="8dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPurchaseDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Ngày mua (yyyy-MM-dd)"
-                        android:inputType="text"
-                        android:textSize="16sp"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="8dp"
+                    android:text="Ngày mua: 2023-10-01"
+                    android:textSize="16sp"
+                    android:textColor="#6B7280"/>
 
                 <!-- Tổng tiền -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvTotalAmount"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#D1D5DB"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusBottomEnd="8dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etTotalAmount"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Tổng tiền"
-                        android:inputType="numberDecimal"
-                        android:textSize="16sp"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="8dp"
+                    android:text="Tổng tiền: 100.00"
+                    android:textSize="16sp"
+                    android:textColor="#6B7280"/>
 
                 <!-- Trạng thái -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="#D1D5DB"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusBottomEnd="8dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etStatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Trạng thái (pending/completed/cancelled)"
-                        android:inputType="text"
-                        android:textSize="16sp"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="8dp"
+                    android:text="Trạng thái: pending"
+                    android:textSize="16sp"
+                    android:textColor="#6B7280"/>
+
+                <!-- Địa chỉ khách hàng -->
+                <TextView
+                    android:id="@+id/tvCustomerAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Địa chỉ: 123 Đường ABC, Quận 1, TP.HCM"
+                    android:textSize="16sp"
+                    android:textColor="#6B7280"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -137,13 +127,12 @@
             app:layout_constraintTop_toBottomOf="@id/orderInfoCard"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- Container cho chi tiết đơn hàng -->
-        <LinearLayout
-            android:id="@+id/purchaseDetailsContainer"
+        <!-- RecyclerView hiển thị danh sách sản phẩm -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/tvPurchaseDetailsTitle"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -160,7 +149,7 @@
             android:textColor="#FFFFFF"
             android:elevation="4dp"
             app:cornerRadius="12dp"
-            app:layout_constraintTop_toBottomOf="@id/purchaseDetailsContainer"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewProducts"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <!-- Nút hủy đơn hàng -->
@@ -193,40 +182,6 @@
             android:elevation="4dp"
             app:cornerRadius="12dp"
             app:layout_constraintTop_toBottomOf="@id/btnCancelOrder"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <!-- Nút Lưu -->
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:text="Lưu"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:backgroundTint="#2196F3"
-            android:textColor="#FFFFFF"
-            android:elevation="4dp"
-            app:cornerRadius="12dp"
-            app:layout_constraintTop_toBottomOf="@id/btnDelete"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <!-- Nút Hủy -->
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:text="Hủy"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:backgroundTint="#B0BEC5"
-            android:textColor="#FFFFFF"
-            android:elevation="4dp"
-            app:cornerRadius="12dp"
-            app:layout_constraintTop_toBottomOf="@id/btnSave"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,4 +51,8 @@ dependencies {
 
     // CardView
     implementation("androidx.cardview:cardview:1.0.0")
+
+    // Thêm Glide đúng cú pháp Kotlin DSL
+    implementation("com.github.bumptech.glide:glide:4.15.1") // Cập nhật phiên bản mới nhất
+
 }

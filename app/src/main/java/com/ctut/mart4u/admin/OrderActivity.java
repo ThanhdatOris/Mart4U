@@ -15,7 +15,6 @@ import com.ctut.mart4u.R;
 import com.ctut.mart4u.admin.adapter.OrderAdapter;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.Purchase;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,6 @@ public class OrderActivity extends AdminBaseActivity {
     private OrderAdapter orderAdapter;
     private List<Purchase> orderList;
     private EditText searchBar;
-    private FloatingActionButton fabAddOrder;
 
     @Override
     protected int getLayoutId() {
@@ -44,7 +42,6 @@ public class OrderActivity extends AdminBaseActivity {
         // Ánh xạ view
         recyclerViewOrders = findViewById(R.id.recyclerViewOrders);
         searchBar = findViewById(R.id.searchBar);
-        fabAddOrder = findViewById(R.id.fabAddOrder);
 
         // Khởi tạo danh sách đơn hàng
         orderList = new ArrayList<>();
@@ -72,12 +69,6 @@ public class OrderActivity extends AdminBaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {}
-        });
-
-        // Xử lý nút thêm đơn hàng
-        fabAddOrder.setOnClickListener(v -> {
-            Intent intent = new Intent(OrderActivity.this, OrderEditActivity.class);
-            startActivity(intent);
         });
     }
 

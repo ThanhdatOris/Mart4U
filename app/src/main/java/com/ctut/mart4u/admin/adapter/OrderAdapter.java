@@ -10,7 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ctut.mart4u.R;
+import com.ctut.mart4u.db.DatabaseHelper;
+import com.ctut.mart4u.model.Address;
 import com.ctut.mart4u.model.Purchase;
+import com.ctut.mart4u.model.User;
 
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     private Context context;
     private List<Purchase> orderList;
     private OnOrderClickListener onOrderClickListener;
+    private DatabaseHelper databaseHelper;
 
     public interface OnOrderClickListener {
         void onOrderClick(Purchase purchase);
@@ -28,6 +32,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         this.context = context;
         this.orderList = orderList;
         this.onOrderClickListener = listener;
+        this.databaseHelper = DatabaseHelper.getInstance(context);
     }
 
     @NonNull
@@ -40,11 +45,25 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Purchase purchase = orderList.get(position);
-        holder.tvOrderId.setText(String.valueOf(purchase.getId()));
-        holder.tvUserId.setText(String.valueOf(purchase.getUserId()));
-        holder.tvPurchaseDate.setText(purchase.getPurchaseDate());
-        holder.tvTotalAmount.setText(String.format("%.2f", purchase.getTotalAmount()));
-        holder.tvStatus.setText(purchase.getStatus());
+        holder.tvOrderId.setText("Mã đơn hàng: " + purchase.getId());
+        holder.tvPurchaseDate.setText("Ngày mua: " + purchase.getPurchaseDate());
+        holder.tvTotalAmount.setText("Tổng tiền: " + String.format("%.2f", purchase.getTotalAmount()));
+        holder.tvStatus.setText("Trạng thái: " + purchase.getStatus());
+
+        // Hiển thị tên khách hàng và số điện thoại
+        User user = databaseHelper.getUserDao().getUserById(purchase.getUserId());
+        if (user != null) {
+            holder.tvCustomerName.setText("Tên khách hàng: " + user.getUsername());
+            holder.tvPhoneNumber.setText("Số điện thoại: " + user.getPhoneNumber());
+
+            // Hiển thị địa chỉ khách hàng
+            Address address = databaseHelper.getAddressDao().getDefaultAddress(user.getId());
+            if (address != null) {
+                holder.tvCustomerAddress.setText("Địa chỉ: " + address.getAddress());
+            } else {
+                holder.tvCustomerAddress.setText("Địa chỉ: Chưa có");
+            }
+        }
 
         holder.itemView.setOnClickListener(v -> onOrderClickListener.onOrderClick(purchase));
     }
@@ -55,15 +74,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView tvOrderId, tvUserId, tvPurchaseDate, tvTotalAmount, tvStatus;
+        TextView tvOrderId, tvCustomerName, tvPhoneNumber, tvPurchaseDate, tvTotalAmount, tvStatus, tvCustomerAddress;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
             tvOrderId = itemView.findViewById(R.id.tvOrderId);
-            tvUserId = itemView.findViewById(R.id.tvUserId);
+            tvCustomerName = itemView.findViewById(R.id.tvCustomerName);
+            tvPhoneNumber = itemView.findViewById(R.id.tvPhoneNumber);
             tvPurchaseDate = itemView.findViewById(R.id.tvPurchaseDate);
             tvTotalAmount = itemView.findViewById(R.id.tvTotalAmount);
             tvStatus = itemView.findViewById(R.id.tvStatus);
+            tvCustomerAddress = itemView.findViewById(R.id.tvCustomerAddress);
         }
     }
 }

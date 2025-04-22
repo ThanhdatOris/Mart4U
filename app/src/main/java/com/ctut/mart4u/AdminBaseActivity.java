@@ -21,6 +21,7 @@ import com.ctut.mart4u.utils.UserSession;
 public abstract class AdminBaseActivity extends AppCompatActivity {
 
     protected abstract int getLayoutId();
+
     private DatabaseHelper databaseHelper;
     private SharedPreferences sharedPreferences;
 
@@ -31,7 +32,6 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
 
         databaseHelper = DatabaseHelper.getInstance(this);
         sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
-
 
         // Lấy container và thêm layout của activity con vào
         FrameLayout contentContainer = findViewById(R.id.content_container);
@@ -44,12 +44,7 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
         // Highlight tab hiện tại
         highlightCurrentTab();
 
-        // Xử lý sự kiện cho nút tìm kiếm và cài đặt trên top nav bar
-//        ImageView icSearch = findViewById(R.id.ic_search_admin);
-//        ImageView icSettings = findViewById(R.id.ic_settings_admin);
-//        icSearch.setOnClickListener(v -> Toast.makeText(this, "Tính năng tìm kiếm đang phát triển", Toast.LENGTH_SHORT).show());
-//        icSettings.setOnClickListener(v -> Toast.makeText(this, "Tính năng cài đặt đang phát triển", Toast.LENGTH_SHORT).show());
-        // Gán sự kiện cho nút đăng xuất
+        // Logout
         setEventListenerLogout();
     }
 
@@ -57,18 +52,7 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
         // Xử lý sự kiện nhấn nút Logout
         LinearLayout llLogoutAdmin = findViewById(R.id.ll_logout_admin);
         llLogoutAdmin.setOnClickListener(v -> {
-            // // Xóa thông tin đăng nhập trong SharedPreferences
-            // SharedPreferences sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
-            // SharedPreferences.Editor editor = sharedPreferences.edit();
-            // editor.clear(); // Xóa toàn bộ dữ liệu trong SharedPreferences
-            // editor.apply();
-        
-            // // Chuyển đến LoginActivity
-            // Intent intent = new Intent(this, LoginActivity.class);
-            // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            // startActivity(intent);
-            // finish();
-        
+
             // Toast.makeText(this, "Đã đăng xuất", Toast.LENGTH_SHORT).show();
             UserSession.getInstance().clearSession();
             sharedPreferences.edit().clear().apply();
@@ -133,10 +117,10 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
             highlightTab(R.id.tab_product);
         }else if (this.getClass().equals(CustomerActivity.class)) {
             highlightTab(R.id.tab_user);
+        } else if (this.getClass().equals(OrderActivity.class)) {
+            highlightTab(R.id.tab_purchase);
         }
-//        else if (this.getClass().equals(AddressActivity.class)) {
-//            highlightTab(R.id.tab_address);
-//        } else if (this.getClass().equals(PurchaseActivity.class)) {
+//        else if (this.getClass().equals(PurchaseActivity.class)) {
 //            highlightTab(R.id.tab_purchase);
 //        }
     }
