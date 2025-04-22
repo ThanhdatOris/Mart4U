@@ -106,7 +106,7 @@
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:src="@drawable/ic_flag"
+                                android:src="@drawable/ic_location"
                                 android:layout_gravity="center_vertical"
                                 app:tint="#757575" />
 
@@ -180,7 +180,7 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_flag"
+                            android:src="@drawable/ic_location"
                             app:tint="#757575"
                             android:layout_gravity="center_vertical" />
 

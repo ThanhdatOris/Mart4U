@@ -152,7 +152,7 @@ public class DeliveryActivity extends BaseActivity {
     }
 
     private void loadStoreInfo() {
-        tvStore.setText("Cửa hàng: Căn Thơ");
+        tvStore.setText("Cửa hàng: Cần Thơ");
     }
 
     private void showManageAddressesDialog() {
