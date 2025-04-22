@@ -30,10 +30,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Tổng đài/ email"
+            android:textAlignment="textStart"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center" />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <!-- Nội dung tổng đài -->
