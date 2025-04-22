@@ -30,4 +30,8 @@ public interface PurchaseDao {
 
     @Query("SELECT * FROM purchases WHERE userId LIKE '%' || :query || '%' OR purchaseDate LIKE '%' || :query || '%' OR status LIKE '%' || :query || '%'")
     List<Purchase> searchPurchases(String query);
+
+    // Thêm phương thức để đếm đơn hàng theo trạng thái và userId
+    @Query("SELECT COUNT(*) FROM purchases WHERE userId = :userId AND status = :status")
+    int getOrderCountByStatus(int userId, String status);
 }

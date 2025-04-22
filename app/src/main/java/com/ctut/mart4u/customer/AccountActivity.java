@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import androidx.activity.EdgeToEdge;
 
 import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.LoginActivity;
@@ -21,21 +20,20 @@ public class AccountActivity extends BaseActivity {
     private DatabaseHelper databaseHelper;
     private LinearLayout layoutNotLoggedIn, layoutLoggedIn;
     private Button btnLogin;
-    private TextView tvUsername, tvEmail;
+    private TextView tvUsername, tvEmail, tv_pending_count, tv_processing_count, tv_shipping_count, tv_delivered_count;
     private ImageView avatar, icSettings;
     private View llSupport, profileContainer;
     private SharedPreferences sharedPreferences;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.customer_account; // Trả về layout nội dung của AccountActivity
+        return R.layout.customer_account;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //EdgeToEdge.enable(this);
         getWindow().setNavigationBarColor(getResources().getColor(R.color.red));
 
         databaseHelper = DatabaseHelper.getInstance(this);
@@ -51,10 +49,25 @@ public class AccountActivity extends BaseActivity {
         icSettings = findViewById(R.id.ic_settings);
         llSupport = findViewById(R.id.ll_support);
         profileContainer = findViewById(R.id.profile_container);
+        tv_pending_count = findViewById(R.id.tv_pending_count);
+//        tv_processing_count = findViewById(R.id.tv_processing_count);
+//        tv_shipping_count = findViewById(R.id.tv_shipping_count);
+        tv_delivered_count = findViewById(R.id.tv_delivered_count); // Sửa lỗi ánh xạ
+        LinearLayout statusContainer = findViewById(R.id.order_status_container);
 
         // Cập nhật giao diện dựa trên trạng thái đăng nhập
         updateUI();
 
+        // Load trạng thái đơn hàng
+        if (UserSession.getInstance().isLoggedIn()) {
+            orderStat();
+        }
+
+        statusContainer.setOnClickListener(v -> {
+            Intent intent = new Intent(AccountActivity.this, HistoryActivity.class);
+            intent.putExtra("userId", UserSession.getInstance().getCurrentUser().getId());
+            startActivity(intent);
+        });
         // Xử lý sự kiện nút Đăng nhập
         btnLogin.setOnClickListener(v -> {
             Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
@@ -102,10 +115,23 @@ public class AccountActivity extends BaseActivity {
         }
     }
 
+    // Load các trạng thái đơn hàng
+    private void orderStat() {
+        int userId = UserSession.getInstance().getCurrentUser().getId();
+        tv_pending_count.setText(String.valueOf(databaseHelper.getPurchaseDao().getOrderCountByStatus(userId, "pending")));
+        tv_delivered_count.setText(String.valueOf(databaseHelper.getPurchaseDao().getOrderCountByStatus(userId, "completed")));
+        // Không dùng processing và shipping
+//        tv_processing_count.setText("0");
+//        tv_shipping_count.setText("0");
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         // Cập nhật giao diện khi quay lại Activity
         updateUI();
+        if (UserSession.getInstance().isLoggedIn()) {
+            orderStat();
+        }
     }
 }
