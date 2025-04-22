@@ -85,7 +85,10 @@ public class ProductDetailActivity extends BaseActivity {
 
             // Chức năng tăng/giảm số lượng
             Button btnIncreaseQuantity = findViewById(R.id.buttonIncreaseQuantity);
+            btnIncreaseQuantity.setBackgroundTintList(getResources().getColorStateList(R.color.red));
+
             Button btnDecreaseQuantity = findViewById(R.id.buttonDecreaseQuantity);
+            btnDecreaseQuantity.setBackgroundTintList(getResources().getColorStateList(R.color.red));
             EditText editTextQuantity = findViewById(R.id.editTextQuantity);
 
             btnIncreaseQuantity.setOnClickListener(v -> {
