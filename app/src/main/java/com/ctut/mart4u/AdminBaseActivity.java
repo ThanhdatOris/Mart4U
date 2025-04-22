@@ -71,10 +71,10 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
         LinearLayout tabProduct = findViewById(R.id.tab_product);
         LinearLayout tabPurchase = findViewById(R.id.tab_purchase);
         LinearLayout tabUser = findViewById(R.id.tab_user);
-        LinearLayout tabAddress = findViewById(R.id.tab_address);
+        //LinearLayout tabAddress = findViewById(R.id.tab_address);
 
         if (tabCategory == null || tabProduct == null || tabPurchase == null ||
-                tabUser == null || tabAddress == null) {
+                tabUser == null) {
             android.util.Log.e("AdminBaseActivity", "One or more tabs not found in layout");
             Toast.makeText(this, "Lỗi: Không tìm thấy các tab trong layout", Toast.LENGTH_LONG).show();
             return;
@@ -131,7 +131,7 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
         setTabColor(R.id.tab_product, defaultColor);
         setTabColor(R.id.tab_purchase, defaultColor);
         setTabColor(R.id.tab_user, defaultColor);
-        setTabColor(R.id.tab_address, defaultColor);
+        //setTabColor(R.id.tab_address, defaultColor);
     }
 
     private void highlightTab(int tabId) {
