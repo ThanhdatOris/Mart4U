@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ctut.mart4u.admin.CategoryActivity;
 import com.ctut.mart4u.admin.CustomerActivity;
+import com.ctut.mart4u.admin.DashboardActivity;
 import com.ctut.mart4u.admin.OrderActivity;
 import com.ctut.mart4u.admin.ProductActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
@@ -66,6 +67,8 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
     }
 
     private void initNavigationBars() {
+        // Khởi tạo logo
+        ImageView logo = findViewById(R.id.logo);
         // Khởi tạo Bottom Navigation Bar
         LinearLayout tabCategory = findViewById(R.id.tab_category);
         LinearLayout tabProduct = findViewById(R.id.tab_product);
@@ -79,6 +82,14 @@ public abstract class AdminBaseActivity extends AppCompatActivity {
             Toast.makeText(this, "Lỗi: Không tìm thấy các tab trong layout", Toast.LENGTH_LONG).show();
             return;
         }
+
+        // Điều hướng đến trang dashboard khi bấm vào logo
+        logo.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminBaseActivity.this, DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        });
 
         // Xử lý sự kiện cho các tab
         tabCategory.setOnClickListener(v -> safeNavigateTo(CategoryActivity.class));
