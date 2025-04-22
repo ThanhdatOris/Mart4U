@@ -21,7 +21,7 @@ public interface ProductDao {
     List<Product> searchProducts(String keyword);
     @Query("DELETE FROM products WHERE id = :productId")
     void deleteProductById(int productId);
-    @Query("SELECT * FROM products WHERE categoryId = :categoryId OR isDeleted = 0")
+    @Query("SELECT * FROM products WHERE categoryId = :categoryId AND isDeleted = 0")
     List<Product> getProductsByCategory(int categoryId);
 
 
