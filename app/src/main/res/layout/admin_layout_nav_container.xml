@@ -52,7 +52,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_cart" />
+                android:src="@drawable/ic_product" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,22 +99,22 @@
         </LinearLayout>
 
         <!-- Tab Address -->
-        <LinearLayout
-            android:id="@+id/tab_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_support" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Địa Chỉ"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:id="@+id/tab_address"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="vertical">-->
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_support" />-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Địa Chỉ"-->
+<!--                android:textColor="@android:color/white" />-->
+<!--        </LinearLayout>-->
     </LinearLayout>
 </LinearLayout>

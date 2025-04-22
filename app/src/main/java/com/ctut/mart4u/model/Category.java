@@ -9,12 +9,12 @@ public class Category {
     private int id;
     private String name;
     private String description;
-    private int imageResourceId; // Này lưu kiểu này cũng dễ hơn
+    private String imagePath; // Thay imageResourceId bằng imagePath
 
-    public Category(String name, String description, int imageResourceId) {
+    public Category(String name, String description, String imagePath) {
         this.name = name;
         this.description = description;
-        this.imageResourceId = imageResourceId;
+        this.imagePath = imagePath;
     }
 
     // Getters and Setters
@@ -42,11 +42,11 @@ public class Category {
         this.description = description;
     }
 
-    public int getImageResourceId() {
-        return imageResourceId;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageResourceId(int imageResourceId) {
-        this.imageResourceId = imageResourceId;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

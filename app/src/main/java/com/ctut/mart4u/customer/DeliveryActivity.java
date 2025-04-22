@@ -47,7 +47,7 @@ public class DeliveryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.red));
         databaseHelper = DatabaseHelper.getInstance(this);
 
         // Ánh xạ các thành phần giao diện
@@ -152,7 +152,7 @@ public class DeliveryActivity extends BaseActivity {
     }
 
     private void loadStoreInfo() {
-        tvStore.setText("Cửa hàng: Căn Thơ");
+        tvStore.setText("Cửa hàng: Cần Thơ");
     }
 
     private void showManageAddressesDialog() {

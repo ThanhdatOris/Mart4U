@@ -30,10 +30,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Tổng đài/ email"
+            android:textAlignment="textStart"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center" />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <!-- Nội dung tổng đài -->
@@ -48,14 +49,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tổng đài chính thức của LOTTE Mart Việt Nam:"
+        android:text="Tổng đài chính thức của Mart4U:"
         android:textSize="16sp"
         android:layout_marginTop="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0901 057 057 (Cước gọi sẽ được tính theo cước phí của nhà mạng)"
+        android:text="0975961207 (Cước gọi sẽ được tính theo cước phí của nhà mạng)"
         android:textSize="16sp"
         android:textColor="@android:color/holo_blue_dark"
         android:layout_marginTop="4dp" />
@@ -79,7 +80,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Địa chỉ email: info@lotte.vn"
+        android:text="Địa chỉ email: info@mart4u.vn"
         android:textSize="16sp"
         android:textColor="@android:color/holo_blue_dark"
         android:layout_marginTop="8dp" />
