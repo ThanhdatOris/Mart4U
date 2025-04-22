@@ -41,6 +41,35 @@
             android:textSize="16sp"
             android:textColor="#757575" />
 
+<!--        &lt;!&ndash; Tên khách hàng &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/tvCustomerName"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Khách hàng: Nguyễn Văn A"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="#212121"-->
+<!--            android:layout_marginTop="4dp" />-->
+<!--&lt;!&ndash;        Số điện thoại&ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/tvCustomerPhone"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Số điện thoại: 0123456789"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="#212121"-->
+<!--            android:layout_marginTop="4dp" />-->
+
+<!--        &lt;!&ndash; Địa chỉ giao hàng &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/tvShippingAddress"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Địa chỉ giao hàng: 123 Đường ABC, Quận 1, TP.HCM"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="#212121"-->
+<!--            android:layout_marginTop="4dp" />-->
+
         <!-- Ngày đặt hàng -->
         <TextView
             android:id="@+id/tvOrderDate"

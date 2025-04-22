@@ -49,9 +49,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             holder.tvOrderDate.setText("Ngày đặt: " + purchase.getPurchaseDate());
         }
 
+//        holder.tvCustomerName.setText("Tên khách hàng: " + purchase.get());
+//        holder.tvPhoneNumber.setText("Số điện thoại: " + purchase.getPhoneNumber());
+//        holder.tvShippingAddress.setText("Địa chỉ giao hàng: " + purchase.getShippingAddress());
 
         holder.tvOrderStatus.setText("Trạng thái: " + purchase.getStatus());
         holder.tvOrderTotal.setText("Tổng tiền: " + purchase.getTotalAmount() + " VNĐ");
+
+
 
         //xu ly su kien click xem chi tiet
         holder.btnViewDetails.setOnClickListener(v -> {
