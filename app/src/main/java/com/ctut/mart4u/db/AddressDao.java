@@ -24,4 +24,5 @@ public interface AddressDao {
 
     @Query("SELECT * FROM addresses WHERE userId = :userId AND isDefault = 1 LIMIT 1")
     Address getDefaultAddress(int userId);
+
 }
