@@ -15,7 +15,10 @@ import com.ctut.mart4u.model.Address;
 import com.ctut.mart4u.model.Purchase;
 import com.ctut.mart4u.model.User;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
@@ -46,8 +49,23 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Purchase purchase = orderList.get(position);
         holder.tvOrderId.setText("Mã đơn hàng: " + purchase.getId());
-        holder.tvPurchaseDate.setText("Ngày mua: " + purchase.getPurchaseDate());
-        holder.tvTotalAmount.setText("Tổng tiền: " + String.format("%.2f", purchase.getTotalAmount()));
+//        holder.tvPurchaseDate.setText("Ngày mua: " + purchase.getPurchaseDate());
+        // Xử lý ngày mua
+        String purchaseDate = purchase.getPurchaseDate();
+        String formattedDate;
+        try {
+            // Thử phân tích purchaseDate dưới dạng timestamp (dãy số)
+            long timestamp = Long.parseLong(purchaseDate);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            formattedDate = dateFormat.format(new Date(timestamp));
+        } catch (NumberFormatException e) {
+            // Nếu không phải timestamp, giả sử nó đã là chuỗi yyyy-MM-dd
+            formattedDate = purchaseDate;
+        }
+
+        holder.tvPurchaseDate.setText("Ngày mua: " + formattedDate);
+
+        holder.tvTotalAmount.setText("Tổng tiền: " + (int) purchase.getTotalAmount() + " VND");
         holder.tvStatus.setText("Trạng thái: " + purchase.getStatus());
 
         // Hiển thị tên khách hàng và số điện thoại

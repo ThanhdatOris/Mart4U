@@ -45,7 +45,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
         Product product = databaseHelper.getProductDao().getProductById(detail.getProductId());
         if (product != null) {
             // Hiển thị tên sản phẩm
-            holder.tvProductName.setText("Tên sản phẩm: " + product.getName());
+            holder.tvProductName.setText(product.getName());
 
             // Hiển thị hình ảnh sản phẩm từ thư mục assets
             if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
@@ -66,7 +66,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
 
         // Hiển thị số lượng và đơn giá
         holder.tvQuantity.setText("Số lượng: " + detail.getQuantity());
-        holder.tvUnitPrice.setText("Đơn giá: " + detail.getUnitPrice());
+        holder.tvUnitPrice.setText("Đơn giá: " + (int)detail.getUnitPrice() + " VNĐ");
     }
 
     @Override

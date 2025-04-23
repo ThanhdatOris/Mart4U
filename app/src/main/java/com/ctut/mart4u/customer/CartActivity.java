@@ -23,7 +23,10 @@ import com.ctut.mart4u.model.Purchase;
 import com.ctut.mart4u.model.PurchaseDetail;
 import com.ctut.mart4u.model.User;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CartActivity extends BaseActivity {
 
@@ -145,6 +148,10 @@ public class CartActivity extends BaseActivity {
                 Toast.makeText(this, "Tổng tiền bằng 0, không thể thanh toán", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            // Định dạng ngày hiện tại thành yyyy-MM-dd
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String currentDate = dateFormat.format(new Date());
 
             // Tạo đơn hàng
             Purchase purchase = new Purchase(userId, String.valueOf(System.currentTimeMillis()), totalAmount, "pending");

@@ -19,19 +19,19 @@ public interface PurchaseDao {
     @Delete
     void delete(Purchase purchase);
 
-    @Query("SELECT * FROM purchases WHERE userId = :userId")
+    @Query("SELECT * FROM purchases WHERE userId = :userId  ORDER BY purchaseDate DESC")
     List<Purchase> getPurchasesByUser(int userId);
 
-    @Query("SELECT * FROM purchases WHERE id = :purchaseId")
+    @Query("SELECT * FROM purchases WHERE id = :purchaseId ORDER BY purchaseDate DESC")
     Purchase getPurchaseById(int purchaseId);
 
-    @Query("SELECT * FROM purchases")
+    @Query("SELECT * FROM purchases ORDER BY purchaseDate DESC")
     List<Purchase> getAllPurchases();
 
-    @Query("SELECT * FROM purchases WHERE userId LIKE '%' || :query || '%' OR purchaseDate LIKE '%' || :query || '%' OR status LIKE '%' || :query || '%'")
+    @Query("SELECT * FROM purchases WHERE userId LIKE '%' || :query || '%' OR purchaseDate LIKE '%' || :query || '%' OR status LIKE '%' || :query || '%' ORDER BY purchaseDate DESC")
     List<Purchase> searchPurchases(String query);
 
     // Thêm phương thức để đếm đơn hàng theo trạng thái và userId
-    @Query("SELECT COUNT(*) FROM purchases WHERE userId = :userId AND status = :status")
+    @Query("SELECT COUNT(*) FROM purchases WHERE userId = :userId AND status = :status ORDER BY purchaseDate DESC")
     int getOrderCountByStatus(int userId, String status);
 }
