@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ctut.mart4u.customer.ProductDetailActivity;
 import com.ctut.mart4u.model.Product;
 
@@ -53,16 +54,26 @@ public class ShoppingListAdapter  extends RecyclerView.Adapter<ShoppingListAdapt
 
         // Lấy hình ảnh từ assets
 
-        AssetManager assetManager = context.getAssets();
-        InputStream is = null;
-        try {
-            is = ((AssetManager) assetManager).open(product.getImagePath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Bitmap bitmap = BitmapFactory.decodeStream(is);
-        holder.productImage.setImageBitmap(bitmap);
+//        AssetManager assetManager = context.getAssets();
+//        InputStream is = null;
+//        try {
+//            is = ((AssetManager) assetManager).open(product.getImagePath());
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        Bitmap bitmap = BitmapFactory.decodeStream(is);
+//        holder.productImage.setImageBitmap(bitmap);
 
+        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
+        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
+            Glide.with(context)
+                    .load(product.getImagePath()) // Glide tự động xử lý cả assets và URL
+                    .placeholder(R.drawable.ic_flag) // Ảnh mặc định khi đang tải
+                    .error(R.drawable.ic_flag) // Ảnh mặc định nếu lỗi
+                    .into(holder.productImage);
+        } else {
+            holder.productImage.setImageResource(R.drawable.ic_flag); // Ảnh mặc định
+        }
 
         //xử lý sự kiện xem chị tiết sản phẩm => day qua trang chi tiet san pham
         holder.addToCartIcon.setOnClickListener(v -> {

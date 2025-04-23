@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.customer.ProductDetailActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
@@ -62,22 +63,31 @@ public class CartEntryAdapter extends RecyclerView.Adapter<CartEntryAdapter.Cart
         holder.textViewQuantity.setText("Số lượng: " + cartDetail.getQuantity());
 
         // Hiển thị hình ảnh với bitmap từ imagePath
-        AssetManager assetManager = context.getAssets();
-        InputStream is = null;
-        try {
-            is = assetManager.open(productImagePath);
-            Bitmap bitmap = BitmapFactory.decodeStream(is);
-            holder.imageViewProduct.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            holder.imageViewProduct.setImageResource(R.drawable.ic_launcher_foreground); // Hình ảnh mặc định nếu lỗi
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+//        AssetManager assetManager = context.getAssets();
+//        InputStream is = null;
+//        try {
+//            is = assetManager.open(productImagePath);
+//            Bitmap bitmap = BitmapFactory.decodeStream(is);
+//            holder.imageViewProduct.setImageBitmap(bitmap);
+//        } catch (IOException e) {
+//            holder.imageViewProduct.setImageResource(R.drawable.ic_launcher_foreground); // Hình ảnh mặc định nếu lỗi
+//        } finally {
+//            if (is != null) {
+//                try {
+//                    is.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+        if (productImagePath != null && !productImagePath.isEmpty()) {
+            Glide.with(context)
+                    .load(productImagePath) // Glide tự động xử lý cả assets và URL
+                    .placeholder(R.drawable.ic_flag) // Ảnh mặc định khi đang tải
+                    .error(R.drawable.ic_flag) // Ảnh mặc định nếu lỗi
+                    .into(holder.imageViewProduct);
+        } else {
+            holder.imageViewProduct.setImageResource(R.drawable.ic_flag); // Ảnh mặc định
         }
 
         // Xử lý sự kiện onClick khi nhấn vào sản phẩm

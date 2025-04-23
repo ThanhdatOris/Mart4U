@@ -2,13 +2,11 @@ package com.ctut.mart4u.admin.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,14 +15,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ctut.mart4u.R;
-import com.ctut.mart4u.admin.ProductActivity;
 import com.ctut.mart4u.admin.ProductEditActivity;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.Product;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.File;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -32,11 +29,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private Context context;
     private List<Product> productList;
 
-    //contructor
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
     }
+
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,31 +42,55 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductAdapter.ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productName.setText(product.getName());
-        holder.productPrice.setText(String.valueOf(product.getPrice()));
-        AssetManager assetManager = context.getAssets();
-        InputStream is = null;
-        try {
-            is = ((AssetManager) assetManager).open(product.getImagePath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        holder.productPrice.setText(String.valueOf((int) product.getPrice())); // Hiển thị giá không có số thập phân
+
+//        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
+//        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
+//            Log.d("ProductAdapter", "Tải hình ảnh cho productId=" + product.getId() + ", imagePath=" + product.getImagePath());
+//            try {
+//                // imagePath giờ là đường dẫn file thực tế trong bộ nhớ nội bộ
+//                Uri imageUri = Uri.fromFile(new File(product.getImagePath()));
+//                holder.productImage.setImageURI(imageUri);
+//            } catch (Exception e) {
+//                Log.e("ProductAdapter", "Lỗi khi hiển thị Uri cho productId=" + product.getId() + ": " + e.getMessage());
+//                holder.productImage.setImageResource(R.drawable.ic_flag);
+//            }
+//        } else {
+//            Log.d("ProductAdapter", "imagePath là null hoặc rỗng cho productId=" + product.getId());
+//            holder.productImage.setImageResource(R.drawable.ic_flag); // Ảnh mặc định
+//        }
+
+//        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
+//        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
+//            Uri imageUri = Uri.parse(product.getImagePath());
+//            holder.productImage.setImageURI(imageUri);
+//        } else {
+//            holder.productImage.setImageResource(R.drawable.ic_flag);
+//        }
+
+        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
+        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
+            Glide.with(context)
+                    .load(product.getImagePath()) // Glide tự động xử lý cả assets và URL
+                    .placeholder(R.drawable.ic_flag) // Ảnh mặc định khi đang tải
+                    .error(R.drawable.ic_flag) // Ảnh mặc định nếu lỗi
+                    .into(holder.productImage);
+        } else {
+            holder.productImage.setImageResource(R.drawable.ic_flag); // Ảnh mặc định
         }
-        Bitmap bitmap = BitmapFactory.decodeStream(is);
-        holder.productImage.setImageBitmap(bitmap);
 
-        // sự kiện click vào edit
+        // Sự kiện click vào edit
         holder.btnEditProduct.setOnClickListener(v -> {
-
-            // mo productEidtActivity
             Intent intent = new Intent(context, ProductEditActivity.class);
             intent.putExtra("productId", product.getId());
             context.startActivity(intent);
         });
 
-        //su kien xoa
-        holder.btnDeleteProduct.setOnClickListener(v ->{
+        // Sự kiện xóa
+        holder.btnDeleteProduct.setOnClickListener(v -> {
             DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
             product.setDeleted(true);
             databaseHelper.getProductDao().update(product);
@@ -78,10 +99,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             notifyItemRangeChanged(position, productList.size());
             Toast.makeText(context, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
         });
-
-//
-
-
     }
 
     @Override
@@ -89,14 +106,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productList.size();
     }
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder {
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
         ImageView productImage;
         TextView productName;
         TextView productPrice;
         ImageButton btnEditProduct;
         ImageButton btnDeleteProduct;
-//        ImageView searchIcon;
-//        EditText searchEditText;
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             productImage = itemView.findViewById(R.id.productImage);
@@ -104,10 +120,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productPrice = itemView.findViewById(R.id.productPrice);
             btnEditProduct = itemView.findViewById(R.id.btnEditProduct);
             btnDeleteProduct = itemView.findViewById(R.id.btnDeleteProduct);
-
-//            searchIcon = itemView.findViewById(R.id.searchIcon);
-//            searchEditText = itemView.findViewById(R.id.searchEditText);
-
         }
     }
 }

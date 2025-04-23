@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.db.DatabaseHelper;
 import com.ctut.mart4u.model.Product;
@@ -46,15 +47,27 @@ public class PurchaseDetailAdapter extends RecyclerView.Adapter<PurchaseDetailAd
         holder.tvProductQuantity.setText("Số lượng: " + String.valueOf(purchaseDetail.getQuantity()));
         holder.tvProductPrice.setText("Tổng giá: " + String.valueOf(purchaseDetail.getUnitPrice() * purchaseDetail.getQuantity()) + " VNĐ");
 
-        AssetManager assetManager = context.getAssets();
-        InputStream is = null;
-        try {
-            is = ((AssetManager) assetManager).open(product.getImagePath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+//        AssetManager assetManager = context.getAssets();
+//        InputStream is = null;
+//        try {
+//            is = ((AssetManager) assetManager).open(product.getImagePath());
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        Bitmap bitmap = BitmapFactory.decodeStream(is);
+//        holder.ivProductImage.setImageBitmap(bitmap);
+
+        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
+        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
+            Glide.with(context)
+                    .load(product.getImagePath()) // Glide tự động xử lý cả assets và URL
+                    .placeholder(R.drawable.ic_flag) // Ảnh mặc định khi đang tải
+                    .error(R.drawable.ic_flag) // Ảnh mặc định nếu lỗi
+                    .into(holder.ivProductImage);
+        } else {
+            holder.ivProductImage.setImageResource(R.drawable.ic_flag); // Ảnh mặc định
         }
-        Bitmap bitmap = BitmapFactory.decodeStream(is);
-        holder.ivProductImage.setImageBitmap(bitmap);
+
     }
 
     @Override

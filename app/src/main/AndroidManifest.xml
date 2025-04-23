@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Quyền truy cập bộ nhớ cho Android 10 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <!-- Khai báo rằng camera không bắt buộc -->
     <uses-feature android:name="android.hardware.camera" android:required="false" />
 

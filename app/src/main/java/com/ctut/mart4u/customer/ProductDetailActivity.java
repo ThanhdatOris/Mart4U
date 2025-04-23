@@ -14,6 +14,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.ctut.mart4u.BaseActivity;
 import com.ctut.mart4u.LoginActivity;
 import com.ctut.mart4u.R;
@@ -74,14 +76,15 @@ public class ProductDetailActivity extends BaseActivity {
             stockQuantity.setText("Số lượng: " + product.getStockQuantity());
             categoryName.setText(category.getName());
             // Hiển thị ảnh sản phẩm
-            InputStream is = null;
-            try {
-                is = getAssets().open(product.getImagePath());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
+                Glide.with(this)
+                        .load(product.getImagePath()) // Glide tự động xử lý cả assets và URL
+                        .placeholder(R.drawable.ic_flag) // Ảnh mặc định khi đang tải
+                        .error(R.drawable.ic_flag) // Ảnh mặc định nếu lỗi
+                        .into(productImage);
+            } else {
+                productImage.setImageResource(R.drawable.ic_flag); // Ảnh mặc định
             }
-            Bitmap bitmap = BitmapFactory.decodeStream(is);
-            productImage.setImageBitmap(bitmap);
 
             // Chức năng tăng/giảm số lượng
             Button btnIncreaseQuantity = findViewById(R.id.buttonIncreaseQuantity);

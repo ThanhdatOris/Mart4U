@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.ctut.mart4u.R;
 import com.ctut.mart4u.customer.ProductDetailActivity;
 import com.ctut.mart4u.model.Product;
@@ -47,15 +49,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.tvProductPrice.setText(String.format("%,.2fđ", product.getPrice())); // Use %.2f for double/float
 
         // Hien thi img voi bitmap tu imagePath
-        AssetManager assetManager = context.getAssets();
-        InputStream is = null;
-        try {
-            is = ((AssetManager) assetManager).open(product.getImagePath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+//        AssetManager assetManager = context.getAssets();
+//        InputStream is = null;
+//        try {
+//            is = ((AssetManager) assetManager).open(product.getImagePath());
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        Bitmap bitmap = BitmapFactory.decodeStream(is);
+//        holder.ivProductImage.setImageBitmap(bitmap);
+
+        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
+        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
+            Glide.with(context)
+                    .load(product.getImagePath()) // Glide tự động xử lý cả assets và URL
+                    .placeholder(R.drawable.ic_flag) // Ảnh mặc định khi đang tải
+                    .error(R.drawable.ic_flag) // Ảnh mặc định nếu lỗi
+                    .into(holder.ivProductImage);
+        } else {
+            holder.ivProductImage.setImageResource(R.drawable.ic_flag); // Ảnh mặc định
         }
-        Bitmap bitmap = BitmapFactory.decodeStream(is);
-        holder.ivProductImage.setImageBitmap(bitmap);
 
         // xu ly event onClick khi nhấn vào sản phẩm
         holder.itemView.setOnClickListener(v -> {
