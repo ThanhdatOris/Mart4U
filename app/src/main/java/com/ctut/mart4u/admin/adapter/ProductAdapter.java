@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,13 +84,32 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         // Sự kiện xóa
         holder.btnDeleteProduct.setOnClickListener(v -> {
-            DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
-            product.setDeleted(true);
-            databaseHelper.getProductDao().update(product);
-            productList.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, productList.size());
-            Toast.makeText(context, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+            // Create an alert dialog to confirm deletion
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Xác nhận xóa");
+            builder.setMessage("Bạn có chắc chắn muốn xóa sản phẩm này không?");
+
+            // Add the positive button (Yes)
+            builder.setPositiveButton("Có", (dialog, which) -> {
+                // Execute deletion when confirmed
+                DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+                product.setDeleted(true);
+                databaseHelper.getProductDao().update(product);
+                productList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, productList.size());
+                Toast.makeText(context, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+            });
+
+            // Add the negative button (No)
+            builder.setNegativeButton("Không", (dialog, which) -> {
+                // User cancelled the deletion, just dismiss the dialog
+                dialog.dismiss();
+            });
+
+            // Show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
     }
 
