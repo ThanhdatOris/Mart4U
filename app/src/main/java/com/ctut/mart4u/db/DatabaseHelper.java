@@ -142,16 +142,6 @@ public class DatabaseHelper {
 
         // Thêm dữ liệu mẫu cho bảng products nếu bảng rỗng
         if (database.productDao().getAllProducts().isEmpty()) {
-            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, "file:///android_asset/images/product_gaongucoc1.jpg", false));
-            database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, "file:///android_asset/images/product_gaongucoc2.jpg", false));
-            database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200, "file:///android_asset/images/product_trungsua1.jpg", false));
-            database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50, "file:///android_asset/images/product_trungsua2.jpg", false));
-            database.productDao().insert(new Product("Táo Mỹ", "Táo nhập khẩu từ Mỹ", 60000, 1, 80, "file:///android_asset/images/product_trungsua3.jpg", false));
-            database.productDao().insert(new Product("Cải xanh", "Cải xanh tươi", 15000, 2, 150, "file:///android_asset/images/product_raucu1.jpg", false));
-            database.productDao().insert(new Product("Trứng gà", "Trứng gà công nghiệp", 3000, 3, 500, "file:///android_asset/images/product_thit1.jpg", false));
-            database.productDao().insert(new Product("Thịt bò", "Thịt bò tươi", 200000, 4, 60, "file:///android_asset/images/product_thit2.jpg", false));
-            database.productDao().insert(new Product("Nước cam", "Nước cam ép 100%", 35000, 5, 120, "file:///android_asset/images/product_thit3.jpg", false));
-            database.productDao().insert(new Product("Chảo chống dính", "Chảo chống dính cao cấp", 120000, 6, 40, "file:///android_asset/images/product_giavi1.jpg", false));
             database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 7, 100, "file:///android_asset/images/product_gaoST25.jpg", false));
             database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 7, 100, "file:///android_asset/images/product_gaongucoc2.jpg", false));
             database.productDao().insert(new Product("Rau củ ", "Rau củ các loại ", 25000, 2, 200, "file:///android_asset/images/product_raucu1.jpg", false));

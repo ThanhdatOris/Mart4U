@@ -1,5 +1,5 @@
 package com.ctut.mart4u.admin;
-
+import androidx.appcompat.app.AlertDialog;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -40,7 +40,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductEditActivity extends AdminBaseActivity {
+public class ProductEditActivity extends AdminBaseActivity
+{
 
     private DatabaseHelper databaseHelper;
     private TextInputEditText etProductName, etProductPrice, etProductDescription;
@@ -305,14 +306,33 @@ public class ProductEditActivity extends AdminBaseActivity {
         // Xử lý sự kiện nút Xóa (chỉ khi chỉnh sửa)
         if (productId != -1) {
             btnDeleteProduct.setOnClickListener(v -> {
-                Product product = databaseHelper.getProductDao().getProductById(productId);
-                product.setDeleted(true);
-                databaseHelper.getProductDao().update(product);
-                Toast.makeText(this, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, ProductActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
+                // Create an alert dialog to confirm deletion
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Xác nhận xóa");
+                builder.setMessage("Bạn có chắc chắn muốn xóa sản phẩm này không?");
+
+                // Add the positive button (Yes)
+                builder.setPositiveButton("Có", (dialog, which) -> {
+                    // Execute the deletion when user confirms
+                    Product product = databaseHelper.getProductDao().getProductById(productId);
+                    product.setDeleted(true);
+                    databaseHelper.getProductDao().update(product);
+                    Toast.makeText(this, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, ProductActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                });
+
+                // Add the negative button (No)
+                builder.setNegativeButton("Không", (dialog, which) -> {
+                    // User cancelled the deletion, just dismiss the dialog
+                    dialog.dismiss();
+                });
+
+                // Show the alert dialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
             });
         }
     }
