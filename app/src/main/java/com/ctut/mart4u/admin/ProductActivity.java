@@ -32,7 +32,7 @@ public class ProductActivity extends AdminBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+//        EdgeToEdge.enable(this);
         RecyclerView recyclerViewProduct = findViewById(R.id.productRecyclerView);
         recyclerViewProduct.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));
 

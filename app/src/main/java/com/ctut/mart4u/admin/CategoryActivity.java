@@ -30,7 +30,7 @@ public class CategoryActivity extends AdminBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+//        EdgeToEdge.enable(this);
 
         RecyclerView recyclerViewCategory = findViewById(R.id.categoryRecyclerView);
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this));
