@@ -136,7 +136,7 @@ public class DatabaseHelper {
             ));
             database.categoryDao().insert(new Category("Đồ uống", "Nước giải khát và sữa", Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_drink).toString()));
             database.categoryDao().insert(new Category("Đồ gia dụng", "Dụng cụ gia đình", Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_household).toString()));
-            database.categoryDao().insert(new Category("Gạo", "Gạo các loại", Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_flag).toString()));
+            database.categoryDao().insert(new Category("Gạo", "Gạo các loại", Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_rice).toString()));
         }
 
 
