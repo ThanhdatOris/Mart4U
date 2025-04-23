@@ -60,14 +60,21 @@ public class PurchaseDetailActivity extends BaseActivity {
                 tvOrderDate.setText("Ngày đặt: " + purchase.getPurchaseDate());
             }
 //            tvOrderDate.setText("Ngày đặt hàng: " + databaseHelper.getPurchaseDao().getPurchaseById(purchaseId).getPurchaseDate());
-            tvOrderStatus.setText("Trạng thái đơn hàng: " + databaseHelper.getPurchaseDao().getPurchaseById(purchaseId).getStatus());
+            //        // trạng thái
+            if (databaseHelper.getPurchaseDao().getPurchaseById(purchaseId).getStatus().equalsIgnoreCase("completed")) {
+                tvOrderStatus.setText("Trạng thái: Hoàn thành");
+            } else {
+                tvOrderStatus.setText("Trạng thái: Đang xử lý");
+            }
+
+//            tvOrderStatus.setText("Trạng thái đơn hàng: " + databaseHelper.getPurchaseDao().getPurchaseById(purchaseId).getStatus());
             tvOrderTotal.setText("Tổng tiền: " + databaseHelper.getPurchaseDao().getPurchaseById(purchaseId).getTotalAmount() + " VNĐ");
 
 
 
             // Lấy thông tin chi tiết đơn hàng từ cơ sở dữ liệu
             List<PurchaseDetail> purchaseDetails = databaseHelper.getPurchaseDetailDao().getPurchaseDetailsByPurchase(purchaseId);
-            Toast.makeText(this, "Lấy thông tin chi tiết đơn hàng thành công! Số lượng: " + purchaseDetails.size(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Lấy thông tin chi tiết đơn hàng thành công! Số lượng: " + purchaseDetails.size(), Toast.LENGTH_SHORT).show();
             // Tạo adapter và gán dữ liệu cho RecyclerView
             PurchaseDetailAdapter purchaseDetailAdapter = new PurchaseDetailAdapter(this, purchaseDetails);
             recyclerViewPurchaseDetail.setAdapter(purchaseDetailAdapter);
