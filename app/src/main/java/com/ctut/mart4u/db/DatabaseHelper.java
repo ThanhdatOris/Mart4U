@@ -136,20 +136,24 @@ public class DatabaseHelper {
             ));
             database.categoryDao().insert(new Category("Đồ uống", "Nước giải khát và sữa", Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_drink).toString()));
             database.categoryDao().insert(new Category("Đồ gia dụng", "Dụng cụ gia đình", Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_category_household).toString()));
+            database.categoryDao().insert(new Category("Gạo", "Gạo các loại", Uri.parse("android.resource://com.ctut.mart4u/" + R.drawable.ic_flag).toString()));
         }
+
 
         // Thêm dữ liệu mẫu cho bảng products nếu bảng rỗng
         if (database.productDao().getAllProducts().isEmpty()) {
-            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, "images/product_gaongucoc1.jpg", false));
-            database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 1, 100, "images/product_gaongucoc2.jpg", false));
-            database.productDao().insert(new Product("Sữa tươi Vinamilk", "Sữa tươi 100% nguyên chất", 25000, 2, 200, "images/product_trungsua1.jpg", false));
-            database.productDao().insert(new Product("Nồi inox", "Nồi inox cao cấp", 150000, 3, 50, "images/product_trungsua2.jpg", false));
-            database.productDao().insert(new Product("Táo Mỹ", "Táo nhập khẩu từ Mỹ", 60000, 1, 80, "images/product_trungsua3.jpg", false));
-            database.productDao().insert(new Product("Cải xanh", "Cải xanh tươi", 15000, 2, 150, "images/product_raucu1.jpg", false));
-            database.productDao().insert(new Product("Trứng gà", "Trứng gà công nghiệp", 3000, 3, 500, "images/product_thit1.jpg", false));
-            database.productDao().insert(new Product("Thịt bò", "Thịt bò tươi", 200000, 4, 60, "images/product_thit2.jpg", false));
-            database.productDao().insert(new Product("Nước cam", "Nước cam ép 100%", 35000, 5, 120, "images/product_thit3.jpg", false));
-            database.productDao().insert(new Product("Chảo chống dính", "Chảo chống dính cao cấp", 120000, 6, 40, "images/product_giavi1.jpg", false));
+            database.productDao().insert(new Product("Gạo ST25", "Gạo thơm ngon từ Việt Nam", 30000, 7, 100, "images/product_gaoST25.jpg", false));
+            database.productDao().insert(new Product("Gạo ABC", "Gạo thơm ngon từ Việt Nam", 30000, 7, 100, "images/product_gaongucoc2.jpg", false));
+            database.productDao().insert(new Product("Rau củ ", "Rau củ các loại ", 25000, 2, 200, "images/product_raucu1.jpg", false));
+            database.productDao().insert(new Product("Trứng vịt ", "Trứng vịt đồng", 150000, 3, 50, "images/product_trungvit.jpg", false));
+            database.productDao().insert(new Product("Táo Mỹ", "Táo nhập khẩu từ Mỹ", 60000, 1, 80, "images/product_tao2.jpg", false));
+            database.productDao().insert(new Product("Cải xanh", "Cải xanh tươi", 15000, 2, 150, "images/product_caixanh.jpg", false));
+            database.productDao().insert(new Product("Trứng gà", "Trứng gà công nghiệp", 3000, 3, 500, "images/product_trungga.jpg", false));
+            database.productDao().insert(new Product("Thịt bò Wagyu", "Thịt bò Wagyu Nhât Bản", 200000, 4, 60, "images/product_thit2.jpg", false));
+            database.productDao().insert(new Product("Sữa Vinamilk", "Sữa Vinamilk", 10000, 5, 120, "images/product_Vinamilk.jpg", false));
+            database.productDao().insert(new Product("Thịt bò ", "Thịt bò tươi", 200000, 4, 60, "images/product_thitbo.jpg", false));
+            database.productDao().insert(new Product("Nước cam", "Nước cam ép 100%", 35000, 5, 120, "images/product_nuoccam.jpg", false));
+            database.productDao().insert(new Product("Chảo chống dính", "Chảo chống dính cao cấp", 120000, 6, 40, "images/product_chaochongdinh.jpg", false));
         }
 
         // Thêm dữ liệu mẫu cho bảng delivery_schedule nếu bảng rỗng
