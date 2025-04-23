@@ -3,8 +3,10 @@ package com.ctut.mart4u.customer.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +20,13 @@ import java.util.List;
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressViewHolder> {
     private List<Address> addresses;
     private AddressDao addressDao;
+    private OnEditAddressListener editAddressListener;
 
-    // Constructor nhận danh sách địa chỉ và AddressDao
-    public AddressAdapter(List<Address> addresses, AddressDao addressDao) {
+    // Constructor nhận danh sách địa chỉ, AddressDao, và listener để xử lý sự kiện sửa
+    public AddressAdapter(List<Address> addresses, AddressDao addressDao, OnEditAddressListener editAddressListener) {
         this.addresses = addresses;
         this.addressDao = addressDao;
+        this.editAddressListener = editAddressListener;
     }
 
     // Phương thức cập nhật danh sách địa chỉ
@@ -46,6 +50,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
         holder.tvDeliveryMethod.setText("Phương thức giao hàng: " + address.getDeliveryMethod());
         holder.checkboxDefault.setChecked(address.isDefault());
 
+        // Xử lý sự kiện checkbox đặt làm mặc định
         holder.checkboxDefault.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 for (Address addr : addresses) {
@@ -59,6 +64,38 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
                 notifyDataSetChanged();
             }
         });
+
+        // Xử lý sự kiện nút Sửa
+        holder.btnEditAddress.setOnClickListener(v -> {
+            if (editAddressListener != null) {
+                editAddressListener.onEditAddress(address, position);
+            }
+        });
+
+        // Xử lý sự kiện nút Xóa
+        holder.btnDeleteAddress.setOnClickListener(v -> {
+            // Không cho phép xóa nếu chỉ còn 1 địa chỉ và nó là địa chỉ mặc định
+            if (addresses.size() == 1 && address.isDefault()) {
+                Toast.makeText(v.getContext(), "Không thể xóa địa chỉ mặc định cuối cùng", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Xóa địa chỉ khỏi cơ sở dữ liệu
+            addressDao.delete(address);
+            addresses.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, addresses.size());
+
+            // Nếu địa chỉ bị xóa là địa chỉ mặc định, đặt địa chỉ đầu tiên trong danh sách làm mặc định
+            if (address.isDefault() && !addresses.isEmpty()) {
+                Address newDefaultAddress = addresses.get(0);
+                newDefaultAddress.setDefault(true);
+                addressDao.update(newDefaultAddress);
+                notifyDataSetChanged();
+            }
+
+            Toast.makeText(v.getContext(), "Đã xóa địa chỉ", Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -70,8 +107,10 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     static class AddressViewHolder extends RecyclerView.ViewHolder {
         TextView tvReceiverInfo;
         TextView tvAddress;
-        TextView tvDeliveryMethod; // Thêm để hiển thị phương thức giao hàng
+        TextView tvDeliveryMethod;
         CheckBox checkboxDefault;
+        Button btnEditAddress;
+        Button btnDeleteAddress;
 
         public AddressViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,6 +118,13 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
             tvAddress = itemView.findViewById(R.id.tvAddress);
             tvDeliveryMethod = itemView.findViewById(R.id.tvDeliveryMethod);
             checkboxDefault = itemView.findViewById(R.id.checkboxDefault);
+            btnEditAddress = itemView.findViewById(R.id.btnEditAddress);
+            btnDeleteAddress = itemView.findViewById(R.id.btnDeleteAddress);
         }
+    }
+
+    // Interface để xử lý sự kiện sửa địa chỉ
+    public interface OnEditAddressListener {
+        void onEditAddress(Address address, int position);
     }
 }

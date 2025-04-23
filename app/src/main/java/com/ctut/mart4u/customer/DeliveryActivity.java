@@ -2,16 +2,20 @@ package com.ctut.mart4u.customer;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +34,7 @@ import com.ctut.mart4u.utils.UserSession;
 
 import java.util.List;
 
-public class DeliveryActivity extends BaseActivity {
+public class DeliveryActivity extends BaseActivity implements AddressAdapter.OnEditAddressListener {
     private DatabaseHelper databaseHelper;
     private LinearLayout layoutNotLoggedIn, layoutLoggedIn;
     private Button btnLogin, btnUpdateAddress;
@@ -38,6 +42,8 @@ public class DeliveryActivity extends BaseActivity {
     private RadioGroup rgDeliveryMethod;
     private Address currentAddress;
     private User currentUser;
+    private Address editingAddress; // Để lưu địa chỉ đang chỉnh sửa
+    private int editingPosition; // Vị trí của địa chỉ đang chỉnh sửa
 
     @Override
     protected int getLayoutId() {
@@ -166,12 +172,15 @@ public class DeliveryActivity extends BaseActivity {
         EditText etReceiverName = dialog.findViewById(R.id.etReceiverName);
         EditText etPhoneNumber = dialog.findViewById(R.id.etPhoneNumber);
         EditText etAddress = dialog.findViewById(R.id.etAddress);
+        Spinner spinnerDeliveryMethod = dialog.findViewById(R.id.spinnerDeliveryMethod);
+        TextView tvDeliveryFeeDialog = dialog.findViewById(R.id.tvDeliveryFee);
         Button btnSaveNewAddress = dialog.findViewById(R.id.btnSaveNewAddress);
         Button btnClose = dialog.findViewById(R.id.btnClose);
 
         // Thiết lập RecyclerView với AddressAdapter
         AddressDao addressDao = databaseHelper.getAddressDao();
-        AddressAdapter addressAdapter = new AddressAdapter(addressDao.getAddressesByUser(currentUser.getId()), addressDao);
+        List<Address> addressList = addressDao.getAddressesByUser(currentUser.getId());
+        AddressAdapter addressAdapter = new AddressAdapter(addressList, addressDao, this);
         rvAddresses.setLayoutManager(new LinearLayoutManager(this));
         rvAddresses.setAdapter(addressAdapter);
 
@@ -179,21 +188,58 @@ public class DeliveryActivity extends BaseActivity {
         btnAddNewAddress.setOnClickListener(v -> {
             layoutNewAddress.setVisibility(View.VISIBLE);
             btnAddNewAddress.setVisibility(View.GONE);
+            // Xóa dữ liệu trong form
+            etReceiverName.setText("");
+            etPhoneNumber.setText("");
+            etAddress.setText("");
+            spinnerDeliveryMethod.setSelection(0);
+            tvDeliveryFeeDialog.setText("Phí giao hàng: 0 VNĐ");
+            editingAddress = null; // Đặt lại trạng thái chỉnh sửa
         });
 
-        // Sự kiện nút lưu địa chỉ mới
+        // Sự kiện nút lưu địa chỉ
         btnSaveNewAddress.setOnClickListener(v -> {
-            String receiverName = etReceiverName.getText().toString().trim();
-            String phoneNumber = etPhoneNumber.getText().toString().trim();
-            String address = etAddress.getText().toString().trim();
+            // Khai báo các biến cục bộ và đảm bảo chúng không thay đổi sau khi khởi tạo
+            final String receiverName = etReceiverName.getText().toString().trim();
+            final String phoneNumber = etPhoneNumber.getText().toString().trim();
+            final String addressText = etAddress.getText().toString().trim();
+            final String deliveryMethod = spinnerDeliveryMethod.getSelectedItem().toString();
 
-            if (receiverName.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()) {
-                return; // Có thể thêm thông báo lỗi
+            // Kiểm tra dữ liệu nhập vào
+            if (receiverName.isEmpty() || phoneNumber.isEmpty() || addressText.isEmpty()) {
+                Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                return;
             }
 
-            Address newAddress = new Address(currentUser.getId(), receiverName, phoneNumber, address, false, "COD");
-            addressDao.insert(newAddress);
-            addressAdapter.updateAddresses(addressDao.getAddressesByUser(currentUser.getId()));
+            if (!phoneNumber.matches("\\d{10,11}")) {
+                Toast.makeText(this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Cập nhật phí giao hàng dựa trên phương thức giao hàng
+            final int deliveryFee = deliveryMethod.equals("COD") ? 30000 : 0;
+            tvDeliveryFeeDialog.setText("Phí giao hàng: " + deliveryFee + " VNĐ");
+
+            if (editingAddress == null) {
+                // Thêm địa chỉ mới
+                Address newAddress = new Address(currentUser.getId(), receiverName, phoneNumber, addressText, false, deliveryMethod);
+                addressDao.insert(newAddress);
+                addressList.add(newAddress);
+                Toast.makeText(this, "Thêm địa chỉ thành công", Toast.LENGTH_SHORT).show();
+            } else {
+                // Cập nhật địa chỉ hiện có
+                editingAddress.setReceiverName(receiverName);
+                editingAddress.setPhoneNumber(phoneNumber);
+                editingAddress.setAddress(addressText);
+                editingAddress.setDeliveryMethod(deliveryMethod);
+                addressDao.update(editingAddress);
+                addressList.set(editingPosition, editingAddress);
+                Toast.makeText(this, "Cập nhật địa chỉ thành công", Toast.LENGTH_SHORT).show();
+                editingAddress = null; // Đặt lại trạng thái chỉnh sửa
+            }
+
+            // Cập nhật giao diện
+            addressAdapter.updateAddresses(addressList);
             layoutNewAddress.setVisibility(View.GONE);
             btnAddNewAddress.setVisibility(View.VISIBLE);
         });
@@ -204,7 +250,108 @@ public class DeliveryActivity extends BaseActivity {
             dialog.dismiss();
         });
 
+        // Thiết lập kích thước dialog
         dialog.show();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = (int) (displayMetrics.widthPixels * 0.9); // 90% chiều rộng màn hình
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = width;
+        dialog.getWindow().setAttributes(params);
+    }
+
+    @Override
+    public void onEditAddress(Address address, int position) {
+        // Hiển thị dialog với thông tin địa chỉ cần chỉnh sửa
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_manage_addresses);
+
+        RecyclerView rvAddresses = dialog.findViewById(R.id.rvAddresses);
+        Button btnAddNewAddress = dialog.findViewById(R.id.btnAddNewAddress);
+        LinearLayout layoutNewAddress = dialog.findViewById(R.id.layoutNewAddress);
+        EditText etReceiverName = dialog.findViewById(R.id.etReceiverName);
+        EditText etPhoneNumber = dialog.findViewById(R.id.etPhoneNumber);
+        EditText etAddress = dialog.findViewById(R.id.etAddress);
+        Spinner spinnerDeliveryMethod = dialog.findViewById(R.id.spinnerDeliveryMethod);
+        TextView tvDeliveryFeeDialog = dialog.findViewById(R.id.tvDeliveryFee);
+        Button btnSaveNewAddress = dialog.findViewById(R.id.btnSaveNewAddress);
+        Button btnClose = dialog.findViewById(R.id.btnClose);
+
+        AddressDao addressDao = databaseHelper.getAddressDao();
+        List<Address> addressList = addressDao.getAddressesByUser(currentUser.getId());
+        AddressAdapter addressAdapter = new AddressAdapter(addressList, addressDao, this);
+        rvAddresses.setLayoutManager(new LinearLayoutManager(this));
+        rvAddresses.setAdapter(addressAdapter);
+
+        // Hiển thị form chỉnh sửa với thông tin địa chỉ hiện tại
+        layoutNewAddress.setVisibility(View.VISIBLE);
+        btnAddNewAddress.setVisibility(View.GONE);
+
+        // Điền thông tin địa chỉ vào form
+        etReceiverName.setText(address.getReceiverName());
+        etPhoneNumber.setText(address.getPhoneNumber());
+        etAddress.setText(address.getAddress());
+
+        // Thiết lập spinnerDeliveryMethod
+        ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinnerDeliveryMethod.getAdapter();
+        int spinnerPosition = adapter.getPosition(address.getDeliveryMethod());
+        spinnerDeliveryMethod.setSelection(spinnerPosition);
+
+        // Cập nhật phí giao hàng
+        int deliveryFee = address.getDeliveryMethod().equals("COD") ? 30000 : 0;
+        tvDeliveryFeeDialog.setText("Phí giao hàng: " + deliveryFee + " VNĐ");
+
+        // Lưu địa chỉ đang chỉnh sửa và vị trí của nó
+        editingAddress = address;
+        editingPosition = position;
+
+        // Sự kiện nút lưu địa chỉ
+        btnSaveNewAddress.setOnClickListener(v -> {
+            // Khai báo các biến cục bộ và đảm bảo chúng không thay đổi sau khi khởi tạo
+            final String receiverName = etReceiverName.getText().toString().trim();
+            final String phoneNumber = etPhoneNumber.getText().toString().trim();
+            final String addressText = etAddress.getText().toString().trim();
+            final String deliveryMethod = spinnerDeliveryMethod.getSelectedItem().toString();
+
+            if (receiverName.isEmpty() || phoneNumber.isEmpty() || addressText.isEmpty()) {
+                Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!phoneNumber.matches("\\d{10,11}")) {
+                Toast.makeText(this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+            // Cập nhật địa chỉ
+            editingAddress.setReceiverName(receiverName);
+            editingAddress.setPhoneNumber(phoneNumber);
+            editingAddress.setAddress(addressText);
+            editingAddress.setDeliveryMethod(deliveryMethod);
+            addressDao.update(editingAddress);
+            addressList.set(editingPosition, editingAddress);
+            Toast.makeText(this, "Cập nhật địa chỉ thành công", Toast.LENGTH_SHORT).show();
+
+            addressAdapter.updateAddresses(addressList);
+            layoutNewAddress.setVisibility(View.GONE);
+            btnAddNewAddress.setVisibility(View.VISIBLE);
+        });
+
+        // Sự kiện nút đóng
+        btnClose.setOnClickListener(v -> {
+            loadAddressInfo(); // Cập nhật lại địa chỉ mặc định
+            dialog.dismiss();
+        });
+
+        // Thiết lập kích thước dialog
+        dialog.show();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = (int) (displayMetrics.widthPixels * 0.95); // 90% chiều rộng màn hình
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = width;
+        dialog.getWindow().setAttributes(params);
     }
 
     private void loadDeliverySchedule() {

@@ -12,25 +12,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tên: Thành Đạt - SĐT: 0345517311"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Địa chỉ: 123 Đường Láng, Hà Nội"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvDeliveryMethod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Phương thức giao hàng: COD"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
-    <CheckBox
-        android:id="@+id/checkboxDefault"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Đặt làm mặc định" />
+        android:orientation="vertical"
+        android:layout_marginTop="8dp">
+
+        <CheckBox
+            android:id="@+id/checkboxDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đặt làm mặc định" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:layout_marginTop="4dp">
+
+            <Button
+                android:id="@+id/btnEditAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Sửa"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnDeleteAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xóa"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
