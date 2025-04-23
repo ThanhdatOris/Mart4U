@@ -40,7 +40,7 @@ public class ProductActivity extends AdminBaseActivity {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
         List<Product> productList = databaseHelper.getProductDao().getAllProducts();
 
-        Toast.makeText(this, "Số lượng sản phẩm: " + productList.size(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Số lượng sản phẩm: " + productList.size(), Toast.LENGTH_SHORT).show();
 
         // ===== click vao nut search
         ImageView searchIcon = findViewById(R.id.searchIcon);
@@ -50,7 +50,7 @@ public class ProductActivity extends AdminBaseActivity {
             if (query.isEmpty()) {
                 ProductAdapter adapter = new ProductAdapter(this, productList);
                 recyclerViewProduct.setAdapter(adapter);
-                Toast.makeText(this, "Vui lòng nhập tên sản phẩm", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Không có tên sản phẩm. Tìm tất cả sản phẩm!", Toast.LENGTH_SHORT).show();
             } else {
                 List<Product> searchResults = databaseHelper.getProductDao().searchProducts(query);
                 if (searchResults.isEmpty()) {

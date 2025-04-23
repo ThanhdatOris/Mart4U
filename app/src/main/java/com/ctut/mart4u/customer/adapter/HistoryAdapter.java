@@ -53,7 +53,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 //        holder.tvPhoneNumber.setText("Số điện thoại: " + purchase.getPhoneNumber());
 //        holder.tvShippingAddress.setText("Địa chỉ giao hàng: " + purchase.getShippingAddress());
 
-        holder.tvOrderStatus.setText("Trạng thái: " + purchase.getStatus());
+//        // trạng thái
+        if (purchase.getStatus().equalsIgnoreCase("completed")) {
+            holder.tvOrderStatus.setText("Trạng thái: Hoàn thành");
+        } else {
+            holder.tvOrderStatus.setText("Trạng thái: Đang xử lý");
+        }
+//        holder.tvOrderStatus.setText("Trạng thái: " + purchase.getStatus());
         holder.tvOrderTotal.setText("Tổng tiền: " + purchase.getTotalAmount() + " VNĐ");
 
 

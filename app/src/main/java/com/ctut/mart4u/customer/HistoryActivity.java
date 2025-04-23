@@ -33,7 +33,7 @@ public class HistoryActivity extends BaseActivity {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
         //Lấy danh sách đơn hàng từ cơ sở dữ liệu
         List<Purchase> purchaseList = databaseHelper.getPurchaseDao().getPurchasesByUser(userId);
-        Toast.makeText(this, "Số lượng đơn hàng: " + purchaseList.size(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Số lượng đơn hàng: " + purchaseList.size(), Toast.LENGTH_SHORT).show();
 
         //Lấy RecyclerView từ layout
         RecyclerView recyclerViewHistory = findViewById(R.id.rvOrderHistory);
