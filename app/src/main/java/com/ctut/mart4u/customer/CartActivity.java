@@ -134,8 +134,21 @@ public class CartActivity extends BaseActivity {
                 Toast.makeText(this, "Giỏ hàng trống, không thể thanh toán", Toast.LENGTH_SHORT).show();
                 return;
             }
-
             int userId = getIntent().getIntExtra("user_id", -1);
+
+            // Kỉiểm tra ếu người dùng đã đăng nhập và có thông tin địa chỉ
+            User user = databaseHelper.getUserDao().getUserById(userId);
+            if (user == null) {
+                Toast.makeText(this, "Vui lòng đăng nhập để thanh toán", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Address address = databaseHelper.getAddressDao().getDefaultAddress(userId);
+            if (address == null) {
+                Toast.makeText(this, "Vui lòng thêm địa chỉ giao hàng trước khi thanh toán", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             double totalAmount = 0;
             for (CartDetail cartDetail : cartList) {
                 Product product = databaseHelper.getProductDao().getProductById(cartDetail.getProductId());

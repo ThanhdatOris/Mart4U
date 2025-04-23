@@ -96,6 +96,8 @@ public class ProductDetailActivity extends BaseActivity {
 
             btnIncreaseQuantity.setOnClickListener(v -> {
                 int quantity = Integer.parseInt(editTextQuantity.getText().toString());
+
+                // Kiểm tra xem số lượng có vượt quá số lượng tồn kho không
                 if (quantity < product.getStockQuantity()) {
                     quantity++;
                     editTextQuantity.setText(String.valueOf(quantity));
@@ -130,6 +132,13 @@ public class ProductDetailActivity extends BaseActivity {
 
                 int productCartId = product.getId();
                 int quantity = Integer.parseInt(editTextQuantity.getText().toString());
+
+                // Kiểm tra xem sản phẩm có vượt quá số lượng tồn kho không
+                if (quantity > product.getStockQuantity()) {
+                    Toast.makeText(this, "Số lượng vượt quá số lượng tồn kho", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 CartDetail cartDetail = new CartDetail(userId, productCartId, quantity);
                 try {
                     long result = databaseHelper.getCartDetailDao().insert(cartDetail);
