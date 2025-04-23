@@ -47,7 +47,7 @@ public class ProductEditActivity extends AdminBaseActivity {
     private Spinner spinnerCategory;
     private Button btnSaveProduct, btnCancelEdit, btnDeleteProduct, btnChangeImage;
     private ImageView productImage;
-    private TextView titleTextView;
+    private TextView titleTextView, etProductStock;
     private int productId = -1;
     private Uri currentPhotoUri; // Lưu đường dẫn ảnh dưới dạng Uri tạm thời
     private List<Category> categoryList; // Danh sách danh mục
@@ -83,6 +83,7 @@ public class ProductEditActivity extends AdminBaseActivity {
         titleTextView = findViewById(R.id.titleTextView);
         etProductName = findViewById(R.id.etProductName);
         etProductPrice = findViewById(R.id.etProductPrice);
+        etProductStock = findViewById(R.id.etProductStock);
         etProductDescription = findViewById(R.id.etProductDescription);
         spinnerCategory = findViewById(R.id.spinnerCategory);
         btnSaveProduct = findViewById(R.id.btnSaveProduct);
@@ -201,6 +202,7 @@ public class ProductEditActivity extends AdminBaseActivity {
             if (product != null) {
                 etProductName.setText(product.getName());
                 etProductPrice.setText(String.valueOf(product.getPrice()));
+                etProductStock.setText(String.valueOf(product.getStockQuantity()));
                 etProductDescription.setText(product.getDescription());
                 titleTextView.setText("Chỉnh sửa sản phẩm");
 
@@ -247,13 +249,14 @@ public class ProductEditActivity extends AdminBaseActivity {
         btnSaveProduct.setOnClickListener(v -> {
             String name = etProductName.getText().toString().trim();
             String priceStr = etProductPrice.getText().toString().trim();
+            String stockStr = etProductStock.getText().toString().trim();
             String description = etProductDescription.getText().toString().trim();
             int selectedCategoryPosition = spinnerCategory != null ? spinnerCategory.getSelectedItemPosition() : -1;
             int categoryId = selectedCategoryPosition != -1 ? categoryIds.get(selectedCategoryPosition) : -1;
             Log.d("ProductEditActivity", "Vị trí danh mục được chọn: " + selectedCategoryPosition + ", CategoryId: " + categoryId);
 
             // Kiểm tra thông tin bắt buộc
-            if (name.isEmpty() || priceStr.isEmpty() || description.isEmpty()) {
+            if (name.isEmpty() || priceStr.isEmpty() || stockStr.isEmpty() || description.isEmpty()) {
                 Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -279,6 +282,7 @@ public class ProductEditActivity extends AdminBaseActivity {
                 Product product = databaseHelper.getProductDao().getProductById(productId);
                 product.setName(name);
                 product.setPrice(price);
+                product.setStockQuantity(Integer.parseInt(stockStr));
                 product.setDescription(description);
                 product.setCategoryId(categoryId);
                 product.setImagePath(imagePath);

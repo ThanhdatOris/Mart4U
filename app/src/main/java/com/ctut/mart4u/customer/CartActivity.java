@@ -136,7 +136,7 @@ public class CartActivity extends BaseActivity {
             }
             int userId = getIntent().getIntExtra("user_id", -1);
 
-            // Kỉiểm tra ếu người dùng đã đăng nhập và có thông tin địa chỉ
+            // Kiểm tra nếu người dùng đã đăng nhập và có thông tin địa chỉ
             User user = databaseHelper.getUserDao().getUserById(userId);
             if (user == null) {
                 Toast.makeText(this, "Vui lòng đăng nhập để thanh toán", Toast.LENGTH_SHORT).show();
@@ -162,6 +162,22 @@ public class CartActivity extends BaseActivity {
                 return;
             }
 
+            // Kiểm tra số lượng hàng tồn kho (stock) trước khi thanh toán
+            for (CartDetail cartDetail : cartList) {
+                Product product = databaseHelper.getProductDao().getProductById(cartDetail.getProductId());
+                if (product != null) {
+                    int quantityInCart = cartDetail.getQuantity();
+                    int stock = product.getStockQuantity();
+                    if (quantityInCart > stock) {
+                        Toast.makeText(this, "Sản phẩm '" + product.getName() + "' không đủ hàng (còn " + stock + " sản phẩm)", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                } else {
+                    Toast.makeText(this, "Không tìm thấy sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
             // Định dạng ngày hiện tại thành yyyy-MM-dd
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String currentDate = dateFormat.format(new Date());
@@ -171,10 +187,11 @@ public class CartActivity extends BaseActivity {
             long purchaseId = databaseHelper.getPurchaseDao().insert(purchase);
             purchase.setId((int) purchaseId);
 
-            // Tạo chi tiết đơn hàng
+            // Tạo chi tiết đơn hàng và cập nhật stock
             for (CartDetail cartDetail : cartList) {
                 Product product = databaseHelper.getProductDao().getProductById(cartDetail.getProductId());
                 if (product != null) {
+                    // Tạo chi tiết đơn hàng
                     PurchaseDetail purchaseDetail = new PurchaseDetail(
                             purchase.getId(),
                             cartDetail.getProductId(),
@@ -182,6 +199,13 @@ public class CartActivity extends BaseActivity {
                             product.getPrice()
                     );
                     databaseHelper.getPurchaseDetailDao().insert(purchaseDetail);
+
+                    // Cập nhật stock của sản phẩm
+                    int newStock = product.getStockQuantity() - cartDetail.getQuantity();
+                    product.setStockQuantity(newStock);
+                    databaseHelper.getProductDao().update(product);
+
+                    // Xóa mục trong giỏ hàng
                     databaseHelper.getCartDetailDao().delete(cartDetail);
                 }
             }

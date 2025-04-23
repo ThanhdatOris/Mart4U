@@ -56,6 +56,20 @@
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
+<!--        SỐ lượng tồn kho sản phẩm-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProductStock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Số lượng tồn kho sản phẩm"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Spinner
             android:id="@+id/spinnerCategory"
             android:layout_width="match_parent"

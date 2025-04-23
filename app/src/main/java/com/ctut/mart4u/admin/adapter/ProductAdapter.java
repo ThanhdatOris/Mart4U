@@ -45,8 +45,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productName.setText(product.getName());
-        holder.productPrice.setText(String.valueOf((int) product.getPrice())); // Hiển thị giá không có số thập phân
-
+        holder.productPrice.setText(String.valueOf((int) product.getPrice()));
+//        holder.productStock.setText(String.valueOf(product.getStockQuantity()));
 //        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
 //        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
 //            Log.d("ProductAdapter", "Tải hình ảnh cho productId=" + product.getId() + ", imagePath=" + product.getImagePath());
@@ -61,14 +61,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 //        } else {
 //            Log.d("ProductAdapter", "imagePath là null hoặc rỗng cho productId=" + product.getId());
 //            holder.productImage.setImageResource(R.drawable.ic_flag); // Ảnh mặc định
-//        }
-
-//        // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
-//        if (product.getImagePath() != null && !product.getImagePath().isEmpty()) {
-//            Uri imageUri = Uri.parse(product.getImagePath());
-//            holder.productImage.setImageURI(imageUri);
-//        } else {
-//            holder.productImage.setImageResource(R.drawable.ic_flag);
 //        }
 
         // Hiển thị hình ảnh từ imagePath nếu có, nếu không thì dùng ảnh mặc định
@@ -110,6 +102,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         ImageView productImage;
         TextView productName;
         TextView productPrice;
+//        TextView productStock;
         ImageButton btnEditProduct;
         ImageButton btnDeleteProduct;
 
@@ -118,6 +111,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productImage = itemView.findViewById(R.id.productImage);
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
+//            productStock = itemView.findViewById(R.id.etProductStock);
             btnEditProduct = itemView.findViewById(R.id.btnEditProduct);
             btnDeleteProduct = itemView.findViewById(R.id.btnDeleteProduct);
         }
