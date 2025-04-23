@@ -37,7 +37,7 @@ public class ProductEditActivity extends AdminBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+//        EdgeToEdge.enable(this);
 
         int productId = getIntent().getIntExtra("productId", -1);
 

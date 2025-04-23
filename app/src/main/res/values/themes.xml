@@ -3,10 +3,13 @@
     <style name="Base.Theme.Mart4U" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <!-- Ẩn thanh trạng thái -->
-        <item name="android:windowFullscreen">true</item>
-        <!-- Ẩn thanh tiêu đề (action bar) nếu không cần -->
-        <item name="windowNoTitle">true</item>
+        <!-- HIện thanh trạng thái -->
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:statusBarColor">#fa003e</item>
+
+<!--        <item name="windowNoTitle">false</item>-->
+
+<!--        <item name="android:actionBarStyle">@color/red</item>-->
         <!-- Tùy chỉnh thêm nếu cần -->
         <item name="android:windowBackground">@android:color/white</item>
     </style>

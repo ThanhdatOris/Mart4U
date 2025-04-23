@@ -34,7 +34,7 @@ public class CustomerDetailActivity extends AdminBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+//        EdgeToEdge.enable(this);
 
         databaseHelper = DatabaseHelper.getInstance(this);
 

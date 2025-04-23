@@ -30,7 +30,7 @@ public class DashboardActivity extends AdminBaseActivity {
             startActivity(intent);
         });
 
-        EdgeToEdge.enable(this);
+//        EdgeToEdge.enable(this);
 
     }
 
